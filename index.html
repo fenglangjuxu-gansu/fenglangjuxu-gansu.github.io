@@ -62,6 +62,68 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-一天一个Linux命令(第三天chmod命令)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/16/一天一个Linux命令(第三天chmod命令)/" class="article-date">
+  <time datetime="2019-06-16T15:22:23.175Z" itemprop="datePublished">2019-06-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      <strong class="toc-title">����Ŀ¼</strong>
+        <p>toc: true</p>
+<h1 id="一天一个Linux命令，第三天chmod命令"><a href="#一天一个Linux命令，第三天chmod命令" class="headerlink" title="一天一个Linux命令，第三天chmod命令"></a>一天一个Linux命令，第三天chmod命令</h1><ul>
+<li><p>Linux/Unix 的文件调用权限分为三级 : 文件拥有者、群组、其他。利用 chmod 可以藉以控制文件如何被他人所调用。</p>
+</li>
+<li><p>使用权限 : 所有使用者</p>
+</li>
+<li><p>语法<br> chmod [-cfvR] [–help] [–version] mode file…</p>
+</li>
+<li><p>参数说明</p>
+</li>
+<li><p>mode : 权限设定字串，格式如下 :</p>
+</li>
+<li><p>[ugoa…][[+-=][rwxX]…][,…]</p>
+</li>
+<li><p>其中：</p>
+</li>
+</ul>
+<p>u 表示该文件的拥有者，g 表示与该文件的拥有者属于同一个群体(group)者，o 表示其他以外的人，a 表示这三者皆是。</p>
+<ul>
+<li>表示增加权限、- 表示取消权限、= 表示唯一设定权限。<br>r 表示可读取，w 表示可写入，x 表示可执行，X 表示只有当该文件是个子目录或者该文件已经被设定过为可执行。<br>其他参数说明：</li>
+</ul>
+<p>-c : 若该文件权限确实已经更改，才显示其更改动作<br>-f : 若该文件权限无法被更改也不要显示错误讯息<br>-v : 显示权限变更的详细资料<br>-R : 对目前目录下的所有文件与子目录进行相同的权限变更(即以递回的方式逐个变更)<br>–help : 显示辅助说明<br>–version : 显示版本</p>
+<p>*实例<br> 将文件 file1.txt 设为所有人皆可读取 :</p>
+<p> chmod ugo+r file1.txt<br> 将文件 file1.txt 设为所有人皆可读取 :</p>
+<p> chmod a+r file1.txt<br> 将文件 file1.txt 与 file2.txt 设为该文件拥有者，与其所属同一个群体者可写入，但其他以外的人则不可写入 :</p>
+<p> chmod ug+w,o-w file1.txt file2.txt<br> 将 ex1.py 设定为只有该文件拥有者可以执行 :</p>
+<p> chmod u+x ex1.py<br> 将目前目录下的所有文件与子目录皆设为任何人可读取 :</p>
+<p> chmod -R a+r *
+ 此外chmod也可以用数字来表示权限如 :</p>
+<p> chmod 777 file<br> 语法为：</p>
+<p> chmod abc file<br> 其中a,b,c各为一个数字，分别表示User、Group、及Other的权限。</p>
+<p> r=4，w=2，x=1<br> 若要rwx属性则4+2+1=7；<br> 若要rw-属性则4+2=6；<br> 若要r-x属性则4+1=5。<br> chmod a=rwx file<br> 和</p>
+<p> chmod 777 file<br> 效果相同</p>
+<p> chmod ug=rwx,o=x file<br> 和</p>
+<p> chmod 771 file</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/06/16/一天一个Linux命令(第三天chmod命令)/" data-id="cjwz3voqy0000nomiugpmk82b" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-一天一个Linux命令(第三天cat命令)" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/06/15/一天一个Linux命令(第三天cat命令)/" class="article-date">
@@ -230,6 +292,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2019/06/16/一天一个Linux命令(第三天chmod命令)/">(no title)</a>
+          </li>
         
           <li>
             <a href="/2019/06/15/一天一个Linux命令(第三天cat命令)/">(no title)</a>
