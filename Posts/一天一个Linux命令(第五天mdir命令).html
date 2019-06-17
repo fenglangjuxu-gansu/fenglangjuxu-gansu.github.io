@@ -1,0 +1,25 @@
+<hr>
+<p>title: 一天一个Linux命令(第五天mdir命令)<br>date:<br>tags:<br>categories:</p>
+<ul>
+<li>Linux</li>
+</ul>
+<hr>
+<h2 id="1、语法"><a href="#1、语法" class="headerlink" title="1、语法"></a>1、语法</h2><p> <code>mdir [-afwx/][目录]</code></p>
+<h2 id="2、参数"><a href="#2、参数" class="headerlink" title="2、参数"></a>2、参数</h2><ul>
+<li>-/ 显示目录下所有子目录与文件。</li>
+<li>-a 　显示隐藏文件。</li>
+<li>-f 　不显示磁盘所剩余的可用空间。</li>
+<li>-w 　仅显示目录或文件名称，并以横排方式呈现，以便一次能显示较多的目录或文件。</li>
+<li>-X 　仅显示目录下所有子目录与文件的完整路径，不显示其他信息。</li>
+</ul>
+<h2 id="3、实例"><a href="#3、实例" class="headerlink" title="3、实例"></a>3、实例</h2><p>显示a盘中的内容：</p>
+<pre><code>$ mdir -/ a:\*</code></pre><p>以上命令执行后，mdir将显示指定盘”a:&quot;中的所有子目录及其中的文件信息，如下所示：</p>
+<pre><code>Volume in drive A has no label  #加载信息  
+Volume Serial Number is 13D2~055C  
+Directory for A:\                   #以下为目录信息  
+./test &lt;DIR&gt; 2011-08-23 16:59     
+#显示格式为文件名，目录大小，修改时间  
+AUTORUN.INF 265 2011-08-23 16:53  
+AUTORUN.BAT 43 2011-08-23 16:56  
+3 files 308 bytes               #统计总大小  
+724 325 bytes free              #剩余空间  </code></pre>
