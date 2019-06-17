@@ -1,20 +1,5 @@
 ---
-title: Linux
-date: 2018-06-11 10:13:21
-type: "categories"
----
----
-title: Redis
-date: 2018-06-11 10:13:21
-type: "categories"
----
----
-title: JVM
-date: 2018-06-11 10:13:21
-type: "categories"
----
----
-title: Mysql
-date: 2018-06-11 10:13:21
-type: "categories"
+categories:
+ - Linux
+ - Life
 ---
