@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="MV命令 lha命令是从lharc演变而来的压缩程序，文件经它压缩后，会另外产生具有.lzh扩展名的压缩文件。  选项：-a或a：压缩文件，并加入到压缩文件内。 -a&amp;lt;0/1/2&amp;gt;/u&amp;lt;/0/1/2&amp;gt;   压缩文件时，采用不同的文件头。 -c或c：压缩文件，重新建构新的压缩文件后，再将其加入。 -d或d：从压缩文件内删除指定的文件。 -&amp;lt;a/c/u&amp;gt;d或&amp;lt;">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-19T12:52:06.884Z">
+<meta property="og:updated_time" content="2019-06-19T13:35:07.285Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一天一个Linux命令(第10天lha命令)">
 <meta name="twitter:description" content="MV命令 lha命令是从lharc演变而来的压缩程序，文件经它压缩后，会另外产生具有.lzh扩展名的压缩文件。  选项：-a或a：压缩文件，并加入到压缩文件内。 -a&amp;lt;0/1/2&amp;gt;/u&amp;lt;/0/1/2&amp;gt;   压缩文件时，采用不同的文件头。 -c或c：压缩文件，重新建构新的压缩文件后，再将其加入。 -d或d：从压缩文件内删除指定的文件。 -&amp;lt;a/c/u&amp;gt;d或&amp;lt;">
@@ -155,9 +155,9 @@
 -&lt;e/x&gt;w=&lt;目的目录&gt;或&lt;e/x&gt;w=&lt;目的目录&gt;：指定解压缩的目录。
 -x或x：解开压缩文件。
 -&lt;a/u&gt;z或&lt;a/u&gt;z：不压缩文件，直接把它加入，更新压缩文件。</code></pre><h2 id="实例"><a href="#实例" class="headerlink" title="实例:"></a>实例:</h2><p>   压缩a.b文件，压缩后生成 abc.lhz 文件</p>
-<pre><code>lha -a abc.lhz a.b        </code></pre><p>   压缩目录 </p>
-<pre><code>lha -a abc2 /home/hnlinux  </code></pre><p>  解压文件abc，到当前目录</p>
-<pre><code>lha -xiw=agis abc         </code></pre>
+<pre><code>[fenglangjuxu@localhost /]$ lha -a abc.lhz a.b        </code></pre><p>   压缩目录 </p>
+<pre><code>[fenglangjuxu@localhost /]$ lha -a abc2 /home/hnlinux  </code></pre><p>  解压文件abc，到当前目录</p>
+<pre><code>[fenglangjuxu@localhost /]$ lha -xiw=agis abc         </code></pre>
       
     </div>
     <footer class="entry-meta entry-footer">

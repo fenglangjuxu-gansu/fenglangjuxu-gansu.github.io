@@ -149,9 +149,9 @@
 -&lt;e/x&gt;w=&lt;目的目录&gt;或&lt;e/x&gt;w=&lt;目的目录&gt;：指定解压缩的目录。
 -x或x：解开压缩文件。
 -&lt;a/u&gt;z或&lt;a/u&gt;z：不压缩文件，直接把它加入，更新压缩文件。</code></pre><h2 id="实例"><a href="#实例" class="headerlink" title="实例:"></a>实例:</h2><p>   压缩a.b文件，压缩后生成 abc.lhz 文件</p>
-<pre><code>lha -a abc.lhz a.b        </code></pre><p>   压缩目录 </p>
-<pre><code>lha -a abc2 /home/hnlinux  </code></pre><p>  解压文件abc，到当前目录</p>
-<pre><code>lha -xiw=agis abc         </code></pre>
+<pre><code>[fenglangjuxu@localhost /]$ lha -a abc.lhz a.b        </code></pre><p>   压缩目录 </p>
+<pre><code>[fenglangjuxu@localhost /]$ lha -a abc2 /home/hnlinux  </code></pre><p>  解压文件abc，到当前目录</p>
+<pre><code>[fenglangjuxu@localhost /]$ lha -xiw=agis abc         </code></pre>
       
     </div>
     <footer class="entry-meta entry-footer">
@@ -234,9 +234,9 @@
 <li>文件列表：指定要压缩的文件列表。</li>
 </ul>
 <h2 id="实例"><a href="#实例" class="headerlink" title="实例:"></a>实例:</h2><p>   将/home/Blinux/html/这个目录下所有文件和文件夹打包为当前目录下的html.zip：</p>
-<pre><code>zip -q -r html.zip /home/Blinux/html</code></pre><p>  上面的命令操作是将绝对地址的文件及文件夹进行压缩，以下给出压缩相对路径目录，比如目前在Bliux这个目录下，执行以下操作可以达到以上同样的效果：</p>
-<pre><code>zip -q -r html.zip html</code></pre><p>   比如现在我的html目录下，我操作的zip压缩命令是：</p>
-<pre><code>zip -q -r html.zip *</code></pre>
+<pre><code>[fenglangjuxu@localhost /]$ zip -q -r html.zip /home/Blinux/html</code></pre><p>  上面的命令操作是将绝对地址的文件及文件夹进行压缩，以下给出压缩相对路径目录，比如目前在Bliux这个目录下，执行以下操作可以达到以上同样的效果：</p>
+<pre><code>[fenglangjuxu@localhost /]$ zip -q -r html.zip html</code></pre><p>   比如现在我的html目录下，我操作的zip压缩命令是：</p>
+<pre><code>[fenglangjuxu@localhost /]$ zip -q -r html.zip *</code></pre>
       
     </div>
     <footer class="entry-meta entry-footer">
@@ -289,9 +289,9 @@
 -p或--parents 若所要建立目录的上层目录目前尚未建立，则会一并建立上层目录；
 --version 显示版本信息。
 
-注意事项：mv与cp的结果不同，mv好像文件“搬家”，文件个数并未增加。而cp对文件进行复制，文件个数增加了。</code></pre><h2 id="参数："><a href="#参数：" class="headerlink" title="参数："></a>参数：</h2><pre><code>目录：指定要创建的目录列表，多个目录之间用空格隔开。</code></pre><h2 id="实例："><a href="#实例：" class="headerlink" title="实例："></a>实例：</h2><p> 在目录/usr/meng下建立子目录test，并且只有文件主有读、写和执行权限，其他人无权访问   </p>
-<pre><code>mkdir -m 700 /usr/meng/test</code></pre><p>在当前目录中建立bin和bin下的os_1目录，权限设置为文件主可读、写、执行，同组用户可读和执行，其他用户无权访问</p>
-<pre><code>mkdir -p-m 750 bin/os_1</code></pre>
+注意事项：mv与cp的结果不同，mv好像文件“搬家”，文件个数并未增加。而cp对文件进行复制，文件个数增加了。</code></pre><h2 id="参数："><a href="#参数：" class="headerlink" title="参数："></a>参数：</h2><pre><code>目录：指定要创建的目录列表，多个目录之间用空格隔开。</code></pre><h2 id="实例："><a href="#实例：" class="headerlink" title="实例："></a>实例：</h2><p> 在目录/usr/下建立子目录dongpj，并且只有文件主有读、写和执行权限，其他人无权访问   </p>
+<pre><code>[fenglangjuxu@localhost /]$ mkdir -m 700 /usr/dongpj</code></pre><p>在当前目录中建立bin和bin下的os_1目录，权限设置为文件主可读、写、执行，同组用户可读和执行，其他用户无权访问</p>
+<pre><code>[fenglangjuxu@localhost /]$ mkdir -p-m 750 bin/os_1</code></pre>
       
     </div>
     <footer class="entry-meta entry-footer">
@@ -337,8 +337,11 @@
 </ul>
 <h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><p>   <code>pwd（选项）</code></p>
 <h2 id="选项："><a href="#选项：" class="headerlink" title="选项："></a>选项：</h2><pre><code>--help：显示帮助信息；
---version：显示版本信息。</code></pre><h2 id="实例"><a href="#实例" class="headerlink" title="实例:"></a>实例:</h2><pre><code>[root@localhost ~]# pwd
-/root</code></pre>
+--version：显示版本信息。</code></pre><h2 id="实例"><a href="#实例" class="headerlink" title="实例:"></a>实例:</h2><pre><code>[fenglangjuxu@localhost /]$ 
+[fenglangjuxu@localhost /]$ 
+[fenglangjuxu@localhost /]$ pwd
+/
+[fenglangjuxu@localhost /]$ </code></pre>
       
     </div>
     <footer class="entry-meta entry-footer">
@@ -402,8 +405,47 @@
 <li>目标文件：如果“目标文件”是文件名则在移动文件的同时，将其改名为“目标文件”；如果“目标文件”是目录名则将源文件移动到“目标文件”下。</li>
 </ul>
 <h2 id="5、实例"><a href="#5、实例" class="headerlink" title="5、实例:"></a>5、实例:</h2><p>   将文件ex3改名为new1</p>
-<pre><code>mv ex3 new1 </code></pre><p>  将目录/usr/men中的所有文件移到当前目录（用.表示）中：</p>
-<pre><code>mv /usr/men/* .</code></pre>
+<pre><code>[fenglangjuxu@localhost local]$ 
+[fenglangjuxu@localhost local]$ 
+[fenglangjuxu@localhost local]$ 
+[fenglangjuxu@localhost local]$ su root
+密码：
+[root@localhost local]# 
+[root@localhost local]# ll
+总用量 0
+drwxr-xr-x. 2 root root  6 4月  11 2018 bin
+drwxr-xr-x. 2 root root  6 4月  11 2018 etc
+drwxr-xr-x. 2 root root  6 4月  11 2018 games
+drwxr-xr-x. 2 root root  6 4月  11 2018 include
+drwxr-xr-x. 2 root root  6 4月  11 2018 lib
+drwxr-xr-x. 2 root root  6 4月  11 2018 lib64
+drwxr-xr-x. 2 root root  6 4月  11 2018 libexec
+drwxr-xr-x. 2 root root  6 4月  11 2018 sbin
+drwxr-xr-x. 5 root root 49 5月  24 00:21 share
+drwxr-xr-x. 2 root root  6 4月  11 2018 src
+[root@localhost local]# mv src srcnew
+[root@localhost local]# ll
+总用量 0
+drwxr-xr-x. 2 root root  6 4月  11 2018 bin
+drwxr-xr-x. 2 root root  6 4月  11 2018 etc
+drwxr-xr-x. 2 root root  6 4月  11 2018 games
+drwxr-xr-x. 2 root root  6 4月  11 2018 include
+drwxr-xr-x. 2 root root  6 4月  11 2018 lib
+drwxr-xr-x. 2 root root  6 4月  11 2018 lib64
+drwxr-xr-x. 2 root root  6 4月  11 2018 libexec
+drwxr-xr-x. 2 root root  6 4月  11 2018 sbin
+drwxr-xr-x. 5 root root 49 5月  24 00:21 share
+drwxr-xr-x. 2 root root  6 4月  11 2018 srcnew
+[root@localhost local]# </code></pre><p>  将目录/var/中的所有文件移到当前目录（用.表示）中：</p>
+<pre><code>[root@localhost local]# mv /var/* .
+mv：是否覆盖&quot;./crash&quot;？ y
+mv: 无法以目录&quot;/var/crash&quot; 来覆盖非目录&quot;./crash&quot;
+mv：是否覆盖&quot;./games&quot;？ 
+mv：是否覆盖&quot;./lib&quot;？ 
+mv：是否覆盖&quot;./log&quot;？ 
+mv: 无法将&quot;/var/tmp&quot; 移动至&quot;./tmp&quot;: 设备或资源忙
+[root@localhost local]# 
+[root@localhost local]# </code></pre>
       
     </div>
     <footer class="entry-meta entry-footer">

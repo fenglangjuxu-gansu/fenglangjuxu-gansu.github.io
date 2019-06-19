@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="mkdir命令 mkdir命令用来创建目录。该命令创建由dirname命名的目录。如果在目录名的前面没有加任何路径名，则在当前目录下创建由dirname指定的目录；如果给出了一个已经存在的路径，将会在该目录下创建一个指定的目录。在创建目录时，应保证新建的目录与它所在目录下的文件没有重名。  注意：在创建文件时，不要把所有的文件都存放在主目录中，可以创建子目录，通过它们来更有效地组织文件。最好采用前">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-19T12:37:05.716Z">
+<meta property="og:updated_time" content="2019-06-19T13:33:41.027Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一天一个Linux命令(第8天mkdir命令命令)">
 <meta name="twitter:description" content="mkdir命令 mkdir命令用来创建目录。该命令创建由dirname命名的目录。如果在目录名的前面没有加任何路径名，则在当前目录下创建由dirname指定的目录；如果给出了一个已经存在的路径，将会在该目录下创建一个指定的目录。在创建目录时，应保证新建的目录与它所在目录下的文件没有重名。  注意：在创建文件时，不要把所有的文件都存放在主目录中，可以创建子目录，通过它们来更有效地组织文件。最好采用前">
@@ -142,9 +142,9 @@
 -p或--parents 若所要建立目录的上层目录目前尚未建立，则会一并建立上层目录；
 --version 显示版本信息。
 
-注意事项：mv与cp的结果不同，mv好像文件“搬家”，文件个数并未增加。而cp对文件进行复制，文件个数增加了。</code></pre><h2 id="参数："><a href="#参数：" class="headerlink" title="参数："></a>参数：</h2><pre><code>目录：指定要创建的目录列表，多个目录之间用空格隔开。</code></pre><h2 id="实例："><a href="#实例：" class="headerlink" title="实例："></a>实例：</h2><p> 在目录/usr/meng下建立子目录test，并且只有文件主有读、写和执行权限，其他人无权访问   </p>
-<pre><code>mkdir -m 700 /usr/meng/test</code></pre><p>在当前目录中建立bin和bin下的os_1目录，权限设置为文件主可读、写、执行，同组用户可读和执行，其他用户无权访问</p>
-<pre><code>mkdir -p-m 750 bin/os_1</code></pre>
+注意事项：mv与cp的结果不同，mv好像文件“搬家”，文件个数并未增加。而cp对文件进行复制，文件个数增加了。</code></pre><h2 id="参数："><a href="#参数：" class="headerlink" title="参数："></a>参数：</h2><pre><code>目录：指定要创建的目录列表，多个目录之间用空格隔开。</code></pre><h2 id="实例："><a href="#实例：" class="headerlink" title="实例："></a>实例：</h2><p> 在目录/usr/下建立子目录dongpj，并且只有文件主有读、写和执行权限，其他人无权访问   </p>
+<pre><code>[fenglangjuxu@localhost /]$ mkdir -m 700 /usr/dongpj</code></pre><p>在当前目录中建立bin和bin下的os_1目录，权限设置为文件主可读、写、执行，同组用户可读和执行，其他用户无权访问</p>
+<pre><code>[fenglangjuxu@localhost /]$ mkdir -p-m 750 bin/os_1</code></pre>
       
     </div>
     <footer class="entry-meta entry-footer">

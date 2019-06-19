@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="zip命令 zip命令可以用来解压缩文件，或者对文件进行打包操作。zip是个使用广泛的压缩程序，文件经它压缩后会另外产生具有“.zip”扩展名的压缩文件。  语法   zip(选项)(参数) 选项：-A：调整可执行的自动解压缩文件； -b&amp;lt;工作目录&amp;gt;：指定暂时存放文件的目录； -c：替每个被压缩的文件加上注释； -d：从压缩文件内删除指定的文件； -D：压缩文件内不建立目录名称； -f">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-19T12:48:38.217Z">
+<meta property="og:updated_time" content="2019-06-19T13:34:54.659Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一天一个Linux命令(第9天zip命令)">
 <meta name="twitter:description" content="zip命令 zip命令可以用来解压缩文件，或者对文件进行打包操作。zip是个使用广泛的压缩程序，文件经它压缩后会另外产生具有“.zip”扩展名的压缩文件。  语法   zip(选项)(参数) 选项：-A：调整可执行的自动解压缩文件； -b&amp;lt;工作目录&amp;gt;：指定暂时存放文件的目录； -c：替每个被压缩的文件加上注释； -d：从压缩文件内删除指定的文件； -D：压缩文件内不建立目录名称； -f">
@@ -172,9 +172,9 @@
 <li>文件列表：指定要压缩的文件列表。</li>
 </ul>
 <h2 id="实例"><a href="#实例" class="headerlink" title="实例:"></a>实例:</h2><p>   将/home/Blinux/html/这个目录下所有文件和文件夹打包为当前目录下的html.zip：</p>
-<pre><code>zip -q -r html.zip /home/Blinux/html</code></pre><p>  上面的命令操作是将绝对地址的文件及文件夹进行压缩，以下给出压缩相对路径目录，比如目前在Bliux这个目录下，执行以下操作可以达到以上同样的效果：</p>
-<pre><code>zip -q -r html.zip html</code></pre><p>   比如现在我的html目录下，我操作的zip压缩命令是：</p>
-<pre><code>zip -q -r html.zip *</code></pre>
+<pre><code>[fenglangjuxu@localhost /]$ zip -q -r html.zip /home/Blinux/html</code></pre><p>  上面的命令操作是将绝对地址的文件及文件夹进行压缩，以下给出压缩相对路径目录，比如目前在Bliux这个目录下，执行以下操作可以达到以上同样的效果：</p>
+<pre><code>[fenglangjuxu@localhost /]$ zip -q -r html.zip html</code></pre><p>   比如现在我的html目录下，我操作的zip压缩命令是：</p>
+<pre><code>[fenglangjuxu@localhost /]$ zip -q -r html.zip *</code></pre>
       
     </div>
     <footer class="entry-meta entry-footer">
