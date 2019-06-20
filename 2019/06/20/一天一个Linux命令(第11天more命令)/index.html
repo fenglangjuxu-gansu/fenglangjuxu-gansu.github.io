@@ -3,23 +3,23 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
-  <title>Redis简单动态字符串（ simple dynamic string， SDS） | Hexo</title>
+  <title>一天一个Linux命令(第10天more命令) | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   
   
   
-  <meta name="description" content="1、简单动态字符串(SDS) Redis没有使用C语言传统的字符串表示（以空字符结尾的字符数组），而是自己构建了一种名为简单动态字符串的抽象类型，并将SDS用作Redis的默认字符串表示。  在Redis里面，C字符串只会作为字符串字面量用在一些无需对字符串值进行修改的地方，比如打印日志。   当Redis需要的不仅仅是一个字符串字面量，而是一个可以被修改的字符串值时，Redis就会使用SDS来表">
+  <meta name="description" content="1 、more命令   more命令是一个基于vi编辑器文本过滤器，它以全屏幕的方式按页显示文本文件的内容，支持vi中的关键字定位操作。more名单中内置了若干快捷键，常用的有H（获得帮助信息），Enter（向下翻滚一行），空格（向下滚动一屏），Q（退出命令）。 ![](../../picture/640.jpg)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Redis简单动态字符串（ simple dynamic string， SDS）">
-<meta property="og:url" content="http://yoursite.com/2019/06/20/Redis简单动态字符串/index.html">
+<meta property="og:title" content="一天一个Linux命令(第10天more命令)">
+<meta property="og:url" content="http://yoursite.com/2019/06/20/一天一个Linux命令(第11天more命令)/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="1、简单动态字符串(SDS) Redis没有使用C语言传统的字符串表示（以空字符结尾的字符数组），而是自己构建了一种名为简单动态字符串的抽象类型，并将SDS用作Redis的默认字符串表示。  在Redis里面，C字符串只会作为字符串字面量用在一些无需对字符串值进行修改的地方，比如打印日志。   当Redis需要的不仅仅是一个字符串字面量，而是一个可以被修改的字符串值时，Redis就会使用SDS来表">
+<meta property="og:description" content="1 、more命令   more命令是一个基于vi编辑器文本过滤器，它以全屏幕的方式按页显示文本文件的内容，支持vi中的关键字定位操作。more名单中内置了若干快捷键，常用的有H（获得帮助信息），Enter（向下翻滚一行），空格（向下滚动一屏），Q（退出命令）。 ![](../../picture/640.jpg)">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-20T11:54:05.396Z">
+<meta property="og:updated_time" content="2019-06-20T12:08:47.666Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Redis简单动态字符串（ simple dynamic string， SDS）">
-<meta name="twitter:description" content="1、简单动态字符串(SDS) Redis没有使用C语言传统的字符串表示（以空字符结尾的字符数组），而是自己构建了一种名为简单动态字符串的抽象类型，并将SDS用作Redis的默认字符串表示。  在Redis里面，C字符串只会作为字符串字面量用在一些无需对字符串值进行修改的地方，比如打印日志。   当Redis需要的不仅仅是一个字符串字面量，而是一个可以被修改的字符串值时，Redis就会使用SDS来表">
+<meta name="twitter:title" content="一天一个Linux命令(第10天more命令)">
+<meta name="twitter:description" content="1 、more命令   more命令是一个基于vi编辑器文本过滤器，它以全屏幕的方式按页显示文本文件的内容，支持vi中的关键字定位操作。more名单中内置了若干快捷键，常用的有H（获得帮助信息），Enter（向下翻滚一行），空格（向下滚动一屏），Q（退出命令）。 ![](../../picture/640.jpg)">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -101,7 +101,7 @@
             
       <div id="content" class="outer">
         
-          <section id="main" style="float:none;"><article id="post-Redis简单动态字符串" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost">
+          <section id="main" style="float:none;"><article id="post-一天一个Linux命令(第11天more命令)" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost">
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
     
@@ -109,7 +109,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      Redis简单动态字符串（ simple dynamic string， SDS）
+      一天一个Linux命令(第10天more命令)
     </h1>
   
 
@@ -117,8 +117,8 @@
     
     <div class="article-meta">
       
-	<a href="/2019/06/20/Redis简单动态字符串/" class="article-date">
-	  <time datetime="2019-06-20T01:23:35.394Z" itemprop="datePublished">June 20, 2019</time>
+	<a href="/2019/06/20/一天一个Linux命令(第11天more命令)/" class="article-date">
+	  <time datetime="2019-06-20T11:47:40.875Z" itemprop="datePublished">June 20, 2019</time>
 	</a>
 
        
@@ -130,35 +130,8 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1、简单动态字符串-SDS"><a href="#1、简单动态字符串-SDS" class="headerlink" title="1、简单动态字符串(SDS)"></a>1、简单动态字符串(SDS)</h2><ul>
-<li>Redis没有使用C语言传统的字符串表示（以空字符结尾的字符数组），而是自己构建了一种名为简单动态字符串的抽象类型，并将SDS用作Redis的默认字符串表示。</li>
-</ul>
-<pre><code>在Redis里面，C字符串只会作为字符串字面量用在一些无需对字符串值进行修改的地方，比如打印日志。
-
-
-当Redis需要的不仅仅是一个字符串字面量，而是一个可以被修改的字符串值时，Redis就会使用SDS来表示字符串值，比如在Redis的数据库里面，包含字符串值的键值对在底层都是由SDS实现的。
-
-举个例子，如果客户端执行命令：
-
-
-
-    redis&gt; SET msg &quot;hello world&quot;
-    OK</code></pre><p> 那么Redis将在数据中创建一个新的键值对，其中：</p>
-<pre><code>* 键值对的键是一个字符串对象，对象的底层实现是一个保存着字符串 “msg” 的SDS。
-* 键值对的值也是一个字符串对象，对象的底层实现是一个保存着字符串“hello world”的SDS。
-
-又比如， 如果客户端执行命令： 
-
-    redis&gt; RPUSH fruits &quot;apple&quot; &quot;bannan&quot; &quot;cherry&quot;
-    (integer) 3
-那么Redis将在数据库中创建一个新的键值对，其中：</code></pre><ul>
-<li><p>键值对的键是一个字符串对象，对象的底层实现是一个保存了字符串“fruits”的SDS。</p>
-</li>
-<li><p>键值对的值也是一个字符串对象，列表对象包含了三个字符串对象，这三个字符串对象分别有三个SDS实现，第一个SDS保存着字符串apple， 第二个SDS保存着bannan，第三个SDS保存着cherry。</p>
-<p>除了用来保存数据库中的字符串值之外，SDS还被用作缓存区（buffer）</p>
-</li>
-</ul>
-
+        <h2 id="1-、more命令"><a href="#1-、more命令" class="headerlink" title="1 、more命令"></a>1 、more命令</h2><p>   more命令是一个基于vi编辑器文本过滤器，它以全屏幕的方式按页显示文本文件的内容，支持vi中的关键字定位操作。more名单中内置了若干快捷键，常用的有H（获得帮助信息），Enter（向下翻滚一行），空格（向下滚动一屏），Q（退出命令）。</p>
+<pre><code>![](../../picture/640.jpg)</code></pre>
       
     </div>
     <footer class="entry-meta entry-footer">
@@ -197,19 +170,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2019/06/20/一天一个Linux命令(第11天more命令)/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          一天一个Linux命令(第10天more命令)
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/06/19/一天一个Linux命令(第10天lha命令)/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2019/06/20/Redis简单动态字符串/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">一天一个Linux命令(第10天lha命令)</div>
+      <div class="article-nav-title">Redis简单动态字符串（ simple dynamic string， SDS）</div>
     </a>
   
 </nav>
@@ -223,7 +187,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">Contents</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、简单动态字符串-SDS"><span class="nav-number">1.</span> <span class="nav-text">1、简单动态字符串(SDS)</span></a></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-、more命令"><span class="nav-number">1.</span> <span class="nav-text">1 、more命令</span></a></li></ol>
     
     </div>
   </aside>
