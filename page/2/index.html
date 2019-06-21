@@ -99,6 +99,71 @@
         
           <section id="main">
   
+    <article id="post-一天一个Linux命令(第三天cat命令)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2019/06/15/一天一个Linux命令(第三天cat命令)/">一天一个Linux命令，第三天cat命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/06/15/一天一个Linux命令(第三天cat命令)/" class="article-date">
+	  <time datetime="2019-06-15T11:28:34.000Z" itemprop="datePublished">June 15, 2019</time>
+	</a>
+
+       
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li><p>命令：cat (中文猫的意思)</p>
+</li>
+<li><p>解释：cat命令连接文件并打印到标准输出设备上（如显示器），cat经常用来显示文件的内容</p>
+</li>
+<li><p>注意：当文件较大时，文本在屏幕上迅速闪过（滚屏），用户往往看不清所显示的内容。因此，一般用more等命令分屏显示。为了控制滚屏，可以按Ctrl+S键，停止滚屏；按Ctrl+Q键可以恢复滚屏。按Ctrl+C（中断）键可以终止该命令的执行，并且返回Shell提示符状态。</p>
+</li>
+<li><p>语法格式： cat(选项)(参数)</p>
+</li>
+<li><p>因下面要用到Linux中的&gt;符号，我这里就简单介绍下 &gt; , &gt;&gt; , &gt;：将当前命令的执行结果（原本要输出到显示器等地方），重定向到其它输出设备（如文件，打印机），如果存在相同的文件名则覆盖源文件。&gt;&gt;：和上面的命令一样，只不过是不覆盖当前相同的文件，而是在后面追加新内容。</p>
+</li>
+<li><p>选项：      </p>
+<p> -n或–number：有1开始对所有输出的行数编号；(注意number前面是两个–符号, n前面一个-符号)<br> -b或–number-nonblank：和-n相似，只不过对于空白行不编号；<br> -s或–squeeze-blank：当遇到有连续两行以上的空白行，就代换为一行的空白行；<br> -A：显示不可打印字符，行尾显示“$”；<br> -v 或 –show-nonprinting：使用 ^ 和 M- 符号，除了 LFD 和 TAB 之外。<br> -E 或 –show-ends : 在每行结束处显示 $。</p>
+<ul>
+<li>实例： 假设当前目录下有gc.log和all.log两个文件夹</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>cat gc.log all.log （ 同时显示文件gc.log和all.log的内容）</li>
+<li>cat all.log（在屏幕上显示文件all.log的内容）</li>
+<li>cat gc.log  all.log &gt; filefeng （将文件gc.log和all.log合并后放入文件filefeng中）</li>
+<li>以上是主要的一些部分，后面再写几个基于上面知识所灵活组合的命令：把 all.log 的文档内容加上          行号后输入 wang.log 这个文档里：cat -n all.log &gt; wang.log</li>
+</ul>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
     <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
@@ -263,6 +328,18 @@
               <div class="widget-entry-summary" style="margin: 0;">
             
 
+              <h6 style="margin: 0;"><a href="/2019/06/21/Event-Driven Data Management for Microservices/">(no title)</a></h6>
+              <span>June 21, 2019</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
               <h6 style="margin: 0;"><a href="/2019/06/20/一天一个Linux命令(第11天more命令)/">一天一个Linux命令(第10天more命令)</a></h6>
               <span>June 20, 2019</span>
             </div>
@@ -317,18 +394,6 @@
 
           </li>
         
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="/2019/06/19/一天一个Linux命令(第7天pwd命令)/">一天一个Linux命令(第7天pwd命令)</a></h6>
-              <span>June 19, 2019</span>
-            </div>
-
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -354,7 +419,7 @@
     <h3 class="widget-title">Archives</h3>
 
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">11</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">12</span></li></ul>
     </div>
   </div>
 
