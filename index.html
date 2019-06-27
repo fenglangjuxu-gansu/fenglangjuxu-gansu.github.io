@@ -99,6 +99,115 @@
         
           <section id="main">
   
+    <article id="post-一天一个Linux命令(whoami命令)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2019/06/27/一天一个Linux命令(whoami命令)/">一天一个Linux命令(whoami命令)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/06/27/一天一个Linux命令(whoami命令)/" class="article-date">
+	  <time datetime="2019-06-27T13:10:05.052Z" itemprop="datePublished">June 27, 2019</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+ 
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><p> <code>whoami(选项)</code></p>
+<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">--help：在线帮助；</span><br><span class="line">--version：显示版本信息。</span><br></pre></td></tr></table></figure>
+
+<h2 id="3、实例"><a href="#3、实例" class="headerlink" title="3、实例"></a>3、实例</h2><p>whoami显示当前用户名， whoami –version 显示当前Linux内核</p>
+<pre><code>[fenglangjuxu@localhost ~]$ 
+[fenglangjuxu@localhost ~]$ 
+[fenglangjuxu@localhost ~]$ whoami
+fenglangjuxu
+[fenglangjuxu@localhost ~]$ whoami version
+whoami: 额外的操作数 &quot;version&quot;
+Try &apos;whoami --help&apos; for more information.
+[fenglangjuxu@localhost ~]$ whoami --version
+whoami (GNU coreutils) 8.22
+Copyright (C) 2013 Free Software Foundation, Inc.
+许可证：GPLv3+：GNU 通用公共许可证第3 版或更新版本&lt;http://gnu.org/licenses/gpl.html&gt;。
+本软件是自由软件：您可以自由修改和重新发布它。
+在法律范围内没有其他保证。
+
+由Richard Mlynarik 编写。
+[fenglangjuxu@localhost ~]$ </code></pre><p><img src="/.com//1561641280242.png" alt="1561641280242"></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+
+      
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-abc" class="article article-type-post" itemscope itemprop="blogPost">
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2019/06/27/abc/">abc</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/06/27/abc/" class="article-date">
+	  <time datetime="2019-06-27T12:41:16.000Z" itemprop="datePublished">June 27, 2019</time>
+	</a>
+
+       
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="/1561639397783.png" alt="1561639397783"></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
     <article id="post-一天一个Linux命令(watch命令)" class="article article-type-post" itemscope itemprop="blogPost">
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
@@ -135,7 +244,7 @@
 <p>当前时间   系统连续运行时间  当前用户连接数       系统平均负载（最近2分钟、9分钟、XX分钟）</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[fenglangjuxu@localhost ~]$ </span><br><span class="line">[fenglangjuxu@localhost ~]$ </span><br><span class="line">[fenglangjuxu@localhost ~]$ watch uptime</span><br><span class="line">[fenglangjuxu@localhost ~]$ </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Every 2.0s: uptime                                             Thu Jun 27 07:26:42 2019</span><br><span class="line"></span><br><span class="line"> 07:26:42 up 34 min,  2 users,  load average: 0.25, 0.19, 0.47</span><br></pre></td></tr></table></figure>
 
-<p><img src="/.com//1561638341810.png" alt="1561638341810"></p>
+<p><img src="//1561639121169.png" alt="1561639121169"></p>
 
       
     </div>
@@ -207,7 +316,7 @@ local/ lock/
 [root@localhost local]# ll
 总用量 0
 drwx------. 2 root root 6 6月  26 05:25 dongpengju
-[root@localhost local]# </code></pre><p><img src="/.com//1561469268730.png" alt="1561469268730"></p>
+[root@localhost local]# </code></pre><p><img src="//1561469268730.png" alt="1561469268730"></p>
 <p>在当前目录中建立bin和bin下的os_1目录，权限设置为文件主可读、写、执行，同组用户可读和执行，其他用户无权访问</p>
 <pre><code>[root@localhost local]# mkdir -p-m 750 fenglangjuxu/huoqubing
 mkdir：无效选项 -- -
@@ -218,7 +327,7 @@ Try &apos;mkdir --help&apos; for more information.
 drwx------. 2 root root  6 6月  26 05:25 dongpengju
 drwxr-xr-x. 3 root root 23 6月  26 05:30 fenglangjuxu
 [root@localhost local]# </code></pre><p>​    </p>
-<p><img src="/.com//1561469513882.png" alt="1561469513882"></p>
+<p><img src="//1561469513882.png" alt="1561469513882"></p>
 
       
     </div>
@@ -354,7 +463,7 @@ lrwxrwxrwx.   1 root root    10 6月  22 04:07 tmp -&gt; ../var/tmp
 <p>zhiruo@luoyang MINGW64 /e/zhiruoblog<br>$ which chmod<br>/usr/bin/chmod</p>
 <p>zhiruo@luoyang MINGW64 /e/zhiruoblog<br>$ which pwd<br>/usr/bin/pwd </p>
 <p>如图：</p>
-<p><img src="/.com//1561124360712.png" alt="1561124360712"></p>
+<p><img src="//1561124360712.png" alt="1561124360712"></p>
 <p>说明：which是根据使用者所配置的 PATH 变量内的目录去搜寻可运行档的！所以，不同的 PATH 配置内容所找到的命令当然不一样的！</p>
 
       
@@ -574,12 +683,12 @@ lrwxrwxrwx.   1 root root    10 6月  22 04:07 tmp -&gt; ../var/tmp
 <h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><p>文件：指定分页显示内容的文件。</p>
 <h2 id="实例"><a href="#实例" class="headerlink" title="实例:"></a>实例:</h2><p>显示文件file的内容，但在显示之前先清屏，并且在屏幕的最下方显示完核的百分比。</p>
 <p><code>[work@aisp-communitycms-1-ptest aisp-community-cms]$ more -dc gc.log</code></p>
-<p><img src="/.com//1561122816796.png" alt="1561122816796"></p>
+<p><img src="//1561122816796.png" alt="1561122816796"></p>
 <p>显示文件file的内容，每10行显示一次，而且在显示之前先清屏。</p>
 <p><code>[work@aisp-communitycms-1-ptest aisp-community-cms]$ more -c -10 aisp-community-cms.log</code></p>
-<p><img src="/.com//1561122853240.png" alt="1561122853240"></p>
+<p><img src="//1561122853240.png" alt="1561122853240"></p>
 <p>test</p>
-<p><img src="/.com//1561122872815.png" alt="1561122872815"></p>
+<p><img src="//1561122872815.png" alt="1561122872815"></p>
 
       
     </div>
@@ -774,146 +883,6 @@ lrwxrwxrwx.   1 root root    10 6月  22 04:07 tmp -&gt; ../var/tmp
 <!-- Table of Contents -->
 
   
-    <article id="post-一天一个Linux命令(第9天zip命令)" class="article article-type-post" itemscope itemprop="blogPost">
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2019/06/19/一天一个Linux命令(第9天zip命令)/">一天一个Linux命令(第9天zip命令)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2019/06/19/一天一个Linux命令(第9天zip命令)/" class="article-date">
-	  <time datetime="2019-06-19T11:38:59.966Z" itemprop="datePublished">June 19, 2019</time>
-	</a>
-
-       
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="zip命令"><a href="#zip命令" class="headerlink" title="zip命令"></a>zip命令</h2><ul>
-<li>zip命令可以用来解压缩文件，或者对文件进行打包操作。zip是个使用广泛的压缩程序，文件经它压缩后会另外产生具有“.zip”扩展名的压缩文件。</li>
-</ul>
-<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><p>   <code>zip(选项)(参数)</code></p>
-<h2 id="选项："><a href="#选项：" class="headerlink" title="选项："></a>选项：</h2><pre><code>-A：调整可执行的自动解压缩文件；
--b&lt;工作目录&gt;：指定暂时存放文件的目录；
--c：替每个被压缩的文件加上注释；
--d：从压缩文件内删除指定的文件；
--D：压缩文件内不建立目录名称；
--f：此参数的效果和指定“-u”参数类似，但不仅更新既有文件，如果某些文件原本不存在于压缩文件内，使用本参数会一并将其加入压缩文件中；
--F：尝试修复已损坏的压缩文件；
--g：将文件压缩后附加在已有的压缩文件之后，而非另行建立新的压缩文件；
--h：在线帮助；
--i&lt;范本样式&gt;：只压缩符合条件的文件；
--j：只保存文件名称及其内容，而不存放任何目录名称；
--J：删除压缩文件前面不必要的数据；
--k：使用MS-DOS兼容格式的文件名称；
--l：压缩文件时，把LF字符置换成LF+CR字符；
--ll：压缩文件时，把LF+cp字符置换成LF字符；
--L：显示版权信息；
--m：将文件压缩并加入压缩文件后，删除原始文件，即把文件移到压缩文件中；
--n&lt;字尾字符串&gt;：不压缩具有特定字尾字符串的文件；
--o：以压缩文件内拥有最新更改时间的文件为准，将压缩文件的更改时间设成和该文件相同；
--q：不显示指令执行过程；
--r：递归处理，将指定目录下的所有文件和子目录一并处理；
--S：包含系统和隐藏文件；
--t&lt;日期时间&gt;：把压缩文件的日期设成指定的日期；
--T：检查备份文件内的每个文件是否正确无误；
--u：更换较新的文件到压缩文件内；
--v：显示指令执行过程或显示版本信息；
--V：保存VMS操作系统的文件属性；
--w：在文件名称里假如版本编号，本参数仅在VMS操作系统下有效；
--x&lt;范本样式&gt;：压缩时排除符合条件的文件；
--X：不保存额外的文件属性；
--y：直接保存符号连接，而非该链接所指向的文件，本参数仅在UNIX之类的系统下有效；
--z：替压缩文件加上注释；
--$：保存第一个被压缩文件所在磁盘的卷册名称；
--&lt;压缩效率&gt;：压缩效率是一个介于1~9的数值。</code></pre><h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><ul>
-<li>zip压缩包：指定要创建的zip压缩包；</li>
-<li>文件列表：指定要压缩的文件列表。</li>
-</ul>
-<h2 id="实例"><a href="#实例" class="headerlink" title="实例:"></a>实例:</h2><p>   将/home/Blinux/html/这个目录下所有文件和文件夹打包为当前目录下的html.zip：</p>
-<pre><code>[fenglangjuxu@localhost /]$ zip -q -r html.zip /home/Blinux/html</code></pre><p>  上面的命令操作是将绝对地址的文件及文件夹进行压缩，以下给出压缩相对路径目录，比如目前在Bliux这个目录下，执行以下操作可以达到以上同样的效果：</p>
-<pre><code>[fenglangjuxu@localhost /]$ zip -q -r html.zip html</code></pre><p>   比如现在我的html目录下，我操作的zip压缩命令是：</p>
-<pre><code>[fenglangjuxu@localhost /]$ zip -q -r html.zip *</code></pre>
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-      
-      
-    </footer>
-    <hr class="entry-footer-hr">
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
-    <article id="post-一天一个Linux命令(第8天mkdir命令)" class="article article-type-post" itemscope itemprop="blogPost">
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2019/06/19/一天一个Linux命令(第8天mkdir命令)/">一天一个Linux命令(第8天mkdir命令命令)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2019/06/19/一天一个Linux命令(第8天mkdir命令)/" class="article-date">
-	  <time datetime="2019-06-19T11:38:59.702Z" itemprop="datePublished">June 19, 2019</time>
-	</a>
-
-       
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="mkdir命令"><a href="#mkdir命令" class="headerlink" title="mkdir命令"></a>mkdir命令</h2><ul>
-<li><p>mkdir命令用来创建目录。该命令创建由dirname命名的目录。如果在目录名的前面没有加任何路径名，则在当前目录下创建由dirname指定的目录；如果给出了一个已经存在的路径，将会在该目录下创建一个指定的目录。在创建目录时，应保证新建的目录与它所在目录下的文件没有重名。 </p>
-<p>注意：在创建文件时，不要把所有的文件都存放在主目录中，可以创建子目录，通过它们来更有效地组织文件。最好采用前后一致的命名方式来区分文件和目录。例如，目录名可以以大写字母开头，这样，在目录列表中目录名就出现在前面。</p>
-<p>在一个子目录中应包含类型相似或用途相近的文件。例如，应建立一个子目录，它包含所有的数据库文件，另有一个子目录应包含电子表格文件，还有一个子目录应包含文字处理文档，等等。目录也是文件，它们和普通文件一样遵循相同的命名规则，并且利用全路径可以唯一地指定一个目录。</p>
-</li>
-</ul>
-<h2 id="语法："><a href="#语法：" class="headerlink" title="语法："></a>语法：</h2><p>  <code>mkdir (选项)(参数)</code></p>
-<h2 id="选项"><a href="#选项" class="headerlink" title="选项:"></a>选项:</h2><pre><code> -Z：设置安全上下文，当使用SELinux时有效；
--m&lt;目标属性&gt;或--mode&lt;目标属性&gt;建立目录的同时设置目录的权限；
--p或--parents 若所要建立目录的上层目录目前尚未建立，则会一并建立上层目录；
---version 显示版本信息。
-
-注意事项：mv与cp的结果不同，mv好像文件“搬家”，文件个数并未增加。而cp对文件进行复制，文件个数增加了。</code></pre><h2 id="参数："><a href="#参数：" class="headerlink" title="参数："></a>参数：</h2><pre><code>目录：指定要创建的目录列表，多个目录之间用空格隔开。</code></pre><h2 id="实例："><a href="#实例：" class="headerlink" title="实例："></a>实例：</h2><p> 在目录/usr/下建立子目录dongpj，并且只有文件主有读、写和执行权限，其他人无权访问   </p>
-<pre><code>[fenglangjuxu@localhost /]$ mkdir -m 700 /usr/dongpj</code></pre><p>在当前目录中建立bin和bin下的os_1目录，权限设置为文件主可读、写、执行，同组用户可读和执行，其他用户无权访问</p>
-<pre><code>[fenglangjuxu@localhost /]$ mkdir -p-m 750 bin/os_1</code></pre>
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-      
-      
-    </footer>
-    <hr class="entry-footer-hr">
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
 
 
   <nav id="page-nav">
@@ -1024,6 +993,30 @@ lrwxrwxrwx.   1 root root    10 6月  22 04:07 tmp -&gt; ../var/tmp
               <div class="widget-entry-summary" style="margin: 0;">
             
 
+              <h6 style="margin: 0;"><a href="/2019/06/27/一天一个Linux命令(whoami命令)/">一天一个Linux命令(whoami命令)</a></h6>
+              <span>June 27, 2019</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
+              <h6 style="margin: 0;"><a href="/2019/06/27/abc/">abc</a></h6>
+              <span>June 27, 2019</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
               <h6 style="margin: 0;"><a href="/2019/06/26/一天一个Linux命令(watch命令)/">一天一个Linux命令(watch命令)</a></h6>
               <span>June 26, 2019</span>
             </div>
@@ -1066,30 +1059,6 @@ lrwxrwxrwx.   1 root root    10 6月  22 04:07 tmp -&gt; ../var/tmp
 
           </li>
         
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="/2019/06/21/Event-Driven Data Management for Microservices/">(no title)</a></h6>
-              <span>June 21, 2019</span>
-            </div>
-
-          </li>
-        
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="/2019/06/20/一天一个Linux命令(第11天more命令)/">一天一个Linux命令(第10天more命令)</a></h6>
-              <span>June 20, 2019</span>
-            </div>
-
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -1099,7 +1068,7 @@ lrwxrwxrwx.   1 root root    10 6月  22 04:07 tmp -&gt; ../var/tmp
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -1115,7 +1084,7 @@ lrwxrwxrwx.   1 root root    10 6月  22 04:07 tmp -&gt; ../var/tmp
     <h3 class="widget-title">Archives</h3>
 
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">16</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">18</span></li></ul>
     </div>
   </div>
 
