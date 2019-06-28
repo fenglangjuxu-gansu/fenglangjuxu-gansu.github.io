@@ -99,6 +99,182 @@
         
           <section id="main">
   
+    <article id="post-一天一个Linux命令(第11天more命令)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2019/06/20/一天一个Linux命令(第11天more命令)/">一天一个Linux命令(第10天more命令)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/06/20/一天一个Linux命令(第11天more命令)/" class="article-date">
+	  <time datetime="2019-06-20T11:47:40.875Z" itemprop="datePublished">June 20, 2019</time>
+	</a>
+
+       
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="MV命令"><a href="#MV命令" class="headerlink" title="MV命令"></a>MV命令</h2><ul>
+<li><p>more命令是一个基于vi编辑器文本过滤器，它以全屏幕的方式按页显示文本文件的内容，支持vi中的关键字定位操作。more名单中内置了若干快捷键，常用的有H（获得帮助信息），Enter（向下翻滚一行），空格（向下滚动一屏），Q（退出命令）。</p>
+<p>该命令一次显示一屏文本，满屏后停下来，并且在屏幕的底部出现一个提示信息，给出至今己显示的该文件的百分比：–More–（XX%）可以用下列不同的方法对提示做出回答：</p>
+<ul>
+<li>按Space键：显示文本的下一屏内容。</li>
+<li>按Enier键：只显示文本的下一行内容。</li>
+<li>按斜线符|：接着输入一个模式，可以在文本中寻找下一个相匹配的模式。</li>
+<li>按H键：显示帮助屏，该屏上有相关的帮助信息。</li>
+<li>按B键：显示上一屏内容。</li>
+<li>按Q键：退出rnore命令。</li>
+</ul>
+</li>
+</ul>
+<h2 id="语法："><a href="#语法：" class="headerlink" title="语法："></a>语法：</h2><p><code>more(语法)(参数)</code></p>
+<h2 id="选项："><a href="#选项：" class="headerlink" title="选项："></a>选项：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-&lt;数字&gt;：指定每屏显示的行数；</span><br><span class="line">-d：显示“[press space to continue,&apos;q&apos; to quit.]”和“[Press &apos;h&apos; for instructions]”；</span><br><span class="line">-c：不进行滚屏操作。每次刷新这个屏幕；</span><br><span class="line">-s：将多个空行压缩成一行显示；</span><br><span class="line">-u：禁止下划线；</span><br><span class="line">+&lt;数字&gt;：从指定数字的行开始显示。</span><br></pre></td></tr></table></figure>
+
+<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><p>文件：指定分页显示内容的文件。</p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例:"></a>实例:</h2><p>显示文件file的内容，但在显示之前先清屏，并且在屏幕的最下方显示完核的百分比。</p>
+<p><code>[work@aisp-communitycms-1-ptest aisp-community-cms]$ more -dc gc.log</code></p>
+<p><img src="/2019/06/20/一天一个Linux命令(第11天more命令)/1561122816796.png" alt="1561122816796"></p>
+<p>显示文件file的内容，每10行显示一次，而且在显示之前先清屏。</p>
+<p><code>[work@aisp-communitycms-1-ptest aisp-community-cms]$ more -c -10 aisp-community-cms.log</code></p>
+<p><img src="/2019/06/20/一天一个Linux命令(第11天more命令)/1561122853240.png" alt="1561122853240"></p>
+<p>test</p>
+<p><img src="/2019/06/20/一天一个Linux命令(第11天more命令)/1561122872815.png" alt="1561122872815"></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-Redis简单动态字符串" class="article article-type-post" itemscope itemprop="blogPost">
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2019/06/20/Redis简单动态字符串/">Redis简单动态字符串（ simple dynamic string， SDS）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/06/20/Redis简单动态字符串/" class="article-date">
+	  <time datetime="2019-06-20T01:23:35.394Z" itemprop="datePublished">June 20, 2019</time>
+	</a>
+
+       
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1、简单动态字符串-SDS"><a href="#1、简单动态字符串-SDS" class="headerlink" title="1、简单动态字符串(SDS)"></a>1、简单动态字符串(SDS)</h2><ul>
+<li>Redis没有使用C语言传统的字符串表示（以空字符结尾的字符数组），而是自己构建了一种名为简单动态字符串的抽象类型，并将SDS用作Redis的默认字符串表示。</li>
+</ul>
+<pre><code>在Redis里面，C字符串只会作为字符串字面量用在一些无需对字符串值进行修改的地方，比如打印日志。
+
+
+当Redis需要的不仅仅是一个字符串字面量，而是一个可以被修改的字符串值时，Redis就会使用SDS来表示字符串值，比如在Redis的数据库里面，包含字符串值的键值对在底层都是由SDS实现的。
+
+举个例子，如果客户端执行命令：</code></pre><p>​     
+​<br>        redis&gt; SET msg “hello world”<br>        OK<br> 那么Redis将在数据中创建一个新的键值对，其中：</p>
+<pre><code>* 键值对的键是一个字符串对象，对象的底层实现是一个保存着字符串 “msg” 的SDS。
+* 键值对的值也是一个字符串对象，对象的底层实现是一个保存着字符串“hello world”的SDS。
+
+又比如， 如果客户端执行命令： 
+
+    redis&gt; RPUSH fruits &quot;apple&quot; &quot;bannan&quot; &quot;cherry&quot;
+    (integer) 3
+那么Redis将在数据库中创建一个新的键值对，其中：</code></pre><ul>
+<li><p>键值对的键是一个字符串对象，对象的底层实现是一个保存了字符串“fruits”的SDS。</p>
+</li>
+<li><p>键值对的值也是一个字符串对象，列表对象包含了三个字符串对象，这三个字符串对象分别有三个SDS实现，第一个SDS保存着字符串apple， 第二个SDS保存着bannan，第三个SDS保存着cherry。</p>
+<p>除了用来保存数据库中的字符串值之外，SDS还被用作缓存区（buffer）</p>
+</li>
+</ul>
+<h6 id="缓冲区"><a href="#缓冲区" class="headerlink" title="缓冲区"></a>缓冲区</h6><p>​         C语言给字符串开辟一个存储空间，如果对此存储空间的使用超过开辟的空间，会导致内存溢出。例如使用字符串拼接等方式时，就很容易出现此问题。而如果每次拼接之前都要计算每个字符串的长度，时间上又要耗费很久。</p>
+<p>​         redis的SDS中内置一个sdscat函数，也是用于字符串的拼接。但是在执行操作之前，其会先检查空间是否足够，通过比较当前字符串的free与即将拼接字符串的len的大小，就知道是否可以拼接。如果free的值不够，会再申请内存空间，避免溢出。</p>
+<h6 id="修改字符串时的内存重分配"><a href="#修改字符串时的内存重分配" class="headerlink" title="修改字符串时的内存重分配"></a>修改字符串时的内存重分配</h6><p>​         C语言的字符串长度和底层数组之间存在关联，因此字符串长度增加时需要再分配存储空间，避免溢出；字符串长度减少时，需要释放存储空间，避免内存泄漏。</p>
+<p> 由于redis中，字符串频繁修改是很经常发生的事情，redis的一个应用场景就是变量频繁修改的场景。为了避免C语言的不断重分配空间，redis进行了改进。</p>
+<p>​         redis的sds，主要是通过free字段，来进行判断。通过未使用空间大小，实现了空间预分配和惰性空间释放。</p>
+<p>​         1）空间预分配</p>
+<p> 空间预分配用于优化字符串的增长操作，实现方式为：当需要增长字符串时，sds不仅会分配足够的空间用于增长，还会预分配未使用空间。</p>
+<p>分配的规则是，如果增长字符串后，新的字符串比1MB小，则额外申请字符串当前所占空间的大小作为free值；如果增长后，字符串长度超过1MB，则额外申请1MB大小。</p>
+<p>例如，字符串增长后，大小是50kb，则额外申请50kb作为未使用空间。如果字符串增长后的大小是20mb，则额外申请1mb作为未使用空间。以上两种情况都为将\0计算在内，因此，实际上还会需要1字节作为\0存放的空间。</p>
+<p>上述机制，避免了redis字符串增长情况下频繁申请空间的情况。每次字符串增长之前，sds会先检查空间是否足够，如果足够则直接使用预分配的空间，否则按照上述机制申请使用空间。该机制，使得字符串增长n次，需要申请空间的次数，从必定为n次的情况，降为最多n次的情况。</p>
+<p>2）懒惰空间释放</p>
+<p>懒惰空间释放用于优化sds字符串缩短的操作，实现方式为：当需要缩短sds的长度时，并不立即释放空间，而是使用free来保存剩余可用长度，并等待将来使用。当有剩余空间，而有有增长字符串操作时，则又会调用空间预分配机制。</p>
+<p>当redis内存空间不足时，会自动释放sds中未使用的空间，因此也不需要担心内存泄漏问题。</p>
+<h6 id="二进制安全"><a href="#二进制安全" class="headerlink" title="二进制安全"></a>二进制安全</h6><p>​         C语言的字符必须符合某种编码，例如ascii，且字符串除了末尾之外，不能有空格，否则会被当作是另一个字符串。这些限制使得c语言的字符串只能保存不含空格的文本，不能保存图片、视频等二进制数据，也不能保存包含空格的文本。</p>
+<p> 而保存图片、大段文本等内容，也是redis的常用场景。因此，redis也对此进行优化。因此，sds是二进制安全的，写入的是什么内容，返回的也是什么内容，并没有限制。</p>
+<p>​         redis的sds，用buf保存字符串，保存的就是一系列的二进制数据。因为，sds考虑字符串长度，是通过len属性，而不是通过\0来判断。</p>
+<h6 id="C语言字符串函数"><a href="#C语言字符串函数" class="headerlink" title="C语言字符串函数"></a>C语言字符串函数</h6><p>​         redis兼容c语言对于字符串末尾采用\0进行处理，这样使得其可以复用部分c语言字符串函数的代码，实现代码的精简性。</p>
+<h6 id="总结——C语言字符串和SDS字符串比较"><a href="#总结——C语言字符串和SDS字符串比较" class="headerlink" title="总结——C语言字符串和SDS字符串比较"></a>总结——C语言字符串和SDS字符串比较</h6><table>
+<thead>
+<tr>
+<th align="left">C字符串</th>
+<th align="left">Redis SDS</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">获取字符串长度时间复杂的O(n)</td>
+<td align="left">获取字符串长度时间复杂的O(1)</td>
+</tr>
+<tr>
+<td align="left">字符串长度增加可能造成缓冲区溢出</td>
+<td align="left">字符串长度增加不会造成缓冲区溢出</td>
+</tr>
+<tr>
+<td align="left">修改字符串长度n次，必然n次内存重分配</td>
+<td align="left">修改字符串长度n次，最多n次内存重分配</td>
+</tr>
+<tr>
+<td align="left">只保存不含空格文本</td>
+<td align="left">保存任意二进制数据和文本数据</td>
+</tr>
+<tr>
+<td align="left">可以使用&lt;string.h&gt;库所有函数</td>
+<td align="left">可以使用部分&lt;string.h&gt;库的函数</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
     <article id="post-一天一个Linux命令(第10天lha命令)" class="article article-type-post" itemscope itemprop="blogPost">
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
@@ -666,65 +842,11 @@ AUTORUN.BAT 43 2011-08-23 16:56
 <!-- Table of Contents -->
 
   
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2019/06/15/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2019/06/15/hello-world/" class="article-date">
-	  <time datetime="2019-06-15T11:06:10.786Z" itemprop="datePublished">June 15, 2019</time>
-	</a>
-
-       
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-      
-      
-    </footer>
-    <hr class="entry-footer-hr">
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
 
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/">Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/">Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next</a>
   </nav>
 
 </section>
@@ -830,6 +952,30 @@ AUTORUN.BAT 43 2011-08-23 16:56
               <div class="widget-entry-summary" style="margin: 0;">
             
 
+              <h6 style="margin: 0;"><a href="/2019/06/28/Redis链接表/">Redis跳跃表</a></h6>
+              <span>June 28, 2019</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
+              <h6 style="margin: 0;"><a href="/2019/06/28/Redis跳跃表/">Redis跳跃表</a></h6>
+              <span>June 28, 2019</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
               <h6 style="margin: 0;"><a href="/2019/06/28/testfeng/">testfeng</a></h6>
               <span>June 28, 2019</span>
             </div>
@@ -872,30 +1018,6 @@ AUTORUN.BAT 43 2011-08-23 16:56
 
           </li>
         
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="/2019/06/25/一天一个Linux命令(mkdir命令)/">一天一个Linux命令(mkdir命令)</a></h6>
-              <span>June 25, 2019</span>
-            </div>
-
-          </li>
-        
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="/2019/06/24/一天一个Linux命令(touch命令) /">一天一个Linux命令(第6天touch命令)</a></h6>
-              <span>June 24, 2019</span>
-            </div>
-
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -921,7 +1043,7 @@ AUTORUN.BAT 43 2011-08-23 16:56
     <h3 class="widget-title">Archives</h3>
 
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">19</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">21</span></li></ul>
     </div>
   </div>
 

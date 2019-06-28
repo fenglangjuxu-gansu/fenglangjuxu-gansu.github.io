@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>Redis跳跃表 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  
+  <meta name="description" content="跳跃表  跳跃表（skiplist）是一种有序数据结构，它通过在每个节点中维持多个指向其他节点的指针，从而达到快捷访问节点的目的。  在大多数情况先，跳跃表的效率可以与平衡树媲美，并且因为跳跃表的实现比平衡树更为简单，所以有不少程序都使用跳跃表来代替平衡树。 Redis使用跳跃表作为有序集合键的底层实现之一。 I、跳跃表实现Redis的跳跃表由zskiplistNode和zskiplist两个结构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis跳跃表">
+<meta property="og:url" content="http://yoursite.com/2019/06/28/Redis链接表/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="跳跃表  跳跃表（skiplist）是一种有序数据结构，它通过在每个节点中维持多个指向其他节点的指针，从而达到快捷访问节点的目的。  在大多数情况先，跳跃表的效率可以与平衡树媲美，并且因为跳跃表的实现比平衡树更为简单，所以有不少程序都使用跳跃表来代替平衡树。 Redis使用跳跃表作为有序集合键的底层实现之一。 I、跳跃表实现Redis的跳跃表由zskiplistNode和zskiplist两个结构">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-06-28T04:25:35.247Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Redis跳跃表">
+<meta name="twitter:description" content="跳跃表  跳跃表（skiplist）是一种有序数据结构，它通过在每个节点中维持多个指向其他节点的指针，从而达到快捷访问节点的目的。  在大多数情况先，跳跃表的效率可以与平衡树媲美，并且因为跳跃表的实现比平衡树更为简单，所以有不少程序都使用跳跃表来代替平衡树。 Redis使用跳跃表作为有序集合键的底层实现之一。 I、跳跃表实现Redis的跳跃表由zskiplistNode和zskiplist两个结构">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fashion.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+<header id="allheader" class="site-header" role="banner">
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" title="Hexo" rel="home"> Hexo </a>
+            
+          </h1>
+          
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+
+            <div class="clearfix sf-menu">
+              <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class href="/">Home</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class href="/archives">Archives</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class href="/categories">Categories</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class href="/tags">Tags</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class href="/about">About</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-Redis链接表" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost">
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      Redis跳跃表
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/06/28/Redis链接表/" class="article-date">
+	  <time datetime="2019-06-28T04:20:38.134Z" itemprop="datePublished">June 28, 2019</time>
+	</a>
+
+       
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="跳跃表"><a href="#跳跃表" class="headerlink" title="跳跃表"></a>跳跃表</h2><ul>
+<li><blockquote>
+<p>跳跃表（skiplist）是一种<strong>有序</strong>数据结构，它通过在每个节点中维持多个指向其他节点的指针，从而达到快捷访问节点的目的。</p>
+</blockquote>
+<p>在大多数情况先，<strong>跳跃表</strong>的效率可以与平衡树媲美，并且因为跳跃表的实现比平衡树更为简单，所以有不少程序都使用跳跃表来代替平衡树。</p>
+<p>Redis使用跳跃表作为<strong>有序集合键</strong>的底层实现之一。</p>
+<h2 id="I、跳跃表实现"><a href="#I、跳跃表实现" class="headerlink" title="I、跳跃表实现"></a>I、跳跃表实现</h2><p>Redis的跳跃表由zskiplistNode和zskiplist两个结构定义，其中zskiplistNode结构用于表示跳跃表节点，而zskiplist结构用于保存跳跃表节点的相关信息（如节点数量，表头指针，表尾指针等）。</p>
+<p>下图为一个跳跃表示意图：</p>
+</li>
+</ul>
+<pre><code>在Redis里面，C字符串只会作为字符串字面量用在一些无需对字符串值进行修改的地方，比如打印日志。
+
+
+当Redis需要的不仅仅是一个字符串字面量，而是一个可以被修改的字符串值时，Redis就会使用SDS来表示字符串值，比如在Redis的数据库里面，包含字符串值的键值对在底层都是由SDS实现的。
+
+举个例子，如果客户端执行命令：</code></pre><p>​     
+​<br>​        redis&gt; SET msg “hello world”<br>​        OK<br> 那么Redis将在数据中创建一个新的键值对，其中：</p>
+<pre><code>* 键值对的键是一个字符串对象，对象的底层实现是一个保存着字符串 “msg” 的SDS。
+* 键值对的值也是一个字符串对象，对象的底层实现是一个保存着字符串“hello world”的SDS。
+
+又比如， 如果客户端执行命令： 
+
+    redis&gt; RPUSH fruits &quot;apple&quot; &quot;bannan&quot; &quot;cherry&quot;
+    (integer) 3
+那么Redis将在数据库中创建一个新的键值对，其中：</code></pre><ul>
+<li><p>键值对的键是一个字符串对象，对象的底层实现是一个保存了字符串“fruits”的SDS。</p>
+</li>
+<li><p>键值对的值也是一个字符串对象，列表对象包含了三个字符串对象，这三个字符串对象分别有三个SDS实现，第一个SDS保存着字符串apple， 第二个SDS保存着bannan，第三个SDS保存着cherry。</p>
+<p>除了用来保存数据库中的字符串值之外，SDS还被用作缓存区（buffer）</p>
+</li>
+</ul>
+<h6 id="缓冲区"><a href="#缓冲区" class="headerlink" title="缓冲区"></a>缓冲区</h6><p>​         C语言给字符串开辟一个存储空间，如果对此存储空间的使用超过开辟的空间，会导致内存溢出。例如使用字符串拼接等方式时，就很容易出现此问题。而如果每次拼接之前都要计算每个字符串的长度，时间上又要耗费很久。</p>
+<p>​         redis的SDS中内置一个sdscat函数，也是用于字符串的拼接。但是在执行操作之前，其会先检查空间是否足够，通过比较当前字符串的free与即将拼接字符串的len的大小，就知道是否可以拼接。如果free的值不够，会再申请内存空间，避免溢出。</p>
+<h6 id="修改字符串时的内存重分配"><a href="#修改字符串时的内存重分配" class="headerlink" title="修改字符串时的内存重分配"></a>修改字符串时的内存重分配</h6><p>​         C语言的字符串长度和底层数组之间存在关联，因此字符串长度增加时需要再分配存储空间，避免溢出；字符串长度减少时，需要释放存储空间，避免内存泄漏。</p>
+<p> 由于redis中，字符串频繁修改是很经常发生的事情，redis的一个应用场景就是变量频繁修改的场景。为了避免C语言的不断重分配空间，redis进行了改进。</p>
+<p>​         redis的sds，主要是通过free字段，来进行判断。通过未使用空间大小，实现了空间预分配和惰性空间释放。</p>
+<p>​         1）空间预分配</p>
+<p> 空间预分配用于优化字符串的增长操作，实现方式为：当需要增长字符串时，sds不仅会分配足够的空间用于增长，还会预分配未使用空间。</p>
+<p>分配的规则是，如果增长字符串后，新的字符串比1MB小，则额外申请字符串当前所占空间的大小作为free值；如果增长后，字符串长度超过1MB，则额外申请1MB大小。</p>
+<p>例如，字符串增长后，大小是50kb，则额外申请50kb作为未使用空间。如果字符串增长后的大小是20mb，则额外申请1mb作为未使用空间。以上两种情况都为将\0计算在内，因此，实际上还会需要1字节作为\0存放的空间。</p>
+<p>上述机制，避免了redis字符串增长情况下频繁申请空间的情况。每次字符串增长之前，sds会先检查空间是否足够，如果足够则直接使用预分配的空间，否则按照上述机制申请使用空间。该机制，使得字符串增长n次，需要申请空间的次数，从必定为n次的情况，降为最多n次的情况。</p>
+<p>2）懒惰空间释放</p>
+<p>懒惰空间释放用于优化sds字符串缩短的操作，实现方式为：当需要缩短sds的长度时，并不立即释放空间，而是使用free来保存剩余可用长度，并等待将来使用。当有剩余空间，而有有增长字符串操作时，则又会调用空间预分配机制。</p>
+<p>当redis内存空间不足时，会自动释放sds中未使用的空间，因此也不需要担心内存泄漏问题。</p>
+<h6 id="二进制安全"><a href="#二进制安全" class="headerlink" title="二进制安全"></a>二进制安全</h6><p>​         C语言的字符必须符合某种编码，例如ascii，且字符串除了末尾之外，不能有空格，否则会被当作是另一个字符串。这些限制使得c语言的字符串只能保存不含空格的文本，不能保存图片、视频等二进制数据，也不能保存包含空格的文本。</p>
+<p> 而保存图片、大段文本等内容，也是redis的常用场景。因此，redis也对此进行优化。因此，sds是二进制安全的，写入的是什么内容，返回的也是什么内容，并没有限制。</p>
+<p>​         redis的sds，用buf保存字符串，保存的就是一系列的二进制数据。因为，sds考虑字符串长度，是通过len属性，而不是通过\0来判断。</p>
+<h6 id="C语言字符串函数"><a href="#C语言字符串函数" class="headerlink" title="C语言字符串函数"></a>C语言字符串函数</h6><p>​         redis兼容c语言对于字符串末尾采用\0进行处理，这样使得其可以复用部分c语言字符串函数的代码，实现代码的精简性。</p>
+<h6 id="总结——C语言字符串和SDS字符串比较"><a href="#总结——C语言字符串和SDS字符串比较" class="headerlink" title="总结——C语言字符串和SDS字符串比较"></a>总结——C语言字符串和SDS字符串比较</h6><table>
+<thead>
+<tr>
+<th align="left">C字符串</th>
+<th align="left">Redis SDS</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">获取字符串长度时间复杂的O(n)</td>
+<td align="left">获取字符串长度时间复杂的O(1)</td>
+</tr>
+<tr>
+<td align="left">字符串长度增加可能造成缓冲区溢出</td>
+<td align="left">字符串长度增加不会造成缓冲区溢出</td>
+</tr>
+<tr>
+<td align="left">修改字符串长度n次，必然n次内存重分配</td>
+<td align="left">修改字符串长度n次，最多n次内存重分配</td>
+</tr>
+<tr>
+<td align="left">只保存不含空格文本</td>
+<td align="left">保存任意二进制数据和文本数据</td>
+</tr>
+<tr>
+<td align="left">可以使用&lt;string.h&gt;库所有函数</td>
+<td align="left">可以使用部分&lt;string.h&gt;库的函数</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/06/28/Redis跳跃表/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Redis跳跃表</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#跳跃表"><span class="nav-number">1.</span> <span class="nav-text">跳跃表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#I、跳跃表实现"><span class="nav-number">2.</span> <span class="nav-text">I、跳跃表实现</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#缓冲区"><span class="nav-number">2.0.0.0.1.</span> <span class="nav-text">缓冲区</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#修改字符串时的内存重分配"><span class="nav-number">2.0.0.0.2.</span> <span class="nav-text">修改字符串时的内存重分配</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#二进制安全"><span class="nav-number">2.0.0.0.3.</span> <span class="nav-text">二进制安全</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#C语言字符串函数"><span class="nav-number">2.0.0.0.4.</span> <span class="nav-text">C语言字符串函数</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#总结——C语言字符串和SDS字符串比较"><span class="nav-number">2.0.0.0.5.</span> <span class="nav-text">总结——C语言字符串和SDS字符串比较</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2019 Hexo All Rights Reserved.
+        
+            <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+          
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

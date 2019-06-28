@@ -99,6 +99,211 @@
         
           <section id="main">
   
+    <article id="post-Redis链接表" class="article article-type-post" itemscope itemprop="blogPost">
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2019/06/28/Redis链接表/">Redis跳跃表</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/06/28/Redis链接表/" class="article-date">
+	  <time datetime="2019-06-28T04:20:38.134Z" itemprop="datePublished">June 28, 2019</time>
+	</a>
+
+       
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="跳跃表"><a href="#跳跃表" class="headerlink" title="跳跃表"></a>跳跃表</h2><ul>
+<li><blockquote>
+<p>跳跃表（skiplist）是一种<strong>有序</strong>数据结构，它通过在每个节点中维持多个指向其他节点的指针，从而达到快捷访问节点的目的。</p>
+</blockquote>
+<p>在大多数情况先，<strong>跳跃表</strong>的效率可以与平衡树媲美，并且因为跳跃表的实现比平衡树更为简单，所以有不少程序都使用跳跃表来代替平衡树。</p>
+<p>Redis使用跳跃表作为<strong>有序集合键</strong>的底层实现之一。</p>
+<h2 id="I、跳跃表实现"><a href="#I、跳跃表实现" class="headerlink" title="I、跳跃表实现"></a>I、跳跃表实现</h2><p>Redis的跳跃表由zskiplistNode和zskiplist两个结构定义，其中zskiplistNode结构用于表示跳跃表节点，而zskiplist结构用于保存跳跃表节点的相关信息（如节点数量，表头指针，表尾指针等）。</p>
+<p>下图为一个跳跃表示意图：</p>
+</li>
+</ul>
+<pre><code>在Redis里面，C字符串只会作为字符串字面量用在一些无需对字符串值进行修改的地方，比如打印日志。
+
+
+当Redis需要的不仅仅是一个字符串字面量，而是一个可以被修改的字符串值时，Redis就会使用SDS来表示字符串值，比如在Redis的数据库里面，包含字符串值的键值对在底层都是由SDS实现的。
+
+举个例子，如果客户端执行命令：</code></pre><p>​     
+​<br>​        redis&gt; SET msg “hello world”<br>​        OK<br> 那么Redis将在数据中创建一个新的键值对，其中：</p>
+<pre><code>* 键值对的键是一个字符串对象，对象的底层实现是一个保存着字符串 “msg” 的SDS。
+* 键值对的值也是一个字符串对象，对象的底层实现是一个保存着字符串“hello world”的SDS。
+
+又比如， 如果客户端执行命令： 
+
+    redis&gt; RPUSH fruits &quot;apple&quot; &quot;bannan&quot; &quot;cherry&quot;
+    (integer) 3
+那么Redis将在数据库中创建一个新的键值对，其中：</code></pre><ul>
+<li><p>键值对的键是一个字符串对象，对象的底层实现是一个保存了字符串“fruits”的SDS。</p>
+</li>
+<li><p>键值对的值也是一个字符串对象，列表对象包含了三个字符串对象，这三个字符串对象分别有三个SDS实现，第一个SDS保存着字符串apple， 第二个SDS保存着bannan，第三个SDS保存着cherry。</p>
+<p>除了用来保存数据库中的字符串值之外，SDS还被用作缓存区（buffer）</p>
+</li>
+</ul>
+<h6 id="缓冲区"><a href="#缓冲区" class="headerlink" title="缓冲区"></a>缓冲区</h6><p>​         C语言给字符串开辟一个存储空间，如果对此存储空间的使用超过开辟的空间，会导致内存溢出。例如使用字符串拼接等方式时，就很容易出现此问题。而如果每次拼接之前都要计算每个字符串的长度，时间上又要耗费很久。</p>
+<p>​         redis的SDS中内置一个sdscat函数，也是用于字符串的拼接。但是在执行操作之前，其会先检查空间是否足够，通过比较当前字符串的free与即将拼接字符串的len的大小，就知道是否可以拼接。如果free的值不够，会再申请内存空间，避免溢出。</p>
+<h6 id="修改字符串时的内存重分配"><a href="#修改字符串时的内存重分配" class="headerlink" title="修改字符串时的内存重分配"></a>修改字符串时的内存重分配</h6><p>​         C语言的字符串长度和底层数组之间存在关联，因此字符串长度增加时需要再分配存储空间，避免溢出；字符串长度减少时，需要释放存储空间，避免内存泄漏。</p>
+<p> 由于redis中，字符串频繁修改是很经常发生的事情，redis的一个应用场景就是变量频繁修改的场景。为了避免C语言的不断重分配空间，redis进行了改进。</p>
+<p>​         redis的sds，主要是通过free字段，来进行判断。通过未使用空间大小，实现了空间预分配和惰性空间释放。</p>
+<p>​         1）空间预分配</p>
+<p> 空间预分配用于优化字符串的增长操作，实现方式为：当需要增长字符串时，sds不仅会分配足够的空间用于增长，还会预分配未使用空间。</p>
+<p>分配的规则是，如果增长字符串后，新的字符串比1MB小，则额外申请字符串当前所占空间的大小作为free值；如果增长后，字符串长度超过1MB，则额外申请1MB大小。</p>
+<p>例如，字符串增长后，大小是50kb，则额外申请50kb作为未使用空间。如果字符串增长后的大小是20mb，则额外申请1mb作为未使用空间。以上两种情况都为将\0计算在内，因此，实际上还会需要1字节作为\0存放的空间。</p>
+<p>上述机制，避免了redis字符串增长情况下频繁申请空间的情况。每次字符串增长之前，sds会先检查空间是否足够，如果足够则直接使用预分配的空间，否则按照上述机制申请使用空间。该机制，使得字符串增长n次，需要申请空间的次数，从必定为n次的情况，降为最多n次的情况。</p>
+<p>2）懒惰空间释放</p>
+<p>懒惰空间释放用于优化sds字符串缩短的操作，实现方式为：当需要缩短sds的长度时，并不立即释放空间，而是使用free来保存剩余可用长度，并等待将来使用。当有剩余空间，而有有增长字符串操作时，则又会调用空间预分配机制。</p>
+<p>当redis内存空间不足时，会自动释放sds中未使用的空间，因此也不需要担心内存泄漏问题。</p>
+<h6 id="二进制安全"><a href="#二进制安全" class="headerlink" title="二进制安全"></a>二进制安全</h6><p>​         C语言的字符必须符合某种编码，例如ascii，且字符串除了末尾之外，不能有空格，否则会被当作是另一个字符串。这些限制使得c语言的字符串只能保存不含空格的文本，不能保存图片、视频等二进制数据，也不能保存包含空格的文本。</p>
+<p> 而保存图片、大段文本等内容，也是redis的常用场景。因此，redis也对此进行优化。因此，sds是二进制安全的，写入的是什么内容，返回的也是什么内容，并没有限制。</p>
+<p>​         redis的sds，用buf保存字符串，保存的就是一系列的二进制数据。因为，sds考虑字符串长度，是通过len属性，而不是通过\0来判断。</p>
+<h6 id="C语言字符串函数"><a href="#C语言字符串函数" class="headerlink" title="C语言字符串函数"></a>C语言字符串函数</h6><p>​         redis兼容c语言对于字符串末尾采用\0进行处理，这样使得其可以复用部分c语言字符串函数的代码，实现代码的精简性。</p>
+<h6 id="总结——C语言字符串和SDS字符串比较"><a href="#总结——C语言字符串和SDS字符串比较" class="headerlink" title="总结——C语言字符串和SDS字符串比较"></a>总结——C语言字符串和SDS字符串比较</h6><table>
+<thead>
+<tr>
+<th align="left">C字符串</th>
+<th align="left">Redis SDS</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">获取字符串长度时间复杂的O(n)</td>
+<td align="left">获取字符串长度时间复杂的O(1)</td>
+</tr>
+<tr>
+<td align="left">字符串长度增加可能造成缓冲区溢出</td>
+<td align="left">字符串长度增加不会造成缓冲区溢出</td>
+</tr>
+<tr>
+<td align="left">修改字符串长度n次，必然n次内存重分配</td>
+<td align="left">修改字符串长度n次，最多n次内存重分配</td>
+</tr>
+<tr>
+<td align="left">只保存不含空格文本</td>
+<td align="left">保存任意二进制数据和文本数据</td>
+</tr>
+<tr>
+<td align="left">可以使用&lt;string.h&gt;库所有函数</td>
+<td align="left">可以使用部分&lt;string.h&gt;库的函数</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-Redis跳跃表" class="article article-type-post" itemscope itemprop="blogPost">
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2019/06/28/Redis跳跃表/">Redis跳跃表</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/06/28/Redis跳跃表/" class="article-date">
+	  <time datetime="2019-06-28T04:20:38.134Z" itemprop="datePublished">June 28, 2019</time>
+	</a>
+
+       
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="跳跃表"><a href="#跳跃表" class="headerlink" title="跳跃表"></a>跳跃表</h2><ul>
+<li><blockquote>
+<p>跳跃表（skiplist）是一种<strong>有序</strong>数据结构，它通过在每个节点中维持多个指向其他节点的指针，从而达到快捷访问节点的目的。</p>
+</blockquote>
+<p>在大多数情况先，<strong>跳跃表</strong>的效率可以与平衡树媲美，并且因为跳跃表的实现比平衡树更为简单，所以有不少程序都使用跳跃表来代替平衡树。</p>
+<p>Redis使用跳跃表作为<strong>有序集合键</strong>的底层实现之一。</p>
+<h2 id="I、跳跃表实现"><a href="#I、跳跃表实现" class="headerlink" title="I、跳跃表实现"></a>I、跳跃表实现</h2><p>Redis的跳跃表由zskiplistNode和zskiplist两个结构定义，其中zskiplistNode结构用于表示跳跃表节点，而zskiplist结构用于保存跳跃表节点的相关信息（如节点数量，表头指针，表尾指针等）。</p>
+<p>下图为一个跳跃表示意图：</p>
+</li>
+</ul>
+<pre><code>![1561695969873](Redis跳跃表/1561695969873.png)
+
+
+
+位于最左边的是zskiplist结构，该结构包含以下属性：
+ ·header：指向跳跃表的表头节点。
+ ·tail：指向跳跃表的表尾节点。
+ ·level：表示目前跳跃表内，层数最大的节点的层数。
+ ·length：记录跳跃表长度，即跳跃表包含的节点数量（不包含头结点）。
+
+位于zskiplist结构右方的是四个zskiplistNode结构，其属性如下：
+ ·层：用L1、L2、L3等表示节点的各个层，每个层都有两个属性：**前进指针**和**跨度**。前进指针用于访问位于表尾方向的其他节点，跨度记录了前进指针指向节点和当前节点的距离。当程序从表头向表尾进行遍历时，访问会沿着层的前进指针进行。
+ ·**后退指针**：节点中用BW表示后退指针，后退指针在程序从表尾向表头遍历时使用。
+ · 分值：各个节点中的1.0、2.0是节点保存的分值。**在跳跃表中，节点按照各自所保存的分值从小到大排列**。
+ · 成员对象： 各个节点中o1、o2是节点保存的成员对象。
+
+值的注意的是：表头节点和其他节点是不一样的，表头节点也有后退指针、分值和成员对象，但是表头节点的这些属性都不会被用到，所以图中忽略了这一部分。
+
+##### 1.1 跳跃表节点
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">typedef struct zskiplistNode &#123;</span><br><span class="line"></span><br><span class="line">    // 后退指针</span><br><span class="line">    struct zskiplistNode *backward;</span><br><span class="line"></span><br><span class="line">    // 分值</span><br><span class="line">    double score;</span><br><span class="line"></span><br><span class="line">    // 成员对象</span><br><span class="line">    robj *obj;</span><br><span class="line"></span><br><span class="line">    // 层</span><br><span class="line">    struct zskiplistLevel &#123;</span><br><span class="line"></span><br><span class="line">        // 前进指针</span><br><span class="line">        struct zskiplistNode *forward;</span><br><span class="line"></span><br><span class="line">        // 跨度</span><br><span class="line">        unsigned int span;</span><br><span class="line"></span><br><span class="line">    &#125; level[];</span><br><span class="line"></span><br><span class="line">&#125; zskiplistNode;</span><br></pre></td></tr></table></figure>
+
+
+**层：**  
+ 每次创建一个新跳跃表节点的时候，程序都会**随机生成一个介于1和32之间的值作为level数组的大小**，这个大小就是层的“高度”。</code></pre><ul>
+<li><img src="/2019/06/28/Redis跳跃表/1561696052378.png" alt="1561696052378"></li>
+</ul>
+<p><strong>前进指针：</strong><br>每个层都有一个指向表尾方向的前进指针。下图用虚线表示了从表头遍历到表尾的路径：</p>
+<p><img src="/2019/06/28/Redis跳跃表/1561696088361.png" alt="1561696088361"></p>
+<p><strong>跨度：</strong><br> 层的跨度用于记录两个节点之间的距离：<br> 初看上去，很容易以为跨度与遍历操作有关，但其实<strong>跨度是用来计算排位的</strong>，在查找某个节点的过程中，将沿途访问过的所有层的跨度累积起来，得到的结果就是目标节点在跳跃表中的排位。</p>
+<p><strong>后退指针：</strong><br> 与每个节点有多个前进指针不同，每个节点只有一个后退指针，所以每次只能后退至前一个节点。</p>
+<p><strong>分值和成员：</strong><br> 节点的分值用来对所有节点从小到大排序。<br> 节点的成员是一个指针，其指向一个字符串对象，而字符串对象保存着一个SDS值。</p>
+<p>在同一个跳跃表中，各个节点保存的成员对象必须是唯一的，但是多个节点保存的分值却可以是相同的：<strong>分值相同的节点将按照成员对象在字典序中的大小进行排序。</strong></p>
+<h5 id="1-2-跳跃表"><a href="#1-2-跳跃表" class="headerlink" title="1.2 跳跃表"></a>1.2 跳跃表</h5><p>Redis使用一个zskiplist结构来持有zskiplistNode节点，程序可以更方便的对整个跳跃表进行处理，<strong>比如，快速访问表头节点和表尾节点，或者快速获取表中节点数量。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> typedef struct zskiplist &#123;</span><br><span class="line"></span><br><span class="line">    // 表头节点和表尾节点</span><br><span class="line">    struct zskiplistNode *header, *tail;</span><br><span class="line"></span><br><span class="line">    // 表中节点的数量</span><br><span class="line">    unsigned long length;</span><br><span class="line"></span><br><span class="line">    // 表中层数最大的节点的层数</span><br><span class="line">    int level;</span><br><span class="line"></span><br><span class="line">&#125; zskiplist;</span><br></pre></td></tr></table></figure>
+
+<h2 id="II、跳跃表API"><a href="#II、跳跃表API" class="headerlink" title="II、跳跃表API"></a>II、跳跃表API</h2><p><img src="/2019/06/28/Redis跳跃表/1561696136110.png" alt="1561696136110"></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
     <article id="post-testfeng" class="article article-type-post" itemscope itemprop="blogPost">
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
@@ -681,187 +886,11 @@ lrwxrwxrwx.   1 root root    10 6月  22 04:07 tmp -&gt; ../var/tmp
 <!-- Table of Contents -->
 
   
-    <article id="post-一天一个Linux命令(第11天more命令)" class="article article-type-post" itemscope itemprop="blogPost">
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2019/06/20/一天一个Linux命令(第11天more命令)/">一天一个Linux命令(第10天more命令)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2019/06/20/一天一个Linux命令(第11天more命令)/" class="article-date">
-	  <time datetime="2019-06-20T11:47:40.875Z" itemprop="datePublished">June 20, 2019</time>
-	</a>
-
-       
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="MV命令"><a href="#MV命令" class="headerlink" title="MV命令"></a>MV命令</h2><ul>
-<li><p>more命令是一个基于vi编辑器文本过滤器，它以全屏幕的方式按页显示文本文件的内容，支持vi中的关键字定位操作。more名单中内置了若干快捷键，常用的有H（获得帮助信息），Enter（向下翻滚一行），空格（向下滚动一屏），Q（退出命令）。</p>
-<p>该命令一次显示一屏文本，满屏后停下来，并且在屏幕的底部出现一个提示信息，给出至今己显示的该文件的百分比：–More–（XX%）可以用下列不同的方法对提示做出回答：</p>
-<ul>
-<li>按Space键：显示文本的下一屏内容。</li>
-<li>按Enier键：只显示文本的下一行内容。</li>
-<li>按斜线符|：接着输入一个模式，可以在文本中寻找下一个相匹配的模式。</li>
-<li>按H键：显示帮助屏，该屏上有相关的帮助信息。</li>
-<li>按B键：显示上一屏内容。</li>
-<li>按Q键：退出rnore命令。</li>
-</ul>
-</li>
-</ul>
-<h2 id="语法："><a href="#语法：" class="headerlink" title="语法："></a>语法：</h2><p><code>more(语法)(参数)</code></p>
-<h2 id="选项："><a href="#选项：" class="headerlink" title="选项："></a>选项：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-&lt;数字&gt;：指定每屏显示的行数；</span><br><span class="line">-d：显示“[press space to continue,&apos;q&apos; to quit.]”和“[Press &apos;h&apos; for instructions]”；</span><br><span class="line">-c：不进行滚屏操作。每次刷新这个屏幕；</span><br><span class="line">-s：将多个空行压缩成一行显示；</span><br><span class="line">-u：禁止下划线；</span><br><span class="line">+&lt;数字&gt;：从指定数字的行开始显示。</span><br></pre></td></tr></table></figure>
-
-<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><p>文件：指定分页显示内容的文件。</p>
-<h2 id="实例"><a href="#实例" class="headerlink" title="实例:"></a>实例:</h2><p>显示文件file的内容，但在显示之前先清屏，并且在屏幕的最下方显示完核的百分比。</p>
-<p><code>[work@aisp-communitycms-1-ptest aisp-community-cms]$ more -dc gc.log</code></p>
-<p><img src="/2019/06/20/一天一个Linux命令(第11天more命令)/1561122816796.png" alt="1561122816796"></p>
-<p>显示文件file的内容，每10行显示一次，而且在显示之前先清屏。</p>
-<p><code>[work@aisp-communitycms-1-ptest aisp-community-cms]$ more -c -10 aisp-community-cms.log</code></p>
-<p><img src="/2019/06/20/一天一个Linux命令(第11天more命令)/1561122853240.png" alt="1561122853240"></p>
-<p>test</p>
-<p><img src="/2019/06/20/一天一个Linux命令(第11天more命令)/1561122872815.png" alt="1561122872815"></p>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-      
-      
-    </footer>
-    <hr class="entry-footer-hr">
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
-    <article id="post-Redis简单动态字符串" class="article article-type-post" itemscope itemprop="blogPost">
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2019/06/20/Redis简单动态字符串/">Redis简单动态字符串（ simple dynamic string， SDS）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2019/06/20/Redis简单动态字符串/" class="article-date">
-	  <time datetime="2019-06-20T01:23:35.394Z" itemprop="datePublished">June 20, 2019</time>
-	</a>
-
-       
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1、简单动态字符串-SDS"><a href="#1、简单动态字符串-SDS" class="headerlink" title="1、简单动态字符串(SDS)"></a>1、简单动态字符串(SDS)</h2><ul>
-<li>Redis没有使用C语言传统的字符串表示（以空字符结尾的字符数组），而是自己构建了一种名为简单动态字符串的抽象类型，并将SDS用作Redis的默认字符串表示。</li>
-</ul>
-<pre><code>在Redis里面，C字符串只会作为字符串字面量用在一些无需对字符串值进行修改的地方，比如打印日志。
-
-
-当Redis需要的不仅仅是一个字符串字面量，而是一个可以被修改的字符串值时，Redis就会使用SDS来表示字符串值，比如在Redis的数据库里面，包含字符串值的键值对在底层都是由SDS实现的。
-
-举个例子，如果客户端执行命令：</code></pre><p>​     
-​<br>        redis&gt; SET msg “hello world”<br>        OK<br> 那么Redis将在数据中创建一个新的键值对，其中：</p>
-<pre><code>* 键值对的键是一个字符串对象，对象的底层实现是一个保存着字符串 “msg” 的SDS。
-* 键值对的值也是一个字符串对象，对象的底层实现是一个保存着字符串“hello world”的SDS。
-
-又比如， 如果客户端执行命令： 
-
-    redis&gt; RPUSH fruits &quot;apple&quot; &quot;bannan&quot; &quot;cherry&quot;
-    (integer) 3
-那么Redis将在数据库中创建一个新的键值对，其中：</code></pre><ul>
-<li><p>键值对的键是一个字符串对象，对象的底层实现是一个保存了字符串“fruits”的SDS。</p>
-</li>
-<li><p>键值对的值也是一个字符串对象，列表对象包含了三个字符串对象，这三个字符串对象分别有三个SDS实现，第一个SDS保存着字符串apple， 第二个SDS保存着bannan，第三个SDS保存着cherry。</p>
-<p>除了用来保存数据库中的字符串值之外，SDS还被用作缓存区（buffer）</p>
-</li>
-</ul>
-<h6 id="缓冲区"><a href="#缓冲区" class="headerlink" title="缓冲区"></a>缓冲区</h6><p>​         C语言给字符串开辟一个存储空间，如果对此存储空间的使用超过开辟的空间，会导致内存溢出。例如使用字符串拼接等方式时，就很容易出现此问题。而如果每次拼接之前都要计算每个字符串的长度，时间上又要耗费很久。</p>
-<p>​         redis的SDS中内置一个sdscat函数，也是用于字符串的拼接。但是在执行操作之前，其会先检查空间是否足够，通过比较当前字符串的free与即将拼接字符串的len的大小，就知道是否可以拼接。如果free的值不够，会再申请内存空间，避免溢出。</p>
-<h6 id="修改字符串时的内存重分配"><a href="#修改字符串时的内存重分配" class="headerlink" title="修改字符串时的内存重分配"></a>修改字符串时的内存重分配</h6><p>​         C语言的字符串长度和底层数组之间存在关联，因此字符串长度增加时需要再分配存储空间，避免溢出；字符串长度减少时，需要释放存储空间，避免内存泄漏。</p>
-<p> 由于redis中，字符串频繁修改是很经常发生的事情，redis的一个应用场景就是变量频繁修改的场景。为了避免C语言的不断重分配空间，redis进行了改进。</p>
-<p>​         redis的sds，主要是通过free字段，来进行判断。通过未使用空间大小，实现了空间预分配和惰性空间释放。</p>
-<p>​         1）空间预分配</p>
-<p> 空间预分配用于优化字符串的增长操作，实现方式为：当需要增长字符串时，sds不仅会分配足够的空间用于增长，还会预分配未使用空间。</p>
-<p>分配的规则是，如果增长字符串后，新的字符串比1MB小，则额外申请字符串当前所占空间的大小作为free值；如果增长后，字符串长度超过1MB，则额外申请1MB大小。</p>
-<p>例如，字符串增长后，大小是50kb，则额外申请50kb作为未使用空间。如果字符串增长后的大小是20mb，则额外申请1mb作为未使用空间。以上两种情况都为将\0计算在内，因此，实际上还会需要1字节作为\0存放的空间。</p>
-<p>上述机制，避免了redis字符串增长情况下频繁申请空间的情况。每次字符串增长之前，sds会先检查空间是否足够，如果足够则直接使用预分配的空间，否则按照上述机制申请使用空间。该机制，使得字符串增长n次，需要申请空间的次数，从必定为n次的情况，降为最多n次的情况。</p>
-<p>2）懒惰空间释放</p>
-<p>懒惰空间释放用于优化sds字符串缩短的操作，实现方式为：当需要缩短sds的长度时，并不立即释放空间，而是使用free来保存剩余可用长度，并等待将来使用。当有剩余空间，而有有增长字符串操作时，则又会调用空间预分配机制。</p>
-<p>当redis内存空间不足时，会自动释放sds中未使用的空间，因此也不需要担心内存泄漏问题。</p>
-<h6 id="二进制安全"><a href="#二进制安全" class="headerlink" title="二进制安全"></a>二进制安全</h6><p>​         C语言的字符必须符合某种编码，例如ascii，且字符串除了末尾之外，不能有空格，否则会被当作是另一个字符串。这些限制使得c语言的字符串只能保存不含空格的文本，不能保存图片、视频等二进制数据，也不能保存包含空格的文本。</p>
-<p> 而保存图片、大段文本等内容，也是redis的常用场景。因此，redis也对此进行优化。因此，sds是二进制安全的，写入的是什么内容，返回的也是什么内容，并没有限制。</p>
-<p>​         redis的sds，用buf保存字符串，保存的就是一系列的二进制数据。因为，sds考虑字符串长度，是通过len属性，而不是通过\0来判断。</p>
-<h6 id="C语言字符串函数"><a href="#C语言字符串函数" class="headerlink" title="C语言字符串函数"></a>C语言字符串函数</h6><p>​         redis兼容c语言对于字符串末尾采用\0进行处理，这样使得其可以复用部分c语言字符串函数的代码，实现代码的精简性。</p>
-<h6 id="总结——C语言字符串和SDS字符串比较"><a href="#总结——C语言字符串和SDS字符串比较" class="headerlink" title="总结——C语言字符串和SDS字符串比较"></a>总结——C语言字符串和SDS字符串比较</h6><table>
-<thead>
-<tr>
-<th align="left">C字符串</th>
-<th align="left">Redis SDS</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">获取字符串长度时间复杂的O(n)</td>
-<td align="left">获取字符串长度时间复杂的O(1)</td>
-</tr>
-<tr>
-<td align="left">字符串长度增加可能造成缓冲区溢出</td>
-<td align="left">字符串长度增加不会造成缓冲区溢出</td>
-</tr>
-<tr>
-<td align="left">修改字符串长度n次，必然n次内存重分配</td>
-<td align="left">修改字符串长度n次，最多n次内存重分配</td>
-</tr>
-<tr>
-<td align="left">只保存不含空格文本</td>
-<td align="left">保存任意二进制数据和文本数据</td>
-</tr>
-<tr>
-<td align="left">可以使用&lt;string.h&gt;库所有函数</td>
-<td align="left">可以使用部分&lt;string.h&gt;库的函数</td>
-</tr>
-</tbody></table>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-      
-      
-    </footer>
-    <hr class="entry-footer-hr">
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
 
 
   <nav id="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next</a>
   </nav>
 
 </section>
@@ -967,6 +996,30 @@ lrwxrwxrwx.   1 root root    10 6月  22 04:07 tmp -&gt; ../var/tmp
               <div class="widget-entry-summary" style="margin: 0;">
             
 
+              <h6 style="margin: 0;"><a href="/2019/06/28/Redis链接表/">Redis跳跃表</a></h6>
+              <span>June 28, 2019</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
+              <h6 style="margin: 0;"><a href="/2019/06/28/Redis跳跃表/">Redis跳跃表</a></h6>
+              <span>June 28, 2019</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
               <h6 style="margin: 0;"><a href="/2019/06/28/testfeng/">testfeng</a></h6>
               <span>June 28, 2019</span>
             </div>
@@ -1009,30 +1062,6 @@ lrwxrwxrwx.   1 root root    10 6月  22 04:07 tmp -&gt; ../var/tmp
 
           </li>
         
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="/2019/06/25/一天一个Linux命令(mkdir命令)/">一天一个Linux命令(mkdir命令)</a></h6>
-              <span>June 25, 2019</span>
-            </div>
-
-          </li>
-        
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="/2019/06/24/一天一个Linux命令(touch命令) /">一天一个Linux命令(第6天touch命令)</a></h6>
-              <span>June 24, 2019</span>
-            </div>
-
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -1058,7 +1087,7 @@ lrwxrwxrwx.   1 root root    10 6月  22 04:07 tmp -&gt; ../var/tmp
     <h3 class="widget-title">Archives</h3>
 
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">19</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">21</span></li></ul>
     </div>
   </div>
 
