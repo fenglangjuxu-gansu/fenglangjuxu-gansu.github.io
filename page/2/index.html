@@ -99,72 +99,6 @@
         
           <section id="main">
   
-    <article id="post-一天一个Linux命令(第11天more命令)" class="article article-type-post" itemscope itemprop="blogPost">
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2019/06/20/一天一个Linux命令(第11天more命令)/">一天一个Linux命令(第10天more命令)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2019/06/20/一天一个Linux命令(第11天more命令)/" class="article-date">
-	  <time datetime="2019-06-20T11:47:40.875Z" itemprop="datePublished">June 20, 2019</time>
-	</a>
-
-       
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="MV命令"><a href="#MV命令" class="headerlink" title="MV命令"></a>MV命令</h2><ul>
-<li><p>more命令是一个基于vi编辑器文本过滤器，它以全屏幕的方式按页显示文本文件的内容，支持vi中的关键字定位操作。more名单中内置了若干快捷键，常用的有H（获得帮助信息），Enter（向下翻滚一行），空格（向下滚动一屏），Q（退出命令）。</p>
-<p>该命令一次显示一屏文本，满屏后停下来，并且在屏幕的底部出现一个提示信息，给出至今己显示的该文件的百分比：–More–（XX%）可以用下列不同的方法对提示做出回答：</p>
-<ul>
-<li>按Space键：显示文本的下一屏内容。</li>
-<li>按Enier键：只显示文本的下一行内容。</li>
-<li>按斜线符|：接着输入一个模式，可以在文本中寻找下一个相匹配的模式。</li>
-<li>按H键：显示帮助屏，该屏上有相关的帮助信息。</li>
-<li>按B键：显示上一屏内容。</li>
-<li>按Q键：退出rnore命令。</li>
-</ul>
-</li>
-</ul>
-<h2 id="语法："><a href="#语法：" class="headerlink" title="语法："></a>语法：</h2><p><code>more(语法)(参数)</code></p>
-<h2 id="选项："><a href="#选项：" class="headerlink" title="选项："></a>选项：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-&lt;数字&gt;：指定每屏显示的行数；</span><br><span class="line">-d：显示“[press space to continue,&apos;q&apos; to quit.]”和“[Press &apos;h&apos; for instructions]”；</span><br><span class="line">-c：不进行滚屏操作。每次刷新这个屏幕；</span><br><span class="line">-s：将多个空行压缩成一行显示；</span><br><span class="line">-u：禁止下划线；</span><br><span class="line">+&lt;数字&gt;：从指定数字的行开始显示。</span><br></pre></td></tr></table></figure>
-
-<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><p>文件：指定分页显示内容的文件。</p>
-<h2 id="实例"><a href="#实例" class="headerlink" title="实例:"></a>实例:</h2><p>显示文件file的内容，但在显示之前先清屏，并且在屏幕的最下方显示完核的百分比。</p>
-<p><code>[work@aisp-communitycms-1-ptest aisp-community-cms]$ more -dc gc.log</code></p>
-<p><img src="/2019/06/20/一天一个Linux命令(第11天more命令)/1561122816796.png" alt="1561122816796"></p>
-<p>显示文件file的内容，每10行显示一次，而且在显示之前先清屏。</p>
-<p><code>[work@aisp-communitycms-1-ptest aisp-community-cms]$ more -c -10 aisp-community-cms.log</code></p>
-<p><img src="/2019/06/20/一天一个Linux命令(第11天more命令)/1561122853240.png" alt="1561122853240"></p>
-<p>test</p>
-<p><img src="/2019/06/20/一天一个Linux命令(第11天more命令)/1561122872815.png" alt="1561122872815"></p>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-      
-      
-    </footer>
-    <hr class="entry-footer-hr">
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
     <article id="post-Redis简单动态字符串" class="article article-type-post" itemscope itemprop="blogPost">
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
@@ -842,11 +776,65 @@ AUTORUN.BAT 43 2011-08-23 16:56
 <!-- Table of Contents -->
 
   
+    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2019/06/15/hello-world/">Hello World</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/06/15/hello-world/" class="article-date">
+	  <time datetime="2019-06-15T11:06:10.786Z" itemprop="datePublished">June 15, 2019</time>
+	</a>
+
+       
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
 
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/">Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next</a>
+    <a class="extend prev" rel="prev" href="/">Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
   </nav>
 
 </section>
@@ -952,18 +940,6 @@ AUTORUN.BAT 43 2011-08-23 16:56
               <div class="widget-entry-summary" style="margin: 0;">
             
 
-              <h6 style="margin: 0;"><a href="/2019/06/28/Redis链接表/">Redis跳跃表</a></h6>
-              <span>June 28, 2019</span>
-            </div>
-
-          </li>
-        
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
               <h6 style="margin: 0;"><a href="/2019/06/28/Redis跳跃表/">Redis跳跃表</a></h6>
               <span>June 28, 2019</span>
             </div>
@@ -1018,6 +994,18 @@ AUTORUN.BAT 43 2011-08-23 16:56
 
           </li>
         
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
+              <h6 style="margin: 0;"><a href="/2019/06/25/一天一个Linux命令(mkdir命令)/">一天一个Linux命令(mkdir命令)</a></h6>
+              <span>June 25, 2019</span>
+            </div>
+
+          </li>
+        
       </ul>
     </div>
   </div>
@@ -1043,7 +1031,7 @@ AUTORUN.BAT 43 2011-08-23 16:56
     <h3 class="widget-title">Archives</h3>
 
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">21</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">20</span></li></ul>
     </div>
   </div>
 
