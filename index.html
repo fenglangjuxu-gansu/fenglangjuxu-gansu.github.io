@@ -99,6 +99,60 @@
         
           <section id="main">
   
+    <article id="post-一天一个Linux命令(find命令)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2019/07/01/一天一个Linux命令(find命令)/">一天一个Linux命令，find命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/07/01/一天一个Linux命令(find命令)/" class="article-date">
+	  <time datetime="2019-07-01T14:56:50.770Z" itemprop="datePublished">July 1, 2019</time>
+	</a>
+
+       
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="find命令"><a href="#find命令" class="headerlink" title="find命令"></a>find命令</h3><p><strong>find命令</strong>用来在指定目录下查找文件。任何位于参数之前的字符串都将被视为欲查找的目录名。如果使用该命令时，不设置任何参数，则find命令将在当前目录下查找子目录与文件。并且将查找到的子目录和文件全部进行显示。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p><code>find(选项)(参数)</code></p>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">-amin&lt;分钟&gt;：查找在指定时间曾被存取过的文件或目录，单位以分钟计算；</span><br><span class="line">-anewer&lt;参考文件或目录&gt;：查找其存取时间较指定文件或目录的存取时间更接近现在的文件或目录；</span><br><span class="line">-atime&lt;24小时数&gt;：查找在指定时间曾被存取过的文件或目录，单位以24小时计算；</span><br><span class="line">-cmin&lt;分钟&gt;：查找在指定时间之时被更改过的文件或目录；</span><br><span class="line">-cnewer&lt;参考文件或目录&gt;查找其更改时间较指定文件或目录的更改时间更接近现在的文件或目录；</span><br><span class="line">-ctime&lt;24小时数&gt;：查找在指定时间之时被更改的文件或目录，单位以24小时计算；</span><br><span class="line">-daystart：从本日开始计算时间；</span><br><span class="line">-depth：从指定目录下最深层的子目录开始查找；</span><br><span class="line">-expty：寻找文件大小为0 Byte的文件，或目录下没有任何子目录或文件的空目录；</span><br><span class="line">-exec&lt;执行指令&gt;：假设find指令的回传值为True，就执行该指令；</span><br><span class="line">-false：将find指令的回传值皆设为False；</span><br><span class="line">-fls&lt;列表文件&gt;：此参数的效果和指定“-ls”参数类似，但会把结果保存为指定的列表文件；</span><br><span class="line">-follow：排除符号连接；</span><br><span class="line">-fprint&lt;列表文件&gt;：此参数的效果和指定“-print”参数类似，但会把结果保存成指定的列表文件；</span><br><span class="line">-fprint0&lt;列表文件&gt;：此参数的效果和指定“-print0”参数类似，但会把结果保存成指定的列表文件；</span><br><span class="line">-fprintf&lt;列表文件&gt;&lt;输出格式&gt;：此参数的效果和指定“-printf”参数类似，但会把结果保存成指定的列表文件；</span><br><span class="line">-fstype&lt;文件系统类型&gt;：只寻找该文件系统类型下的文件或目录；</span><br><span class="line">-gid&lt;群组识别码&gt;：查找符合指定之群组识别码的文件或目录；</span><br><span class="line">-group&lt;群组名称&gt;：查找符合指定之群组名称的文件或目录；</span><br><span class="line">-help或——help：在线帮助；</span><br><span class="line">-ilname&lt;范本样式&gt;：此参数的效果和指定“-lname”参数类似，但忽略字符大小写的差别；</span><br><span class="line">-iname&lt;范本样式&gt;：此参数的效果和指定“-name”参数类似，但忽略字符大小写的差别；</span><br><span class="line">-inum&lt;inode编号&gt;：查找符合指定的inode编号的文件或目录；</span><br><span class="line">-ipath&lt;范本样式&gt;：此参数的效果和指定“-path”参数类似，但忽略字符大小写的差别；</span><br><span class="line">-iregex&lt;范本样式&gt;：此参数的效果和指定“-regexe”参数类似，但忽略字符大小写的差别；</span><br><span class="line">-links&lt;连接数目&gt;：查找符合指定的硬连接数目的文件或目录；</span><br><span class="line">-iname&lt;范本样式&gt;：指定字符串作为寻找符号连接的范本样式；</span><br><span class="line">-ls：假设find指令的回传值为Ture，就将文件或目录名称列出到标准输出；</span><br><span class="line">-maxdepth&lt;目录层级&gt;：设置最大目录层级；</span><br><span class="line">-mindepth&lt;目录层级&gt;：设置最小目录层级；</span><br><span class="line">-mmin&lt;分钟&gt;：查找在指定时间曾被更改过的文件或目录，单位以分钟计算；</span><br><span class="line">-mount：此参数的效果和指定“-xdev”相同；</span><br><span class="line">-mtime&lt;24小时数&gt;：查找在指定时间曾被更改过的文件或目录，单位以24小时计算；</span><br><span class="line">-name&lt;范本样式&gt;：指定字符串作为寻找文件或目录的范本样式；</span><br><span class="line">-newer&lt;参考文件或目录&gt;：查找其更改时间较指定文件或目录的更改时间更接近现在的文件或目录；</span><br><span class="line">-nogroup：找出不属于本地主机群组识别码的文件或目录；</span><br><span class="line">-noleaf：不去考虑目录至少需拥有两个硬连接存在；</span><br><span class="line">-nouser：找出不属于本地主机用户识别码的文件或目录；</span><br><span class="line">-ok&lt;执行指令&gt;：此参数的效果和指定“-exec”类似，但在执行指令之前会先询问用户，若回答“y”或“Y”，则放弃执行命令；</span><br><span class="line">-path&lt;范本样式&gt;：指定字符串作为寻找目录的范本样式；</span><br><span class="line">-perm&lt;权限数值&gt;：查找符合指定的权限数值的文件或目录；</span><br><span class="line">-print：假设find指令的回传值为Ture，就将文件或目录名称列出到标准输出。格式为每列一个名称，每个名称前皆有“./”字符串；</span><br><span class="line">-print0：假设find指令的回传值为Ture，就将文件或目录名称列出到标准输出。格式为全部的名称皆在同一行；</span><br><span class="line">-printf&lt;输出格式&gt;：假设find指令的回传值为Ture，就将文件或目录名称列出到标准输出。格式可以自行指定；</span><br><span class="line">-prune：不寻找字符串作为寻找文件或目录的范本样式;</span><br><span class="line">-regex&lt;范本样式&gt;：指定字符串作为寻找文件或目录的范本样式；</span><br><span class="line">-size&lt;文件大小&gt;：查找符合指定的文件大小的文件；</span><br><span class="line">-true：将find指令的回传值皆设为True；</span><br><span class="line">-typ&lt;文件类型&gt;：只寻找符合指定的文件类型的文件；</span><br><span class="line">-uid&lt;用户识别码&gt;：查找符合指定的用户识别码的文件或目录；</span><br><span class="line">-used&lt;日数&gt;：查找文件或目录被更改之后在指定时间曾被存取过的文件或目录，单位以日计算；</span><br><span class="line">-user&lt;拥有者名称&gt;：查找符和指定的拥有者名称的文件或目录；</span><br><span class="line">-version或——version：显示版本信息；</span><br><span class="line">-xdev：将范围局限在先行的文件系统中；</span><br><span class="line">-xtype&lt;文件类型&gt;：此参数的效果和指定“-type”参数类似，差别在于它针对符号连接检查。</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>起始目录：查找文件的起始目录。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>列出当前目录及子目录下所有文件和文件夹:</p>
+<p><img src="/2019/07/01/一天一个Linux命令(find命令)/1561993599386.png" alt="1561993599386"></p>
+<p>在<code>/home</code>目录下查找以.txt结尾的文件名:</p>
+<p><img src="/2019/07/01/一天一个Linux命令(find命令)/1561993731683.png" alt="1561993731683"></p>
+<p>在<code>/home</code>目录下查找以.txt结尾的文件名(忽略大小写)</p>
+<p><img src="/2019/07/01/一天一个Linux命令(find命令)/1561993833251.png" alt="1561993833251"></p>
+<p>当前目录及子目录下查找所有以.txt和.pdf结尾的文件：</p>
+<p><img src="/2019/07/01/一天一个Linux命令(find命令)/1561993969968.png" alt="1561993969968"></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
     <article id="post-一天一个Linux命令(df命令)" class="article article-type-post" itemscope itemprop="blogPost">
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
@@ -720,164 +774,6 @@ lrwxrwxrwx.   1 root root    10 6月  22 04:07 tmp -&gt; ../var/tmp
 <!-- Table of Contents -->
 
   
-    <article id="post-Event-Driven Data Management for Microservices" class="article article-type-post" itemscope itemprop="blogPost">
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-    <div class="article-meta">
-      
-	<a href="/2019/06/21/Event-Driven Data Management for Microservices/" class="article-date">
-	  <time datetime="2019-06-21T02:23:53.828Z" itemprop="datePublished">June 21, 2019</time>
-	</a>
-
-       
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Event-Driven-Data-Management-for-Microservices-用于微服务的事件驱动数据管理"><a href="#Event-Driven-Data-Management-for-Microservices-用于微服务的事件驱动数据管理" class="headerlink" title="Event-Driven Data Management for Microservices   用于微服务的事件驱动数据管理"></a>Event-Driven Data Management for Microservices   用于微服务的事件驱动数据管理</h1><p><em>Editor – This seven‑part series of articles is now complete:</em></p>
-<p><em>编辑－此七部分系列文章现已完成：</em></p>
-<ol>
-<li><a href="https://www.nginx.com/blog/introduction-to-microservices/" target="_blank" rel="noopener">Introduction to Microservices</a>  微服务构建微服务简介：</li>
-<li><a href="https://www.nginx.com/blog/building-microservices-using-an-api-gateway/" target="_blank" rel="noopener">Building Microservices: Using an API Gateway</a> 使用api网关构建微服务</li>
-<li><a href="https://www.nginx.com/blog/building-microservices-inter-process-communication/" target="_blank" rel="noopener">Building Microservices: Inter-Process Communication in a Microservices Architecture</a> 微服务体系结构中的进程间通信</li>
-<li><a href="https://www.nginx.com/blog/service-discovery-in-a-microservices-architecture/" target="_blank" rel="noopener">Service Discovery in a Microservices Architecture</a> 微服务体系结构中的服务发现</li>
-<li>Event‑Driven Data Management for Microservices (this article) 事件驱动的微服务数据管理(本文)</li>
-<li><a href="https://www.nginx.com/blog/deploying-microservices/" target="_blank" rel="noopener">Choosing a Microservices Deployment Strategy</a> 选择一种微服务部署策略</li>
-<li><a href="https://www.nginx.com/blog/refactoring-a-monolith-into-microservices/" target="_blank" rel="noopener">Refactoring a Monolith into Microservices</a> 将单个微服务重构为微服务。</li>
-</ol>
-<p><em>You can also download the complete set of articles, plus information about implementing microservices using NGINX Plus, as an ebook – Microservices: From Design to Deployment. And see our series on the Microservices Reference Architecture and the Microservices Solutions page.</em></p>
-<p><em>您还可以下载完整的文章集，以及有关使用nginx+实现微服务的信息，作为电子书-microservices：从设计到部署。并在微服务参考体系结构和微服务解决方案页面上查看我们的系列文章。</em> </p>
-<p>This is the fifth article in a series about building applications with microservices. The <a href="https://www.nginx.com/blog/introduction-to-microservices/" target="_blank" rel="noopener">first article</a> introduces the Microservices Architecture pattern and discusses the benefits and drawbacks of using microservices. The <a href="https://www.nginx.com/blog/building-microservices-using-an-api-gateway" target="_blank" rel="noopener">second</a> and <a href="https://www.nginx.com/blog/building-microservices-inter-process-communication/" target="_blank" rel="noopener">third</a> articles in the series describe different aspects of communication within a microservices architecture. The <a href="https://www.nginx.com/blog/service-discovery-in-a-microservices-architecture/" target="_blank" rel="noopener">fourth article</a> explores the closely related problem of service discovery. In this article, we change gears and look at the distributed data management problems that arise in a microservices architecture.</p>
-<p>这是关于使用微服务构建应用程序的系列文章的第五篇。第一篇文章介绍了微服务体系结构模式，讨论了使用微服务的优缺点。本系列的第二和第三篇文章描述了微服务体系结构中通信的不同方面。第四篇文章探讨了与服务发现密切相关的问题。在本文中，我们改变了方向，并研究了微服务体系结构中出现的分布式数据管理问题。</p>
-<h2 id="Microservices-and-the-Problem-of-Distributed-Data-Management-微服务与分布式数据管理问题"><a href="#Microservices-and-the-Problem-of-Distributed-Data-Management-微服务与分布式数据管理问题" class="headerlink" title="Microservices and the Problem of Distributed Data Management 微服务与分布式数据管理问题"></a>Microservices and the Problem of Distributed Data Management 微服务与分布式数据管理问题</h2><p>A monolithic application typically has a single relational database. A key benefit of using a relational database is that your application can use <a href="https://en.wikipedia.org/wiki/ACID" target="_blank" rel="noopener">ACID transactions</a>, which provide some important guarantees:</p>
-<p>单块应用程序通常有一个关系数据库。使用关系数据库的一个主要好处是应用程序可以使用ACID事务，这提供了一些重要的保证： </p>
-<ul>
-<li>Atomicity – Changes are made atomically 原子性-原子化改变 </li>
-<li>Consistency – The state of the database is always consistent 一致性-数据库的状态始终一致 </li>
-<li>Isolation – Even though transactions are executed concurrently it appears they are executed serially 隔离-即使事务是并发执行的，它们似乎都是串行执行的。 </li>
-<li>Durability – Once a transaction has committed it is not undone 持久性-事务一旦提交，就不会撤消。 </li>
-</ul>
-<p>As a result, your application can simply begin a transaction, change (insert, update, and delete) multiple rows, and commit the transaction.</p>
-<p>因此，您的应用程序可以简单地开始事务、更改（插入、更新和删除）多行，并提交事务</p>
-<p>Another great benefit of using a relational database is that it provides SQL, which is a rich, declarative, and standardized query language. You can easily write a query that combines data from multiple tables. The RDBMS query planner then determines the most optimal way to execute the query. You don’t have to worry about low‑level details such as how to access the database. And, because all of your application’s data is in one database, it is easy to query.</p>
-<p>使用关系数据库的另一个好处是它提供了SQL，它是一个丰富的、声明性的和标准化的查询语言。您可以轻松编写将数据与多个表组合的查询。RDBMS查询规划器然后确定执行查询的最佳方式。您不必担心低级详细信息，例如如何访问数据库。而且，由于所有应用程序的数据都在一个数据库中，因此很容易查询。</p>
-<p>Unfortunately, data access becomes much more complex when we move to a microservices architecture. That is because the data owned by each microservice is <a href="http://microservices.io/patterns/data/database-per-service.html" target="_blank" rel="noopener">private to that microservice</a> and can only be accessed via its API. Encapsulating the data ensures that the microservices are loosely coupled and can evolve independently of one another. If multiple services access the same data, schema updates require time‑consuming, coordinated updates to all of the services.</p>
-<p>不幸的是，当我们转向微服务体系结构时，数据访问变得更加复杂。这是因为每个微服务拥有的数据都是该微服务的私有数据，并且只能通过其API访问。封装数据可以确保微服务是松散耦合的，并且可以相互独立地进化。如果多个服务访问相同的数据，架构更新需要对所有服务进行耗时、协调的更新。 </p>
-<p>To make matters worse, different microservices often use different kinds of databases. Modern applications store and process diverse kinds of data and a relational database is not always the best choice. For some use cases, a particular NoSQL database might have a more convenient data model and offer much better performance and scalability. For example, it makes sense for a service that stores and queries text to use a text search engine such as Elasticsearch. Similarly, a service that stores social graph data should probably use a graph database, such as Neo4j. Consequently, microservices‑based applications often use a mixture of SQL and NoSQL databases, the so‑called <a href="http://martinfowler.com/bliki/PolyglotPersistence.html" target="_blank" rel="noopener">polyglot persistence</a> approach.</p>
-<p>更糟糕的是，不同的微服务经常使用不同类型的数据库。现代应用程序存储和处理各种数据和关系数据库并不总是最佳选择。对于某些用例，特定的NoSQL数据库可能具有更方便的数据模型，并提供更好的性能和可伸缩性。例如，存储和查询文本的服务使用文本搜索引擎(如ElasticSearch)是有意义的。类似地，存储社交图形数据的服务可能应该使用图形数据库，如ne4j。因此，基于微服务的应用程序通常使用SQL和NoSQL数据库的混合，即所谓的Polyglot持久化方法。 </p>
-<p>A partitioned, polyglot‑persistent architecture for data storage has many benefits, including loosely coupled services and better performance and scalability. However, it does introduce some distributed data management challenges.</p>
-<p>用于数据存储的分区的、多标记的持久性体系结构有许多好处，包括松散耦合的服务以及更好的性能和可伸缩性。然而，它确实带来了一些分布式数据管理方面的挑战。 </p>
-<p>The first challenge is how to implement business transactions that maintain consistency across multiple services. To see why this is a problem, let’s take a look at an example of an online B2B store. The Customer Service maintains information about customers, including their credit lines. The Order Service manages orders and must verify that a new order doesn’t exceed the customer’s credit limit. In the monolithic version of this application, the Order Service can simply use an ACID transaction to check the available credit and create the order.</p>
-<p>第一个挑战是如何实现跨多个服务保持一致性的业务事务。为了了解为什么这是一个问题，让我们来看看一个在线B2B商店的例子。客户服务维护有关客户的信息，包括他们的信用额度。订单服务管理订单，并必须验证新订单不超过客户的信用限额。在这个应用程序的单块版本中，订单服务可以简单地使用ACID事务来检查可用的信用并创建订单。 </p>
-<p>In contrast, in a microservices architecture the ORDER and CUSTOMER tables are private to their respective services, as shown in the following diagram.</p>
-<p>相反，在微服务体系结构中，Order表和Customer表对于各自的服务是私有的，如下图所示。 </p>
-<p><img src="https://cdn.wp.nginx.com/wp-content/uploads/2015/12/Richardson-microservices-part5-separate-tables-e1449727641793.png" alt="Each service in a microservices architecture maintains a private database table"></p>
-<p>The Order Service cannot access the CUSTOMER table directly. It can only use the API provided by the Customer Service. The Order Service could potentially use <a href="https://en.wikipedia.org/wiki/Two-phase_commit_protocol" target="_blank" rel="noopener">distributed transactions</a>, also known as two‑phase commit (2PC). However, 2PC is usually not a viable option in modern applications. The <a href="https://en.wikipedia.org/wiki/CAP_theorem" target="_blank" rel="noopener">CAP theorem</a> requires you to choose between availability and ACID‑style consistency, and availability is usually the better choice. Moreover, many modern technologies, such as most NoSQL databases, do not support 2PC. Maintaining data consistency across services and databases is essential, so we need another solution.</p>
-<p>订单服务无法直接访问客户表。它只能使用客户服务提供的API。订单服务可能会使用分布式事务处理，也称为两相提交（2PC）。然而，在现代应用中，2PC通常不是可行的选择。CAP定理要求您在可用性和酸样式一致性之间进行选择，可用性通常是更好的选择。此外，许多现代技术（如大多数NOSQL数据库）不支持2PC。保持跨服务和数据库的数据一致性是至关重要的，因此我们需要另一个解决方案。 </p>
-<p>The second challenge is how to implement queries that retrieve data from multiple services. For example, let’s imagine that the application needs to display a customer and his recent orders. If the Order Service provides an API for retrieving a customer’s orders then you can retrieve this data using an application‑side join. The application retrieves the customer from the Customer Service and the customer’s orders from the Order Service. Suppose, however, that the Order Service only supports the lookup of orders by their primary key (perhaps it uses a NoSQL database that only supports primary key‑based retrievals). In this situation, there is no obvious way to retrieve the needed data.</p>
-<p>第二个挑战是如何实现从多个服务检索数据的查询。例如，假设应用程序需要显示客户和他最近的订单。如果订单服务提供了用于检索客户订单的API，那么您可以使用应用程序端连接来检索这些数据。应用程序从客户服务中检索客户，从订单服务检索客户的订单。但是，假设Order服务只支持通过主键查找订单(也许它使用的是只支持基于主键的检索的NoSQL数据库)。在这种情况下，没有明显的方法来检索所需的数据</p>
-<h2 id="Event‑Driven-Architecture-事件驱动体系结构"><a href="#Event‑Driven-Architecture-事件驱动体系结构" class="headerlink" title="Event‑Driven Architecture 事件驱动体系结构"></a>Event‑Driven Architecture 事件驱动体系结构</h2><p>For many applications, the solution is to use an <a href="http://martinfowler.com/eaaDev/EventNarrative.html" target="_blank" rel="noopener">event‑driven architecture</a>. In this architecture, a microservice publishes an event when something notable happens, such as when it updates a business entity. Other microservices subscribe to those events. When a microservice receives an event it can update its own business entities, which might lead to more events being published.</p>
-<p>对于许多应用程序，解决方案是使用事件驱动的体系结构。在此体系结构中，微服务在发生一些值得注意的事情时发布事件，例如更新业务实体时。其他微服务订阅了这些事件。当微服务接收到事件时，它可以更新自己的业务实体，这可能会导致更多事件被发布。 </p>
-<p>You can use events to implement business transactions that span multiple services. A transaction consists of a series of steps. Each step consists of a microservice updating a business entity and publishing an event that triggers the next step. The following sequence of diagrams shows how you can use an event‑driven approach to checking for available credit when creating an order. The microservices exchange events via a Message Broker.</p>
-<p>您可以使用事件来实现跨多个服务的业务事务。事务由一系列步骤组成。每个步骤都包含一个微服务，用于更新业务实体并发布触发下一步的事件。以下图表序列显示如何在创建订单时使用事件驱动方法检查可用信用。微服务通过消息代理交换事件。</p>
-<ol>
-<li><p>The Order Service creates an Order with status NEW and publishes an Order Created event.  Order服务创建状态为New的订单，并发布订单创建事件。 </p>
-<p><img src="https://cdn.wp.nginx.com/wp-content/uploads/2015/12/Richardson-microservices-part5-credit-check-1-e1449727610972.png" alt="In step 1 of a credit check in a microservices architecture, the Order Service publishes an &#39;Order Created&#39; event"></p>
-</li>
-<li><p>The Customer Service consumes the Order Created event, reserves credit for the order, and publishes a Credit Reserved event. 客户服务使用订单创建事件，为订单保留信用，并发布信用保留事件。 </p>
-<p><img src="https://cdn.wp.nginx.com/wp-content/uploads/2015/12/Richardson-microservices-part5-credit-check-2-e1449727579423.png" alt="In a microservices architecture, the second step in a credit check is for the Customer Service to generate a &#39;Credit Reserved&#39; event"></p>
-</li>
-<li><p>The Order Service consumes the Credit Reserved event, and changes the status of the order to OPEN. 订单服务使用信用保留事件，并将订单的状态更改为打开。 </p>
-<p><img src="https://cdn.wp.nginx.com/wp-content/uploads/2015/12/Richardson-microservices-part5-credit-check-3-e1449727548440.png" alt="In a microservices architecture, the third step in a credit check is for the Order Service to set the order status to &#39;Open&#39;"></p>
-</li>
-</ol>
-<p>A more complex scenario could involve additional steps, such as reserving inventory at the same time the customer’s credit is checked.</p>
-<p>更复杂的场景可能涉及其他步骤，例如在检查客户信用时保留库存。</p>
-<p>Provided that (a) each service atomically updates the database and publishes an event – more on that later – and (b) the Message Broker guarantees that events are delivered at least once, then you can implement business transactions that span multiple services. It is important to note that these are not ACID transactions. They offer much weaker guarantees such as <a href="https://en.wikipedia.org/wiki/Eventual_consistency" target="_blank" rel="noopener">eventual consistency</a>. This transaction model has been referred to as the <a href="http://queue.acm.org/detail.cfm?id=1394128" target="_blank" rel="noopener">BASE model</a>.</p>
-<p>只要(A)每个服务原子地更新数据库并发布一个事件(稍后会有更多的消息)和(B)MessageBroker保证事件至少交付一次，那么您就可以实现跨多个服务的业务事务。必须指出的是，这些不是ACID交易。它们提供的担保要弱得多，比如最终的一致性。这个事务模型被称为基本模型。 </p>
-<p>You can also use events to maintain materialized views that pre‑join data owned by multiple microservices. The service that maintains the view subscribes to the relevant events and updates the view. For example, the Customer Order View Updater Service that maintains a Customer Orders view subscribes to the events published by the Customer Service and Order Service.</p>
-<p>您还可以使用事件来维护由多个微服务拥有的预联接数据的物化视图。维护视图的服务订阅相关事件并更新视图。例如，维护CustomerOrders视图的CustomerOrder视图更新服务订阅由客户服务和订单服务发布的事件。 </p>
-<p><img src="https://cdn.wp.nginx.com/wp-content/uploads/2015/12/Richardson-microservices-part5-subscribe-e1449727516992.png" alt="In a microservices architecture, a service can subscribe to event notifications published by other services as triggers for action"></p>
-<p>When the Customer Order View Updater Service receives a Customer or Order event, it updates the Customer Order View datastore. You could implement the Customer Order View using a document database such as MongoDB and store one document for each Customer. The Customer Order View Query Service handles requests for a customer and recent orders by querying the Customer Order View datastore.</p>
-<p>当客户订单视图更新服务接收到客户或订单事件时，它将更新客户订单视图数据存储。您可以使用文档数据库(如MongoDB)实现CustomerOrder视图，并为每个客户存储一个文档。客户订单视图查询服务通过查询Customer Order视图数据存储来处理对客户和最近订单的请求。</p>
-<p>An event‑driven architecture has several benefits and drawbacks. It enables the implementation of transactions that span multiple services and provide eventual consistency. Another benefit is that it also enables an application to maintain materialized views. One drawback is that the programming model is more complex than when using ACID transactions. Often you must implement compensating transactions to recover from application‑level failures; for example, you must cancel an order if the credit check fails. Also, applications must deal with inconsistent data. That is because changes made by in‑flight transactions are visible. The application can also see inconsistencies if it reads from a materialized view that is not yet updated. Another drawback is that subscribers must detect and ignore duplicate events.</p>
-<p>事件驱动的体系结构有几个优点和缺点。它实现跨多个服务并提供最终一致性的事务。另一个优点是它还使应用程序能够维护实例化视图。一个缺点是编程模型比使用酸事务时更复杂。通常，您必须实施补偿事务处理才能从应用程序级故障中恢复；例如，如果信用检查失败，则必须取消订单。此外，应用程序必须处理不一致的数据。这是因为飞行中事务所做的更改是可见的。如果应用程序从尚未更新的实体化视图中读取，也可以看到不一致。另一个缺点是订户必须检测和忽略重复事件。</p>
-<h2 id="Achieving-Atomicity-实现原子性"><a href="#Achieving-Atomicity-实现原子性" class="headerlink" title="Achieving Atomicity 实现原子性"></a>Achieving Atomicity 实现原子性</h2><p>In an event‑driven architecture there is also the problem of atomically updating the database and publishing an event. For example, the Order Service must insert a row into the ORDER table and publish an Order Created event. It is essential that these two operations are done atomically. If the service crashes after updating the database but before publishing the event, the system becomes inconsistent. The standard way to ensure atomicity is to use a distributed transaction involving the database and the Message Broker. However, for the reasons described above, such as the CAP theorem, this is exactly what we do not want to do.</p>
-<p>在事件驱动的体系结构中，也存在着原子更新数据库和发布事件的问题。例如，Order服务必须向Order表中插入一行并发布创建的订单事件。这两个操作必须以原子方式完成。如果服务在更新数据库后但在发布事件之前崩溃，则系统将变得不一致。确保原子性的标准方法是使用涉及数据库和消息代理的分布式事务。然而，由于上述原因，如上限定理，这正是我们不想做的。 </p>
-<h3 id="Publishing-Events-Using-Local-Transactions-使用本地事务发布事件"><a href="#Publishing-Events-Using-Local-Transactions-使用本地事务发布事件" class="headerlink" title="Publishing Events Using Local Transactions 使用本地事务发布事件"></a>Publishing Events Using Local Transactions 使用本地事务发布事件</h3><p>One way to achieve atomicity is for the application to publish events using a <a href="http://queue.acm.org/detail.cfm?id=1394128" target="_blank" rel="noopener">multi‑step process involving only local transactions</a>. The trick is to have an EVENT table, which functions as a message queue, in the database that stores the state of the business entities. The application begins a (local) database transaction, updates the state of the business entities, inserts an event into the EVENT table, and commits the transaction. A separate application thread or process queries the EVENT table, publishes the events to the Message Broker, and then uses a local transaction to mark the events as published. The following diagram shows the design.</p>
-<p>实现原子性的一种方法是应用程序使用只涉及本地事务的多步骤进程发布事件。关键是在存储业务实体状态的数据库中具有一个作为消息队列的事件表。应用程序开始（本地）数据库事务，更新业务实体的状态，将事件插入到事件表中，并提交该事务。单独的应用程序线程或进程查询事件表，将事件发布到消息代理，然后使用本地事务将事件标记为已发布。下图显示了设计。 </p>
-<p><img src="https://cdn.wp.nginx.com/wp-content/uploads/2015/12/Richardson-microservices-part5-local-transaction-e1449727484579.png" alt="In a microservices architecture, achieve atomicity by using only local transactions to publish events"></p>
-<p>The Order Service inserts a row into the ORDER table and inserts an Order Created event into the EVENT table. The Event Publisher thread or process queries the EVENT table for unpublished events, publishes the events, and then updates the EVENT table to mark the events as published.</p>
-<p>Order服务将一行插入Order表，并将Order创建的事件插入事件表。事件发布线程或进程查询未发布事件的事件表，发布事件，然后更新事件表，将事件标记为已发布的事件。</p>
-<p>This approach has several benefits and drawbacks. One benefit is that it guarantees an event is published for each update without relying on 2PC. Also, the application publishes business‑level events, which eliminates the need to infer them. One drawback of this approach is that it is potentially error‑prone since the developer must remember to publish events. A limitation of this approach is that it is challenging to implement when using some NoSQL databases because of their limited transaction and query capabilities.</p>
-<p>这种方法有几个优点和缺点。一个好处是，它可以保证为每个更新发布一个事件，而不依赖于2pc。此外，应用程序发布业务级别的事件，这消除了推断它们的需要。这种方法的一个缺点是它可能容易出错，因为开发人员必须记住发布事件。这种方法的一个限制是在使用某些NoSQL数据库时很难实现，因为它们的事务和查询功能有限。 </p>
-<p>This approach eliminates the need for 2PC by having the application use local transactions to update state and publish events. Let’s now look at an approach that achieves atomicity by having the application simply update state.</p>
-<p>这种方法通过让应用程序使用本地事务来更新状态和发布事件，从而消除了对2PC的需求。现在让我们来看看一种通过让应用程序简单地更新状态来实现原子性的方法。 </p>
-<h3 id="Mining-a-Database-Transaction-Log-挖掘数据库事务日志"><a href="#Mining-a-Database-Transaction-Log-挖掘数据库事务日志" class="headerlink" title="Mining a Database Transaction Log 挖掘数据库事务日志"></a>Mining a Database Transaction Log 挖掘数据库事务日志</h3><p>Another way to achieve atomicity without 2PC is for the events to be published by a thread or process that mines the database’s transaction or commit log. The application updates the database, which results in changes being recorded in the database’s transaction log. The Transaction Log Miner thread or process reads the transaction log and publishes events to the Message Broker. The following diagram shows the design.</p>
-<p>另一种在没有2PC的情况下实现原子性的方法是，事件由挖掘数据库事务或提交日志的线程或进程发布。应用程序更新数据库，从而在数据库的事务日志中记录更改。事务日志挖掘程序线程或进程读取事务日志并将事件发布到消息代理。下图显示了设计。</p>
-<p><img src="https://cdn.wp.nginx.com/wp-content/uploads/2015/12/Richardson-microservices-part5-transaction-log-e1449727434678.png" alt="In a microservices architecture, achieve atomicity by mining the transaction log for events"></p>
-<p>A example of this approach is the open source <a href="https://github.com/linkedin/databus" target="_blank" rel="noopener">LinkedIn Databus</a> project. Databus mines the Oracle transaction log and publishes events corresponding to the changes. LinkedIn uses Databus to keep various derived data stores consistent with the system of record.</p>
-<p>此方法的一个示例是开源LinkedInDatabus项目。数据库挖掘Oracle事务日志并发布与更改相对应的事件。LinkedIn使用数据库来保存与记录系统一致的各种衍生数据存储。</p>
-<p>Another example is the <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html" target="_blank" rel="noopener">streams mechanism in AWS DynamoDB</a>, which is a managed NoSQL database. A DynamoDB stream contains the time‑ordered sequence of changes (create, update, and delete operations) made to the items in a DynamoDB table in the last 24 hours. An application can read those changes from the stream and, for example, publish them as events.</p>
-<p>另一个例子是AWS DynamoDB中的Streams机制，它是一个托管的NoSQL数据库。DynamoDB流包含过去24小时内对DynamoDB表中的项进行的按时间顺序的更改序列(创建、更新和删除操作)。应用程序可以从流中读取这些更改，例如，将它们发布为事件。</p>
-<p>Transaction log mining has various benefits and drawbacks. One benefit is that it guarantees that an event is published for each update without using 2PC. Transaction log mining can also simplify the application by separating event publishing from the application’s business logic. A major drawback is that the format of the transaction log is proprietary to each database and can even change between database versions. Also, it can be difficult to reverse engineer the high‑level business events from the low‑level updates recorded in the transaction log.</p>
-<p>事务日志挖掘有不同的优缺点。一个好处是它可以保证在不使用2pc的情况下为每个更新发布一个事件。事务日志挖掘还可以通过将事件发布与应用程序的业务逻辑分离来简化应用程序。一个主要的缺点是事务日志的格式对每个数据库都是专有的，甚至可以在不同的数据库版本之间进行更改。此外，很难从事务日志中记录的低级更新中反向工程高级业务事件。 </p>
-<p>Transaction log mining eliminates the need for 2PC by having the application do one thing: update the database. Let’s now look at a different approach that eliminates the updates and relies solely on events.</p>
-<p>事务日志挖掘通过让应用程序执行以下操作消除了2pc的需求：更新数据库。现在，让我们看看消除更新并仅依赖于事件的其他方法。</p>
-<h3 id="Using-Event-Sourcing-使用事件源"><a href="#Using-Event-Sourcing-使用事件源" class="headerlink" title="Using Event Sourcing 使用事件源"></a>Using Event Sourcing 使用事件源</h3><p><a href="https://github.com/cer/event-sourcing-examples/wiki/WhyEventSourcing" target="_blank" rel="noopener">Event sourcing</a> achieves atomicity without 2PC by using a radically different, event‑centric approach to persisting business entities. Rather than store the current state of an entity, the application stores a sequence of state‑changing events. The application reconstructs an entity’s current state by replaying the events. Whenever the state of a business entity changes, a new event is appended to the list of events. Since saving an event is a single operation, it is inherently atomic.</p>
-<p>通过使用一种完全不同的、以事件为中心的方法来持久化业务实体，事件源可以在没有2PC的情况下实现原子性。应用程序不是存储实体的当前状态，而是存储一系列状态更改事件。应用程序通过重放事件重新构造实体的当前状态。每当业务实体的状态发生变化时，都会将新事件追加到事件列表中。因为保存一个事件是一个单一的操作，所以它本质上是原子的。 </p>
-<p>To see how event sourcing works, consider the Order entity as an example. In a traditional approach, each order maps to a row in an ORDER table and to rows in, for example, an ORDER_LINE_ITEM table. But when using event sourcing, the Order Service stores an Order in the form of its state‑changing events: Created, Approved, Shipped, Cancelled. Each event contains sufficient data to reconstruct the Order’s state.</p>
-<p>要查看事件源是如何工作的，请以Order实体为例。在传统方法中，每个订单映射到Order表中的一行和行，例如Order_line_Item表中的行。但是当使用事件源时，Order服务以其状态更改事件的形式存储订单：创建、批准、发送、取消。每个事件包含足够的数据来重建订单的状态。 </p>
-<p><a href="https://cdn.wp.nginx.com/wp-content/uploads/2015/12/Richardson-microservices-part5-event-sourcing-e1449711558668.png" target="_blank" rel="noopener"><img src="https://cdn.wp.nginx.com/wp-content/uploads/2015/12/Richardson-microservices-part5-event-sourcing-e1449711558668.png" alt="In a microservices architecture, achieve atomicity with event sourcing"></a></p>
-<p>Events persist in an Event Store, which is a database of events. The store has an API for adding and retrieving an entity’s events. The Event Store also behaves like the Message Broker in the architectures we described previously. It provides an API that enables services to subscribe to events. The Event Store delivers all events to all interested subscribers. The Event Store is the backbone of an event‑driven microservices architecture.</p>
-<p>事件持久化在事件存储区中，该存储库是一个事件数据库。存储有一个API，用于添加和检索实体的事件。事件存储也与我们前面描述的体系结构中的MessageBroker类似。它提供了一个API，使服务能够订阅事件。事件存储将所有事件传递给所有感兴趣的订阅者。事件存储是事件驱动的微服务体系结构的主干。 </p>
-<p>Event sourcing has several benefits. It solves one of the key problems in implementing an event‑driven architecture and makes it possible to reliably publish events whenever state changes. As a result, it solves data consistency issues in a microservices architecture. Also, because it persists events rather than domain objects, it mostly avoids the <a href="https://en.wikipedia.org/wiki/Object-relational_impedance_mismatch" target="_blank" rel="noopener">object‑relational impedance mismatch problem</a>. Event sourcing also provides a 100% reliable audit log of the changes made to a business entity, and makes it possible to implement temporal queries that determine the state of an entity at any point in time. Another major benefit of event sourcing is that your business logic consists of loosely coupled business entities that exchange events. This makes it a lot easier to migrate from a monolithic application to a microservices architecture.</p>
-<p>事件来源补充有几个好处。它解决了实现事件驱动架构的关键问题之一，并可以在状态更改时可靠地发布事件。因此，它解决了微服务体系结构中的数据一致性问题。此外，因为它仍然存在事件而不是域对象，所以它主要避免了对象关系的阻抗失配问题。事件来源补充还提供对业务实体所做的更改的100%可靠的审核日志，并可以实现在任何时间点确定实体状态的时间查询。事件来源补充的另一个主要好处是业务逻辑由交换事件的松散耦合的业务实体组成。这使得从整体应用迁移到微服务体系结构更容易。 </p>
-<p>Event sourcing also has some drawbacks. It is a different and unfamiliar style of programming and so there is a learning curve. The event store only directly supports the lookup of business entities by primary key. You must use <a href="https://github.com/cer/event-sourcing-examples/wiki" target="_blank" rel="noopener">Command Query Responsibility Segregation</a> (CQRS) to implement queries. As a result, applications must handle eventually consistent data.</p>
-<p>事件源也有一些缺点。这是一种不同的和不熟悉的编程风格，因此有一个学习曲线。事件存储仅直接支持通过主键查找业务实体。必须使用命令查询责任隔离(Cqrs)来实现查询。因此，应用程序必须最终处理一致的数据。 </p>
-<h2 id="Summary-概要"><a href="#Summary-概要" class="headerlink" title="Summary 概要"></a>Summary 概要</h2><p>In a microservices architecture, each microservice has its own private datastore. Different microservices might use different SQL and NoSQL databases. While this database architecture has significant benefits, it creates some distributed data management challenges. The first challenge is how to implement business transactions that maintain consistency across multiple services. The second challenge is how to implement queries that retrieve data from multiple services.</p>
-<p>在微服务体系结构中，每个微服务都有自己的私有数据存储。不同的微服务可能使用不同的SQL和NoSQL数据库。虽然这种数据库架构有很大的好处，但它也带来了一些分布式数据管理方面的挑战。第一个挑战是如何实现跨多个服务保持一致性的业务事务。第二个挑战是如何实现从多个服务检索数据的查询。</p>
-<p>For many applications, the solution is to use an event‑driven architecture. One challenge with implementing an event‑driven architecture is how to atomically update state and how to publish events. There are a few ways to accomplish this, including using the database as a message queue, transaction log mining, and event sourcing.</p>
-<p>对于许多应用程序，解决方案是使用事件驱动的体系结构。实现事件驱动体系结构的一个挑战是如何原子地更新状态和如何发布事件。有几种方法可以实现这一点，包括将数据库用作消息队列、事务日志挖掘和事件源。 </p>
-<p>In future blog posts, we’ll continue to dive into other aspects of microservices.</p>
-<p>在未来的博客文章中，我们将继续深入到微观服务的其他方面。</p>
-<p><em>Editor – This seven‑part series of articles is now complete:</em></p>
-<p><em>编辑－此七部分系列文章现已完成：</em> </p>
-<ol>
-<li><a href="https://www.nginx.com/blog/introduction-to-microservices/" target="_blank" rel="noopener">Introduction to Microservices</a> 微型服务简介 </li>
-<li><a href="https://www.nginx.com/blog/building-microservices-using-an-api-gateway/" target="_blank" rel="noopener">Building Microservices: Using an API Gateway</a> 构建微服务：使用API网关</li>
-<li><a href="https://www.nginx.com/blog/building-microservices-inter-process-communication/" target="_blank" rel="noopener">Building Microservices: Inter-Process Communication in a Microservices Architecture</a> 构建微服务：微服务体系结构中的进程间通信 </li>
-<li><a href="https://www.nginx.com/blog/service-discovery-in-a-microservices-architecture/" target="_blank" rel="noopener">Service Discovery in a Microservices Architecture</a> 微服务体系结构中的服务发现。 </li>
-<li>Event-Driven Data Management for Microservices (this article) 事件驱动的微服务数据管理（本文） </li>
-<li><a href="https://www.nginx.com/blog/deploying-microservices/" target="_blank" rel="noopener">Choosing a Microservices Deployment Strategy</a> 选择微服务部署策略 </li>
-<li><a href="https://www.nginx.com/blog/refactoring-a-monolith-into-microservices/" target="_blank" rel="noopener">Refactoring a Monolith into Microservices</a> 将单核重构为微服务 </li>
-</ol>
-<p>You can also download the complete set of articles, plus information about implementing microservices using NGINX Plus, as an ebook – <a href="https://www.nginx.com/resources/library/designing-deploying-microservices/" target="_blank" rel="noopener">Microservices: From Design to Deployment</a>. And see our series on the <a href="https://www.nginx.com/blog/introducing-the-nginx-microservices-reference-architecture/" target="_blank" rel="noopener">Microservices Reference Architecture</a> and the <a href="https://www.nginx.com/solutions/microservices/" target="_blank" rel="noopener">Microservices Solutions page</a>.</p>
-<p>您还可以下载完整的文章集，以及有关使用nginx+实现微服务的信息，作为电子书-microservices：从设计到部署。并在微服务参考体系结构和微服务解决方案页面上查看我们的系列文章。</p>
-<p><em>Guest blogger Chris Richardson is the founder of the original CloudFoundry.com, an early Java PaaS (Platform as a Service) for Amazon EC2. He now consults with organizations to improve how they develop and deploy applications. He also blogs regularly about microservices at <a href="http://microservices.io" target="_blank" rel="noopener">http://microservices.io</a>.</em></p>
-<p><em>嘉宾博客作者ChrisRichardson是最初的CloudFoundry.com的创始人，该网站是AmazonEC 2早期的java PaaS(平台即服务)。他现在与组织协商，以改进他们开发和部署应用程序的方式。他还定期在<a href="http://microservices.io.上发表关于微服务的博客。" target="_blank" rel="noopener">http://microservices.io.上发表关于微服务的博客。</a></em> </p>
-<p>Microservices: From Design to Deployment </p>
-<p>微服务：从设计到部署 </p>
-<p>The complete guide to microservices development</p>
-<p>微型服务开发完整指南<br><a href="https://www.nginx.com/resources/library/designing-deploying-microservices/" target="_blank" rel="noopener">DOWNLOAD NOW</a></p>
-<p>现在下载</p>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-      
-      
-    </footer>
-    <hr class="entry-footer-hr">
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
 
 
   <nav id="page-nav">
@@ -988,6 +884,18 @@ lrwxrwxrwx.   1 root root    10 6月  22 04:07 tmp -&gt; ../var/tmp
               <div class="widget-entry-summary" style="margin: 0;">
             
 
+              <h6 style="margin: 0;"><a href="/2019/07/01/一天一个Linux命令(find命令)/">一天一个Linux命令，find命令</a></h6>
+              <span>July 1, 2019</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
               <h6 style="margin: 0;"><a href="/2019/06/28/一天一个Linux命令(df命令)/">一天一个Linux命令，df命令</a></h6>
               <span>June 28, 2019</span>
             </div>
@@ -1042,18 +950,6 @@ lrwxrwxrwx.   1 root root    10 6月  22 04:07 tmp -&gt; ../var/tmp
 
           </li>
         
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="/2019/06/26/一天一个Linux命令(watch命令)/">一天一个Linux命令(watch命令)</a></h6>
-              <span>June 26, 2019</span>
-            </div>
-
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -1079,7 +975,7 @@ lrwxrwxrwx.   1 root root    10 6月  22 04:07 tmp -&gt; ../var/tmp
     <h3 class="widget-title">Archives</h3>
 
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">21</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">21</span></li></ul>
     </div>
   </div>
 
