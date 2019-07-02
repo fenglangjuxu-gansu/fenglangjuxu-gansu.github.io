@@ -99,6 +99,62 @@
         
           <section id="main">
   
+    <article id="post-一天一个Linux命令(第12天which命令)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2019/06/21/一天一个Linux命令(第12天which命令)/">一天一个Linux命令(第12天which命令)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/06/21/一天一个Linux命令(第12天which命令)/" class="article-date">
+	  <time datetime="2019-06-21T13:28:04.785Z" itemprop="datePublished">June 21, 2019</time>
+	</a>
+
+       
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="which命令"><a href="#which命令" class="headerlink" title="which命令"></a>which命令</h1><ul>
+<li><strong>which命令</strong>用于查找并显示给定命令的绝对路径，环境变量PATH中保存了查找命令时需要遍历的目录。which指令会在环境变量$PATH设置的目录里查找符合条件的文件。也就是说，使用which命令，就可以看到某个系统命令是否存在，以及执行的到底是哪一个位置的命令。</li>
+</ul>
+<h2 id="语法："><a href="#语法：" class="headerlink" title="语法："></a>语法：</h2><p><code>which(选项)(参数)</code></p>
+<h2 id="选项："><a href="#选项：" class="headerlink" title="选项："></a>选项：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-n&lt;文件名长度&gt;：制定文件名长度，指定的长度必须大于或等于所有文件中最长的文件名；</span><br><span class="line">-p&lt;文件名长度&gt;：与-n参数相同，但此处的&lt;文件名长度&gt;包含了文件的路径；</span><br><span class="line">-w：指定输出时栏位的宽度；</span><br><span class="line">-V：显示版本信息。</span><br></pre></td></tr></table></figure>
+
+<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><p>指令名：指令名列表。</p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例:"></a>实例:</h2><p>查找文件、显示命令路径：</p>
+<p>zhiruo@luoyang MINGW64 /e/zhiruoblog<br>$</p>
+<p>zhiruo@luoyang MINGW64 /e/zhiruoblog<br>$ which ls<br>/usr/bin/ls</p>
+<p>zhiruo@luoyang MINGW64 /e/zhiruoblog<br>$ which chmod<br>/usr/bin/chmod</p>
+<p>zhiruo@luoyang MINGW64 /e/zhiruoblog<br>$ which pwd<br>/usr/bin/pwd </p>
+<p>如图：</p>
+<p><img src="/2019/06/21/一天一个Linux命令(第12天which命令)/1561124360712.png" alt="1561124360712"></p>
+<p>说明：which是根据使用者所配置的 PATH 变量内的目录去搜寻可运行档的！所以，不同的 PATH 配置内容所找到的命令当然不一样的！</p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
     <article id="post-Event-Driven Data Management for Microservices" class="article article-type-post" itemscope itemprop="blogPost">
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
@@ -860,81 +916,6 @@ AUTORUN.BAT 43 2011-08-23 16:56
 <!-- Table of Contents -->
 
   
-    <article id="post-一天一个Linux命令(第四天chmod命令)" class="article article-type-post" itemscope itemprop="blogPost">
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2019/06/16/一天一个Linux命令(第四天chmod命令)/">一天一个Linux命令，第四天chmod命令</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2019/06/16/一天一个Linux命令(第四天chmod命令)/" class="article-date">
-	  <time datetime="2019-06-16T15:22:23.175Z" itemprop="datePublished">June 16, 2019</time>
-	</a>
-
-       
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li><p>Linux/Unix 的文件调用权限分为三级 : 文件拥有者、群组、其他。利用 chmod 可以藉以控制文件如何被他人所调用。</p>
-</li>
-<li><p>使用权限 : 所有使用者</p>
-</li>
-<li><p>语法<br> chmod [-cfvR] [–help] [–version] mode file…</p>
-</li>
-<li><p>参数说明</p>
-</li>
-<li><p>mode : 权限设定字串，格式如下 :</p>
-</li>
-<li><p>[ugoa…][[+-=][rwxX]…][,…]</p>
-</li>
-<li><p>其中：</p>
-</li>
-</ul>
-<p>u 表示该文件的拥有者，g 表示与该文件的拥有者属于同一个群体(group)者，o 表示其他以外的人，a 表示这三者皆是。</p>
-<ul>
-<li>表示增加权限、- 表示取消权限、= 表示唯一设定权限。<br>r 表示可读取，w 表示可写入，x 表示可执行，X 表示只有当该文件是个子目录或者该文件已经被设定过为可执行。<br>其他参数说明：</li>
-</ul>
-<p>-c : 若该文件权限确实已经更改，才显示其更改动作<br>-f : 若该文件权限无法被更改也不要显示错误讯息<br>-v : 显示权限变更的详细资料<br>-R : 对目前目录下的所有文件与子目录进行相同的权限变更(即以递回的方式逐个变更)<br>–help : 显示辅助说明<br>–version : 显示版本</p>
-<p>*实例<br> 将文件 file1.txt 设为所有人皆可读取 :</p>
-<p> chmod ugo+r file1.txt<br> 将文件 file1.txt 设为所有人皆可读取 :</p>
-<p> chmod a+r file1.txt<br> 将文件 file1.txt 与 file2.txt 设为该文件拥有者，与其所属同一个群体者可写入，但其他以外的人则不可写入 :</p>
-<p> chmod ug+w,o-w file1.txt file2.txt<br> 将 ex1.py 设定为只有该文件拥有者可以执行 :</p>
-<p> chmod u+x ex1.py<br> 将目前目录下的所有文件与子目录皆设为任何人可读取 :</p>
-<p> chmod -R a+r *
- 此外chmod也可以用数字来表示权限如 :</p>
-<p> chmod 777 file<br> 语法为：</p>
-<p> chmod abc file<br> 其中a,b,c各为一个数字，分别表示User、Group、及Other的权限。</p>
-<p> r=4，w=2，x=1<br> 若要rwx属性则4+2+1=7；<br> 若要rw-属性则4+2=6；<br> 若要r-x属性则4+1=5。<br> chmod a=rwx file<br> 和</p>
-<p> chmod 777 file<br> 效果相同</p>
-<p> chmod ug=rwx,o=x file<br> 和</p>
-<p> chmod 771 file</p>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-      
-      
-    </footer>
-    <hr class="entry-footer-hr">
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
 
 
   <nav id="page-nav">
@@ -1045,6 +1026,18 @@ AUTORUN.BAT 43 2011-08-23 16:56
               <div class="widget-entry-summary" style="margin: 0;">
             
 
+              <h6 style="margin: 0;"><a href="/2019/07/02/一天一个Linux命令(mv命令)/">一天一个Linux命令，mv命令</a></h6>
+              <span>July 2, 2019</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
               <h6 style="margin: 0;"><a href="/2019/07/01/一天一个Linux命令(find命令)/">一天一个Linux命令，find命令</a></h6>
               <span>July 1, 2019</span>
             </div>
@@ -1099,18 +1092,6 @@ AUTORUN.BAT 43 2011-08-23 16:56
 
           </li>
         
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="/2019/06/27/abc/">abc</a></h6>
-              <span>June 27, 2019</span>
-            </div>
-
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -1136,7 +1117,7 @@ AUTORUN.BAT 43 2011-08-23 16:56
     <h3 class="widget-title">Archives</h3>
 
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">21</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">21</span></li></ul>
     </div>
   </div>
 
