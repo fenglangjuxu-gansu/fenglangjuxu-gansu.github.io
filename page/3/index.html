@@ -99,6 +99,71 @@
         
           <section id="main">
   
+    <article id="post-一天一个Linux命令(第五天mdir命令)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2019/06/17/一天一个Linux命令(第五天mdir命令)/">一天一个Linux命令(第五天mdir命令)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/06/17/一天一个Linux命令(第五天mdir命令)/" class="article-date">
+	  <time datetime="2019-06-17T12:13:16.957Z" itemprop="datePublished">June 17, 2019</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+ 
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1、语法"><a href="#1、语法" class="headerlink" title="1、语法"></a>1、语法</h2><p> <code>mdir [-afwx/][目录]</code></p>
+<h2 id="2、参数"><a href="#2、参数" class="headerlink" title="2、参数"></a>2、参数</h2><ul>
+<li>-/ 显示目录下所有子目录与文件。</li>
+<li>-a 　显示隐藏文件。</li>
+<li>-f 　不显示磁盘所剩余的可用空间。</li>
+<li>-w 　仅显示目录或文件名称，并以横排方式呈现，以便一次能显示较多的目录或文件。</li>
+<li>-X 　仅显示目录下所有子目录与文件的完整路径，不显示其他信息。</li>
+</ul>
+<h2 id="3、实例"><a href="#3、实例" class="headerlink" title="3、实例"></a>3、实例</h2><p>显示a盘中的内容：</p>
+<pre><code>$ mdir -/ a:\*</code></pre><p>以上命令执行后，mdir将显示指定盘”a:&quot;中的所有子目录及其中的文件信息，如下所示：</p>
+<pre><code>Volume in drive A has no label  #加载信息  
+Volume Serial Number is 13D2~055C  
+Directory for A:\                   #以下为目录信息  
+./test &lt;DIR&gt; 2011-08-23 16:59     
+#显示格式为文件名，目录大小，修改时间  
+AUTORUN.INF 265 2011-08-23 16:53  
+AUTORUN.BAT 43 2011-08-23 16:56  
+3 files 308 bytes               #统计总大小  
+724 325 bytes free              #剩余空间  </code></pre>
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+
+      
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
     <article id="post-一天一个Linux命令(第四天chmod命令)" class="article article-type-post" itemscope itemprop="blogPost">
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
@@ -403,6 +468,18 @@
               <div class="widget-entry-summary" style="margin: 0;">
             
 
+              <h6 style="margin: 0;"><a href="/2019/07/03/一天一个Linux命令(alias命令)/">一天一个Linux命令，alias命令</a></h6>
+              <span>July 3, 2019</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
               <h6 style="margin: 0;"><a href="/2019/07/02/一天一个Linux命令(mv命令)/">一天一个Linux命令，mv命令</a></h6>
               <span>July 2, 2019</span>
             </div>
@@ -457,18 +534,6 @@
 
           </li>
         
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="/2019/06/27/一天一个Linux命令(whoami命令)/">一天一个Linux命令(whoami命令)</a></h6>
-              <span>June 27, 2019</span>
-            </div>
-
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -494,7 +559,7 @@
     <h3 class="widget-title">Archives</h3>
 
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">21</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">21</span></li></ul>
     </div>
   </div>
 
