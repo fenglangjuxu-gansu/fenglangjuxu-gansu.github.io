@@ -124,44 +124,198 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>整数集合<br>整数集合（intset）是集合键的底层实现之一，当一个集合只包含整数值元素，并且这个集合的元素数量不多时，Redis就会使用整数集合作为集合键的底层实现。</p>
-<p>redis-&gt; SADD numbers 1 3 5 7 9<br>(integers) 5<br>redis-&gt; OBJECT ENCODING numbers<br>“intset”<br>1
-2<br>3
-4<br>看看整数集合的定义</p>
-<p>typedef struct intset{<br>    uint32_t encoding;<br>    uint32_t length;<br>    int8_t contents[];<br>}
-1<br>2
-3<br>4
-5<br>contents数组是整数集合的低层实现：整数集合的每个元素都是contents数组的一个数组项（item），各个项在数组中按值的大小从小到大有序地排列，并且不包含重复项。<br>length属性记录了整数集合包含的元素数量，也就是contents数组的长度。虽然intset结构将contents数组声明为int8_t类型，但是其真正类型取决于enconding属性的值。</p>
-<p>如果encoding属性的值为INTSET_ENC_INT16，那么contents就是一个int16_t类型的数组，数组中的每一个项都是一个int16_t类型的整数值（最小值-32768，最大32767）<br>如果encoding属性的值为INTSET_ENC_INT32，那么contents就是一个int32_t类型的数组，数组中的每一个项都是一个int32_t类型的整数值（最小值-2147483648，最大值2147483647）<br>如果encoding属性的值为INTSET_ENC_INT64，那么contents就是一个int64_t类型的数组，数组中里的每一项就是一个int64_t类型的整数值（最小值-9223372036854775808，最大值9223372036854775807）<br>下图展示了一个整数集合： </p>
-<ol>
-<li>encoding属性是INTSET_ENC_INT64,表示整数集合的底层实现为int64_t类型的数组，而数组中保存的都是int64_t类型的整数值 </li>
-<li>length属性的值为4，表示整数集合包含4个元素 </li>
-<li>contents数组按从小到大的顺序保存着集合中的四个元素，因为每个元素都是int64_t类型的整数值，所以contents数组的大小为sizeof（int64_t)4 = 64 4 = 256 位 </li>
-</ol>
-<p>整数集合的升级<br>当我们把一个新元素添加到整数集合中时，如果新元素比整数集合现有的所有元素的类型都要长，整数集合需要先进行升级(upgrade),然后才能将新元素添加到整数集合里面。<br>升级一共分为三个步骤：</p>
-<p>根据新元素的类型，扩展整数集合底层数组的空间大小，并为新元素分配空间<br>将底层数组现有的所有元素都转换成与新元素相同的类型，并将类型转换后的元素放置到正确的位置上，而且在放置元素的过程中，需要继续位置底层数组的有序性不变。<br>将新元素添加到底层数组里面。<br>升级的过程要分配空间并且扩展每个项的字节数并移动到相应的位置，所以复杂度是O(N)。升级的好处主要有两个：提升灵活性，整数集合自动升级来适应新元素，不必担心类型错误；节约内存，集合可以同时保存三种不同类型的值，又可以确保升级操作只会在有需要的时候进行。注意的是整数集合不支持降级。</p>
-<p>压缩表<br>压缩表(ziplist)是列表键和哈希键的底层实现之一。当一个列表键只包含少量列表项，并且每个列表项要么就是小整数值，要么就是长度比较短的字符串，那么redis就会使用压缩列表来做列表键的底层实现。另外当一个哈希键只包含少量键值对，并且这个键值对的键和值要么就是小整数值要么就是长度比较短的字符串，那么redis就会使用压缩列表来做哈希键的底层实现。</p>
-<p>压缩列表是redis为了节约内存而开发的，有由一系列特殊编码的连续内存块组成的顺序型(squential)数据结构。一个压缩列表可以包含多个节点(entry)，每个节点可以保存一个字节数组或者一个整数值。<br>下图展示了压缩列表的各个组成部分： </p>
-<p>举个例子：</p>
-<p>列表zlbytes属性的值为0x50,十进制80，表示压缩列表总长80字节<br>列表zltail属性的值为0x30,十进制60，表示如果我们有一个指向压缩列表起止地址的指针p,那么只要用指针p加上偏移量60就可以计算出表尾节点entry3的地址<br>列表zllen属性的值为0x3,十进制3，表示压缩列表包含三个节点 </p>
-<p>压缩列表节点的构成<br>每个压缩列表节点可以保存一个字节数组或者一个整数值，其中，字节数组可以是以下三种长度的其中一种：</p>
-<p>长度小于等于63（2^6-1) 字节的字节数组<br>长度小于等于16383（2^14-1）字节的字节数组<br>长度小于等于4294967295（2^32-1）字节的字节数组<br>而整数值则可以是以下六种长度的一种：</p>
-<p>4位长，介于0至12之间的无符号整数<br>1字节长的有符号整数<br>3字节长的有符号整数<br>int16_t 类型整数<br>int32_t 类型整数<br>int64_t 类型整数<br>每个压缩列表的节点都是有previous_entry_length,encoding,content三个部分组成，如下图所示。 </p>
-<p>previous_entry_length<br>节点的previous_entry_length属性以字节为单位，记录了压缩列表前一个节点的长度。如果前一个节点长度小于254字节，那么previous_entry_length的长度为1字节；如果前一节点长度大于等于254字节，那么previous_entry_length属性的长度为5字节，其中第一字节为被设置成0xFE（十进制254），而之后的四个字节则用于保存前一节点的长度。</p>
-<p>因为节点的previous_entry_length属性记录了前一节点的长度，所以程序可以通过指针运算，根据当前节点的起始地址来计算出前一个节点的起始地址。如果我们有一个指向当前节点的指针c，那么我们只要用指针c减去当前节点previous_entry_length属性的值，就可以得出一个指针指向前一个节点起始地址的指针p。压缩列表从表尾向表头遍历就是使用这个原理实现的。</p>
-<p>encoding<br>节点的encoding属性记录了节点的content属性所保存数据的类型以及长度： </p>
+        <h4 id="压缩列表"><a href="#压缩列表" class="headerlink" title="压缩列表"></a>压缩列表</h4><p>压缩列表（ziplist）是列表键和哈希键的底层实现之一。</p>
+<p>当一个列表键只包含少量列表项， 并且每个列表项要么就是小整数值， 要么就是长度比较短的字符串， 那么 Redis 就会使用压缩列表来做列表键的底层实现。</p>
+<p>比如说， 执行以下命令将创建一个压缩列表实现的列表键：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">redis&gt; RPUSH lst 1 3 5 10086 &quot;hello&quot; &quot;world&quot;</span><br><span class="line">(integer) 6</span><br><span class="line"></span><br><span class="line">redis&gt; OBJECT ENCODING lst</span><br><span class="line">&quot;ziplist&quot;</span><br></pre></td></tr></table></figure>
+
+<p>因为列表键里面包含的都是 1 、 3 、 5 、 10086 这样的小整数值， 以及 “hello” 、 “world” 这样的短字符串。</p>
+<p>另外， 当一个哈希键只包含少量键值对， 并且每个键值对的键和值要么就是小整数值， 要么就是长度比较短的字符串， 那么 Redis 就会使用压缩列表来做哈希键的底层实现。</p>
+<p>举个例子， 执行以下命令将创建一个压缩列表实现的哈希键：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">redis&gt; HMSET profile &quot;name&quot; &quot;Jack&quot; &quot;age&quot; 28 &quot;job&quot; &quot;Programmer&quot;</span><br><span class="line">OK</span><br><span class="line"></span><br><span class="line">redis&gt; OBJECT ENCODING profile</span><br><span class="line">&quot;ziplist&quot;</span><br></pre></td></tr></table></figure>
+
+<p>因为哈希键里面包含的所有键和值都是小整数值或者短字符串。</p>
+<p>本章将对压缩列表的定义以及相关操作进行详细的介绍。</p>
+<h4 id="压缩列表的构成"><a href="#压缩列表的构成" class="headerlink" title="压缩列表的构成"></a>压缩列表的构成</h4><p>压缩列表是 Redis 为了节约内存而开发的， 由一系列特殊编码的连续内存块组成的顺序型（sequential）数据结构。</p>
+<p>一个压缩列表可以包含任意多个节点（entry）， 每个节点可以保存一个字节数组或者一个整数值。</p>
+<p>图 7-1 展示了压缩列表的各个组成部分， 表 7-1 则记录了各个组成部分的类型、长度、以及用途。</p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/4057005-e183f6108621e565.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/509/format/webp" alt="img"></p>
+<p>表 7-1 压缩列表各个组成部分的详细说明</p>
+<table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">类型</th>
+<th align="left">长度</th>
+<th align="left">用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">zlbytes</td>
+<td align="left">uint32_t</td>
+<td align="left">4 字节</td>
+<td align="left">记录整个压缩列表占用的内存字节数：在对压缩列表进行内存重分配， 或者计算 zlend 的位置时使用。</td>
+</tr>
+<tr>
+<td align="left">zltail</td>
+<td align="left">uint32_t</td>
+<td align="left">4 字节</td>
+<td align="left">记录压缩列表表尾节点距离压缩列表的起始地址有多少字节： 通过这个偏移量，程序无须遍历整个压缩列表就可以确定表尾节点的地址。</td>
+</tr>
+<tr>
+<td align="left">zllen</td>
+<td align="left">uint16_t</td>
+<td align="left">2 字节</td>
+<td align="left">记录了压缩列表包含的节点数量： 当这个属性的值小于 UINT16_MAX （65535）时， 这个属性的值就是压缩列表包含节点的数量； 当这个值等于 UINT16_MAX 时， 节点的真实数量需要遍历整个压缩列表才能计算得出。</td>
+</tr>
+<tr>
+<td align="left">entryX</td>
+<td align="left">列表节点</td>
+<td align="left">不定</td>
+<td align="left">压缩列表包含的各个节点，节点的长度由节点保存的内容决定。</td>
+</tr>
+<tr>
+<td align="left">zlend</td>
+<td align="left">uint8_t</td>
+<td align="left">1 字节</td>
+<td align="left">特殊值 0xFF （十进制 255 ），用于标记压缩列表的末端。</td>
+</tr>
+</tbody></table>
+<p>图 7-2 展示了一个压缩列表示例：</p>
 <ul>
-<li>一字节、两字节或者五字节长，值得最高位为00、01或者10的是字节数组编码：这种编码表示节点的content属性保存着字节数组，数组的长度由编码除去最高两位之后的其他位记录 </li>
-<li>一字节长，值的最高位以11开头的是整数编码：这种编码表示节点的content属性保存的是整数值，整数值的类型和长度由编码除去最高两位之后的其他位记录</li>
+<li>列表 zlbytes 属性的值为 0x50 （十进制 80）， 表示压缩列表的总长为 80 字节。</li>
+<li>列表 zltail 属性的值为 0x3c （十进制 60）， 这表示如果我们有一个指向压缩列表起始地址的指针 p ， 那么只要用指针 p 加上偏移量 60 ， 就可以计算出表尾节点 entry3 的地址。</li>
+<li>列表 zllen 属性的值为 0x3 （十进制 3）， 表示压缩列表包含三个节点。</li>
 </ul>
-<p>字节数组编码： </p>
-<p>整数编码 </p>
-<p>content<br>节点的content 属性负责保存节点的值，节点值可以是一个字节数组或者整数，值的类型和长度由节点的encoding属性决定。</p>
-<p>previous_entry_length    encoding    content<br>…    00001011    “hello world”<br>…    11000000    10086<br>连锁更新<br>前面说过，每个节点的previous_entry_length属性都记录了前一个节点的长度，现在考虑这样一种情况，在一个压缩列表中，有多个连续的、长度介于250字节到253字节之间的e1至eN，因为e1至eN的所有节点的长度都小于254字节，所以记录这些节点的长度只需要1字节的previous_entry_length。</p>
-<p>这时我们将一个长度大于254字节的新节点new设置为压缩列表的表头节点，那么new将成为e1的前置节点。</p>
-<p>因为e1的previous_entry_length属性为1字节，它没办法保存new节点的长度，所以程序要对它进行空间重新分配，并由原来的1字节变成5字节，现在麻烦来了，由于e1处于250字节到253字节之间，这就导致了e1的长度介于254字节和257字节之间，以此类推，后面的所有节点都需要重新分配空间，这种操作就是连锁更新。</p>
-<p>删除节点时也有可能会触发连锁更新，被删除节点的后续节点的previous_entry_length如果是一字节，而被删除节点的前面节点长度大于等于254字节，就需要对后面节点重新分配，而如果该节点也是在250-253之间，并且后面都是，那么同样的会出现连锁更新。</p>
-<h2 id="因为连锁更新在最坏的情况下需要对压缩列表执行N次空间分配，而每次空间重分配的最坏时间复杂度为O-N-，所以连锁更新时间复杂度为O-N-2-但是需要注意的是，虽然连锁更新复杂度高，但是发生的概率很小，压缩表的性能几乎不会被其受影响。"><a href="#因为连锁更新在最坏的情况下需要对压缩列表执行N次空间分配，而每次空间重分配的最坏时间复杂度为O-N-，所以连锁更新时间复杂度为O-N-2-但是需要注意的是，虽然连锁更新复杂度高，但是发生的概率很小，压缩表的性能几乎不会被其受影响。" class="headerlink" title="因为连锁更新在最坏的情况下需要对压缩列表执行N次空间分配，而每次空间重分配的最坏时间复杂度为O(N)，所以连锁更新时间复杂度为O(N^2),但是需要注意的是，虽然连锁更新复杂度高，但是发生的概率很小，压缩表的性能几乎不会被其受影响。"></a>因为连锁更新在最坏的情况下需要对压缩列表执行N次空间分配，而每次空间重分配的最坏时间复杂度为O(N)，所以连锁更新时间复杂度为O(N^2),但是需要注意的是，虽然连锁更新复杂度高，但是发生的概率很小，压缩表的性能几乎不会被其受影响。</h2>
+<p><img src="https:////upload-images.jianshu.io/upload_images/4057005-2d18bc354fb38eeb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/489/format/webp" alt="img"></p>
+<p>图 7-3 展示了另一个压缩列表示例：</p>
+<ul>
+<li>列表 zlbytes 属性的值为 0xd2 （十进制 210）， 表示压缩列表的总长为 210 字节。</li>
+<li>列表 zltail 属性的值为 0xb3 （十进制 179）， 这表示如果我们有一个指向压缩列表起始地址的指针 p ， 那么只要用指针 p 加上偏移量 179 ， 就可以计算出表尾节点 entry5 的地址。</li>
+<li>列表 zllen 属性的值为 0x5 （十进制 5）， 表示压缩列表包含五个节点。</li>
+</ul>
+<p><img src="https:////upload-images.jianshu.io/upload_images/4057005-cb66d5c1db5ac933.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/627/format/webp" alt="img"></p>
+<h4 id="连锁更新"><a href="#连锁更新" class="headerlink" title="连锁更新"></a>连锁更新</h4><p>前面说过， 每个节点的 previous_entry_length 属性都记录了前一个节点的长度：</p>
+<p>如果前一节点的长度小于 254 字节， 那么 previous_entry_length 属性需要用 1 字节长的空间来保存这个长度值。<br> 如果前一节点的长度大于等于 254 字节， 那么 previous_entry_length 属性需要用 5 字节长的空间来保存这个长度值。<br> 现在， 考虑这样一种情况： 在一个压缩列表中， 有多个连续的、长度介于 250 字节到 253 字节之间的节点 e1 至 eN ， 如图 7-11 所示。</p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/4057005-645c6c7efe6c8f70.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/458/format/webp" alt="img"></p>
+<p>因为 e1 至 eN 的所有节点的长度都小于 254 字节， 所以记录这些节点的长度只需要 1 字节长的 previous_entry_length 属性， 换句话说， e1 至 eN 的所有节点的 previous_entry_length 属性都是 1 字节长的。</p>
+<p>这时， 如果我们将一个长度大于等于 254 字节的新节点 new 设置为压缩列表的表头节点， 那么 new 将成为 e1 的前置节点， 如图 7-12 所示。</p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/4057005-4a18bb51e6ea66af.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/511/format/webp" alt="img"></p>
+<p>因为 e1 的 previous_entry_length 属性仅长 1 字节， 它没办法保存新节点 new 的长度， 所以程序将对压缩列表执行空间重分配操作， 并将 e1 节点的 previous_entry_length 属性从原来的 1 字节长扩展为 5 字节长。</p>
+<p>现在， 麻烦的事情来了 —— e1 原本的长度介于 250 字节至 253 字节之间， 在为 previous_entry_length 属性新增四个字节的空间之后， e1 的长度就变成了介于 254 字节至 257 字节之间， 而这种长度使用 1 字节长的 previous_entry_length 属性是没办法保存的。</p>
+<p>因此， 为了让 e2 的 previous_entry_length 属性可以记录下 e1 的长度， 程序需要再次对压缩列表执行空间重分配操作， 并将 e2 节点的 previous_entry_length 属性从原来的 1 字节长扩展为 5 字节长。</p>
+<p>正如扩展 e1 引发了对 e2 的扩展一样， 扩展 e2 也会引发对 e3 的扩展， 而扩展 e3 又会引发对 e4 的扩展……为了让每个节点的 previous_entry_length 属性都符合压缩列表对节点的要求， 程序需要不断地对压缩列表执行空间重分配操作， 直到 eN 为止。</p>
+<p>Redis 将这种在特殊情况下产生的连续多次空间扩展操作称之为“连锁更新”（cascade update）， 图 7-13 展示了这一过程。</p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/4057005-ed7ce534dab58d75.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/511/format/webp" alt="img"></p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/4057005-ad4564953532bdfc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/511/format/webp" alt="img"></p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/4057005-65237e44b74e1180.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/511/format/webp" alt="img"></p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/4057005-db13148bb7ca630e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/511/format/webp" alt="img"></p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/4057005-e19702d441541b5b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/663/format/webp" alt="img"></p>
+<p>除了添加新节点可能会引发连锁更新之外， 删除节点也可能会引发连锁更新。</p>
+<p>考虑图 7-14 所示的压缩列表， 如果 e1 至 eN 都是大小介于 250 字节至 253 字节的节点， big 节点的长度大于等于 254 字节（需要 5 字节的 previous_entry_length 来保存）， 而 small 节点的长度小于 254 字节（只需要 1 字节的 previous_entry_length 来保存）， 那么当我们将 small 节点从压缩列表中删除之后， 为了让 e1 的 previous_entry_length 属性可以记录 big 节点的长度， 程序将扩展 e1 的空间， 并由此引发之后的连锁更新。</p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/4057005-77193aa6bb962687.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/565/format/webp" alt="img"></p>
+<p>因为连锁更新在最坏情况下需要对压缩列表执行 N 次空间重分配操作， 而每次空间重分配的最坏复杂度为 O(N) ， 所以连锁更新的最坏复杂度为 O(N^2) 。</p>
+<p>要注意的是， 尽管连锁更新的复杂度较高， 但它真正造成性能问题的几率是很低的：</p>
+<ul>
+<li>首先， 压缩列表里要恰好有多个连续的、长度介于 250 字节至 253 字节之间的节点， 连锁更新才有可能被引发， 在实际中， 这种情况并不多见；</li>
+<li>其次， 即使出现连锁更新， 但只要被更新的节点数量不多， 就不会对性能造成任何影响： 比如说， 对三五个节点进行连锁更新是绝对不会影响性能的；</li>
+</ul>
+<p>因为以上原因， ziplistPush 等命令的平均复杂度仅为 O(N) ， 在实际中， 我们可以放心地使用这些函数， 而不必担心连锁更新会影响压缩列表的性能。</p>
+<h4 id="压缩列表-API"><a href="#压缩列表-API" class="headerlink" title="压缩列表 API"></a>压缩列表 API</h4><p>表 7-4 列出了所有用于操作压缩列表的 API 。</p>
+<hr>
+<p>表 7-4 压缩列表 API</p>
+<table>
+<thead>
+<tr>
+<th align="left">函数</th>
+<th align="left">作用</th>
+<th align="left">算法复杂度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">ziplistNew</td>
+<td align="left">创建一个新的压缩列表。</td>
+<td align="left">O(1)</td>
+</tr>
+<tr>
+<td align="left">ziplistPush</td>
+<td align="left">创建一个包含给定值的新节点， 并将这个新节点添加到压缩列表的表头或者表尾。</td>
+<td align="left">平均 O(N) ，最坏 O(N^2) 。</td>
+</tr>
+<tr>
+<td align="left">ziplistInsert</td>
+<td align="left">将包含给定值的新节点插入到给定节点之后。</td>
+<td align="left">平均 O(N) ，最坏 O(N^2) 。</td>
+</tr>
+<tr>
+<td align="left">ziplistIndex</td>
+<td align="left">返回压缩列表给定索引上的节点。</td>
+<td align="left">O(N)</td>
+</tr>
+<tr>
+<td align="left">ziplistFind</td>
+<td align="left">在压缩列表中查找并返回包含了给定值的节点。</td>
+<td align="left">因为节点的值可能是一个字节数组， 所以检查节点值和给定值是否相同的复杂度为 O(N) ， 而查找整个列表的复杂度则为 O(N^2) 。</td>
+</tr>
+<tr>
+<td align="left">ziplistNext</td>
+<td align="left">返回给定节点的下一个节点。</td>
+<td align="left">O(1)</td>
+</tr>
+<tr>
+<td align="left">ziplistPrev</td>
+<td align="left">返回给定节点的前一个节点。</td>
+<td align="left">O(1)</td>
+</tr>
+<tr>
+<td align="left">ziplistGet</td>
+<td align="left">获取给定节点所保存的值。</td>
+<td align="left">O(1)</td>
+</tr>
+<tr>
+<td align="left">ziplistDelete</td>
+<td align="left">从压缩列表中删除给定的节点。</td>
+<td align="left">平均 O(N) ，最坏 O(N^2) 。</td>
+</tr>
+<tr>
+<td align="left">ziplistDeleteRange</td>
+<td align="left">删除压缩列表在给定索引上的连续多个节点。</td>
+<td align="left">平均 O(N) ，最坏 O(N^2) 。</td>
+</tr>
+<tr>
+<td align="left">ziplistBlobLen</td>
+<td align="left">返回压缩列表目前占用的内存字节数。</td>
+<td align="left">O(1)</td>
+</tr>
+<tr>
+<td align="left">ziplistLen</td>
+<td align="left">返回压缩列表目前包含的节点数量。</td>
+<td align="left">节点数量小于 65535 时 O(1) ， 大于 65535 时 O(N) 。</td>
+</tr>
+</tbody></table>
+<p>因为 ziplistPush 、 ziplistInsert 、 ziplistDelete 和 ziplistDeleteRange 四个函数都有可能会引发连锁更新， 所以它们的最坏复杂度都是 O(N^2) 。</p>
+<h2 id="整数集合"><a href="#整数集合" class="headerlink" title="整数集合"></a>整数集合</h2><p>整数集合（intset）是<strong>集合键</strong>的底层实现之一，当一个集合只包含整数值元素，并且这个集合的元素数量不多时，Redis就会使用整数集合作为集合键的底层实现。</p>
+<p>　　它可以保存类型为int16_t、int32_t或者int64_t的整数值，并且保证集合中不会出现重复元素。</p>
+<p><a href="javascript:void(0);" target="_blank" rel="noopener"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1 typedef struct intset &#123;</span><br><span class="line">2     // 编码方式</span><br><span class="line">3     uint32_t encoding;</span><br><span class="line">4     // 集合包含的元素数量</span><br><span class="line">5     uint32_t length;</span><br><span class="line">6     // 保存元素的数组</span><br><span class="line">7     int8_t contents[];</span><br><span class="line">8 &#125; intset;</span><br></pre></td></tr></table></figure>
+
+<p><a href="javascript:void(0);" target="_blank" rel="noopener"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<p><img src="https://images2018.cnblogs.com/blog/720994/201807/720994-20180704175038775-372816996.png" alt="img"></p>
+<p>　　contents数组是整数集合的底层实现：整数集合的每个元素都是contents数组的一个数组项，各个项在数组中按值的大小<strong>从小到大有序地排列</strong>，并且数组中<strong>不包含任何重复项</strong>。</p>
+<p><strong>升级：</strong></p>
+<p>每当我们要将一个新元素添加到整数集合里面，并且新元素的类型比整数集合现有所有元素的的类型都要长时，整数集合需要先进行升级，然后才能将新元素添加到整数集合里面。</p>
+<p>　　根据新元素的类型，扩展整数集合底层数组的空间大小，并为新元素分配空间。</p>
+<p>　　将底层数组现有的所有元素都转换成与新元素相同的类型，并将类型转换后的元素放置到正确的位上（从后往前），而且在放置元素的过程中，需要继续位置底层数组的有序性质不变。</p>
+<p>　　将新元素添加到底层数组里面。</p>
+<p>　　将encoding属性更改。</p>
+<p>　　整数集合添加新元素的时间复杂度为O(N)。</p>
+<p>　　因为引发升级的元素要么最大要么最小，所有它的位置要么是0要么是length-1。</p>
+<p><strong>升级的好处：</strong></p>
+<p>　　提升整数集合的灵活性，可以随意将int16，int32，int64的值放入集合。</p>
+<p>　　尽可能地节约内存</p>
+<p><strong>降级：</strong></p>
+<p>　　整数集合不支持降级操作</p>
+
       
     </div>
     <footer class="entry-meta entry-footer">
