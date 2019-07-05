@@ -99,6 +99,84 @@
         
           <section id="main">
   
+    <article id="post-整数集合-压缩列表" class="article article-type-post" itemscope itemprop="blogPost">
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2019/07/05/整数集合-压缩列表/">整数集合-压缩列表</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/07/05/整数集合-压缩列表/" class="article-date">
+	  <time datetime="2019-07-05T04:42:44.237Z" itemprop="datePublished">July 5, 2019</time>
+	</a>
+
+       
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>整数集合<br>整数集合（intset）是集合键的底层实现之一，当一个集合只包含整数值元素，并且这个集合的元素数量不多时，Redis就会使用整数集合作为集合键的底层实现。</p>
+<p>redis-&gt; SADD numbers 1 3 5 7 9<br>(integers) 5<br>redis-&gt; OBJECT ENCODING numbers<br>“intset”<br>1
+2<br>3
+4<br>看看整数集合的定义</p>
+<p>typedef struct intset{<br>    uint32_t encoding;<br>    uint32_t length;<br>    int8_t contents[];<br>}
+1<br>2
+3<br>4
+5<br>contents数组是整数集合的低层实现：整数集合的每个元素都是contents数组的一个数组项（item），各个项在数组中按值的大小从小到大有序地排列，并且不包含重复项。<br>length属性记录了整数集合包含的元素数量，也就是contents数组的长度。虽然intset结构将contents数组声明为int8_t类型，但是其真正类型取决于enconding属性的值。</p>
+<p>如果encoding属性的值为INTSET_ENC_INT16，那么contents就是一个int16_t类型的数组，数组中的每一个项都是一个int16_t类型的整数值（最小值-32768，最大32767）<br>如果encoding属性的值为INTSET_ENC_INT32，那么contents就是一个int32_t类型的数组，数组中的每一个项都是一个int32_t类型的整数值（最小值-2147483648，最大值2147483647）<br>如果encoding属性的值为INTSET_ENC_INT64，那么contents就是一个int64_t类型的数组，数组中里的每一项就是一个int64_t类型的整数值（最小值-9223372036854775808，最大值9223372036854775807）<br>下图展示了一个整数集合： </p>
+<ol>
+<li>encoding属性是INTSET_ENC_INT64,表示整数集合的底层实现为int64_t类型的数组，而数组中保存的都是int64_t类型的整数值 </li>
+<li>length属性的值为4，表示整数集合包含4个元素 </li>
+<li>contents数组按从小到大的顺序保存着集合中的四个元素，因为每个元素都是int64_t类型的整数值，所以contents数组的大小为sizeof（int64_t)4 = 64 4 = 256 位 </li>
+</ol>
+<p>整数集合的升级<br>当我们把一个新元素添加到整数集合中时，如果新元素比整数集合现有的所有元素的类型都要长，整数集合需要先进行升级(upgrade),然后才能将新元素添加到整数集合里面。<br>升级一共分为三个步骤：</p>
+<p>根据新元素的类型，扩展整数集合底层数组的空间大小，并为新元素分配空间<br>将底层数组现有的所有元素都转换成与新元素相同的类型，并将类型转换后的元素放置到正确的位置上，而且在放置元素的过程中，需要继续位置底层数组的有序性不变。<br>将新元素添加到底层数组里面。<br>升级的过程要分配空间并且扩展每个项的字节数并移动到相应的位置，所以复杂度是O(N)。升级的好处主要有两个：提升灵活性，整数集合自动升级来适应新元素，不必担心类型错误；节约内存，集合可以同时保存三种不同类型的值，又可以确保升级操作只会在有需要的时候进行。注意的是整数集合不支持降级。</p>
+<p>压缩表<br>压缩表(ziplist)是列表键和哈希键的底层实现之一。当一个列表键只包含少量列表项，并且每个列表项要么就是小整数值，要么就是长度比较短的字符串，那么redis就会使用压缩列表来做列表键的底层实现。另外当一个哈希键只包含少量键值对，并且这个键值对的键和值要么就是小整数值要么就是长度比较短的字符串，那么redis就会使用压缩列表来做哈希键的底层实现。</p>
+<p>压缩列表是redis为了节约内存而开发的，有由一系列特殊编码的连续内存块组成的顺序型(squential)数据结构。一个压缩列表可以包含多个节点(entry)，每个节点可以保存一个字节数组或者一个整数值。<br>下图展示了压缩列表的各个组成部分： </p>
+<p>举个例子：</p>
+<p>列表zlbytes属性的值为0x50,十进制80，表示压缩列表总长80字节<br>列表zltail属性的值为0x30,十进制60，表示如果我们有一个指向压缩列表起止地址的指针p,那么只要用指针p加上偏移量60就可以计算出表尾节点entry3的地址<br>列表zllen属性的值为0x3,十进制3，表示压缩列表包含三个节点 </p>
+<p>压缩列表节点的构成<br>每个压缩列表节点可以保存一个字节数组或者一个整数值，其中，字节数组可以是以下三种长度的其中一种：</p>
+<p>长度小于等于63（2^6-1) 字节的字节数组<br>长度小于等于16383（2^14-1）字节的字节数组<br>长度小于等于4294967295（2^32-1）字节的字节数组<br>而整数值则可以是以下六种长度的一种：</p>
+<p>4位长，介于0至12之间的无符号整数<br>1字节长的有符号整数<br>3字节长的有符号整数<br>int16_t 类型整数<br>int32_t 类型整数<br>int64_t 类型整数<br>每个压缩列表的节点都是有previous_entry_length,encoding,content三个部分组成，如下图所示。 </p>
+<p>previous_entry_length<br>节点的previous_entry_length属性以字节为单位，记录了压缩列表前一个节点的长度。如果前一个节点长度小于254字节，那么previous_entry_length的长度为1字节；如果前一节点长度大于等于254字节，那么previous_entry_length属性的长度为5字节，其中第一字节为被设置成0xFE（十进制254），而之后的四个字节则用于保存前一节点的长度。</p>
+<p>因为节点的previous_entry_length属性记录了前一节点的长度，所以程序可以通过指针运算，根据当前节点的起始地址来计算出前一个节点的起始地址。如果我们有一个指向当前节点的指针c，那么我们只要用指针c减去当前节点previous_entry_length属性的值，就可以得出一个指针指向前一个节点起始地址的指针p。压缩列表从表尾向表头遍历就是使用这个原理实现的。</p>
+<p>encoding<br>节点的encoding属性记录了节点的content属性所保存数据的类型以及长度： </p>
+<ul>
+<li>一字节、两字节或者五字节长，值得最高位为00、01或者10的是字节数组编码：这种编码表示节点的content属性保存着字节数组，数组的长度由编码除去最高两位之后的其他位记录 </li>
+<li>一字节长，值的最高位以11开头的是整数编码：这种编码表示节点的content属性保存的是整数值，整数值的类型和长度由编码除去最高两位之后的其他位记录</li>
+</ul>
+<p>字节数组编码： </p>
+<p>整数编码 </p>
+<p>content<br>节点的content 属性负责保存节点的值，节点值可以是一个字节数组或者整数，值的类型和长度由节点的encoding属性决定。</p>
+<p>previous_entry_length    encoding    content<br>…    00001011    “hello world”<br>…    11000000    10086<br>连锁更新<br>前面说过，每个节点的previous_entry_length属性都记录了前一个节点的长度，现在考虑这样一种情况，在一个压缩列表中，有多个连续的、长度介于250字节到253字节之间的e1至eN，因为e1至eN的所有节点的长度都小于254字节，所以记录这些节点的长度只需要1字节的previous_entry_length。</p>
+<p>这时我们将一个长度大于254字节的新节点new设置为压缩列表的表头节点，那么new将成为e1的前置节点。</p>
+<p>因为e1的previous_entry_length属性为1字节，它没办法保存new节点的长度，所以程序要对它进行空间重新分配，并由原来的1字节变成5字节，现在麻烦来了，由于e1处于250字节到253字节之间，这就导致了e1的长度介于254字节和257字节之间，以此类推，后面的所有节点都需要重新分配空间，这种操作就是连锁更新。</p>
+<p>删除节点时也有可能会触发连锁更新，被删除节点的后续节点的previous_entry_length如果是一字节，而被删除节点的前面节点长度大于等于254字节，就需要对后面节点重新分配，而如果该节点也是在250-253之间，并且后面都是，那么同样的会出现连锁更新。</p>
+<h2 id="因为连锁更新在最坏的情况下需要对压缩列表执行N次空间分配，而每次空间重分配的最坏时间复杂度为O-N-，所以连锁更新时间复杂度为O-N-2-但是需要注意的是，虽然连锁更新复杂度高，但是发生的概率很小，压缩表的性能几乎不会被其受影响。"><a href="#因为连锁更新在最坏的情况下需要对压缩列表执行N次空间分配，而每次空间重分配的最坏时间复杂度为O-N-，所以连锁更新时间复杂度为O-N-2-但是需要注意的是，虽然连锁更新复杂度高，但是发生的概率很小，压缩表的性能几乎不会被其受影响。" class="headerlink" title="因为连锁更新在最坏的情况下需要对压缩列表执行N次空间分配，而每次空间重分配的最坏时间复杂度为O(N)，所以连锁更新时间复杂度为O(N^2),但是需要注意的是，虽然连锁更新复杂度高，但是发生的概率很小，压缩表的性能几乎不会被其受影响。"></a>因为连锁更新在最坏的情况下需要对压缩列表执行N次空间分配，而每次空间重分配的最坏时间复杂度为O(N)，所以连锁更新时间复杂度为O(N^2),但是需要注意的是，虽然连锁更新复杂度高，但是发生的概率很小，压缩表的性能几乎不会被其受影响。</h2>
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
     <article id="post-一天一个Linux命令(screen命令)" class="article article-type-post" itemscope itemprop="blogPost">
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
@@ -811,58 +889,6 @@ Copyright (C) 2013 Free Software Foundation, Inc.
 <!-- Table of Contents -->
 
   
-    <article id="post-一天一个Linux命令(watch命令)" class="article article-type-post" itemscope itemprop="blogPost">
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2019/06/26/一天一个Linux命令(watch命令)/">一天一个Linux命令(watch命令)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2019/06/26/一天一个Linux命令(watch命令)/" class="article-date">
-	  <time datetime="2019-06-26T14:46:24.632Z" itemprop="datePublished">June 26, 2019</time>
-	</a>
-
-       
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="watch命令"><a href="#watch命令" class="headerlink" title="watch命令"></a>watch命令</h2><ul>
-<li><strong>watch命令</strong>以周期性的方式执行给定的指令，指令输出以全屏方式显示。watch是一个非常实用的命令，基本所有的Linux发行版都带有这个小工具，如同名字一样，watch可以帮你监测一个命令的运行结果，省得你一遍遍的手动运行。</li>
-</ul>
-<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><p>   <code>watch(选项)(参数)</code></p>
-<h3 id="选项："><a href="#选项：" class="headerlink" title="选项："></a>选项：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-n：指定指令执行的间隔时间（秒）；</span><br><span class="line">-d：高亮显示指令输出信息不同之处；</span><br><span class="line">-t：不显示标题。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数："><a href="#参数：" class="headerlink" title="参数："></a>参数：</h3><p>指令：需要周期性执行的指令。</p>
-<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p> uptime命令用来显示系统运行时间信息,   而watch uptime命令执行后会展示uptime信息：</p>
-<p>当前时间   系统连续运行时间  当前用户连接数       系统平均负载（最近2分钟、9分钟、XX分钟）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[fenglangjuxu@localhost ~]$ </span><br><span class="line">[fenglangjuxu@localhost ~]$ </span><br><span class="line">[fenglangjuxu@localhost ~]$ watch uptime</span><br><span class="line">[fenglangjuxu@localhost ~]$ </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Every 2.0s: uptime                                             Thu Jun 27 07:26:42 2019</span><br><span class="line"></span><br><span class="line"> 07:26:42 up 34 min,  2 users,  load average: 0.25, 0.19, 0.47</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-      
-      
-    </footer>
-    <hr class="entry-footer-hr">
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
 
 
   <nav id="page-nav">
@@ -973,6 +999,18 @@ Copyright (C) 2013 Free Software Foundation, Inc.
               <div class="widget-entry-summary" style="margin: 0;">
             
 
+              <h6 style="margin: 0;"><a href="/2019/07/05/整数集合-压缩列表/">整数集合-压缩列表</a></h6>
+              <span>July 5, 2019</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
               <h6 style="margin: 0;"><a href="/2019/07/04/一天一个Linux命令(screen命令)/">一天一个Linux命令，screen命令</a></h6>
               <span>July 4, 2019</span>
             </div>
@@ -1027,18 +1065,6 @@ Copyright (C) 2013 Free Software Foundation, Inc.
 
           </li>
         
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="/2019/06/28/Redis跳跃表/">Redis跳跃表</a></h6>
-              <span>June 28, 2019</span>
-            </div>
-
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -1064,7 +1090,7 @@ Copyright (C) 2013 Free Software Foundation, Inc.
     <h3 class="widget-title">Archives</h3>
 
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">21</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">21</span></li></ul>
     </div>
   </div>
 
