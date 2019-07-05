@@ -99,6 +99,91 @@
         
           <section id="main">
   
+    <article id="post-一天一个Linux命令(chmod命令)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2019/07/05/一天一个Linux命令(chmod命令)/">一天一个Linux命令，chmod命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/07/05/一天一个Linux命令(chmod命令)/" class="article-date">
+	  <time datetime="2019-07-05T12:38:49.610Z" itemprop="datePublished">July 5, 2019</time>
+	</a>
+
+       
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="chmod命令"><a href="#chmod命令" class="headerlink" title="chmod命令"></a>chmod命令</h3><p>Linux/Unix 的文件调用权限分为三级 : 文件拥有者、群组、其他。利用 chmod 可以藉以控制文件如何被他人所调用。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p><code>chmod [-cfvR] [--help] [--version] mode file...</code></p>
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>mode : 权限设定字串，格式如下 :</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ugoa...][[+-=][rwxX]...][,...]</span><br></pre></td></tr></table></figure>
+
+<p>### </p>
+<p>其中：</p>
+<ul>
+<li>u 表示该文件的拥有者，g 表示与该文件的拥有者属于同一个群体(group)者，o 表示其他以外的人，a 表示这三者皆是。</li>
+<li>+ 表示增加权限、- 表示取消权限、= 表示唯一设定权限。</li>
+<li>r 表示可读取，w 表示可写入，x 表示可执行，X 表示只有当该文件是个子目录或者该文件已经被设定过为可执行。</li>
+</ul>
+<p>其他参数说明：</p>
+<ul>
+<li>-c : 若该文件权限确实已经更改，才显示其更改动作</li>
+<li>-f : 若该文件权限无法被更改也不要显示错误讯息</li>
+<li>-v : 显示权限变更的详细资料</li>
+<li>-R : 对目前目录下的所有文件与子目录进行相同的权限变更(即以递回的方式逐个变更)</li>
+<li>–help : 显示辅助说明</li>
+<li>–version : 显示版本</li>
+</ul>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>文件dong.txt当前的权限是文件拥有者可以读写权限，群组的人也具有读写的权限，其他人具有读的权限，</p>
+<p>执行如下命令后，给所有人都赋予执行的权限。  chmod ugo+x dong.txt</p>
+<p><img src="/2019/07/05/一天一个Linux命令(chmod命令)/1562331024159.png" alt="1562331024159"></p>
+<p>执行 chmod o+w dong.txt  给其他人赋予写的权限。</p>
+<p><img src="/2019/07/05/一天一个Linux命令(chmod命令)/1562331237253.png" alt="1562331237253"></p>
+<p>执行 chmod  -R a+w *  将当前目录下的所有文件及文件夹设置为可以执行的权限</p>
+<p><img src="/2019/07/05/一天一个Linux命令(chmod命令)/1562331543618.png" alt="1562331543618"></p>
+<p>创建两个文件 zhengzhou.txt 和 lanzhou.txt,   文件所有者具有读写的权限， 群组的人具有读的权限，其他人具有读的权限。</p>
+<p>执行 chmod ug+w,o-r zhengzhou.txt lanzhou.txt 命令，赋予文件所有者和群组的人写的权限，其他人剥夺读的权限。</p>
+<p><img src="/2019/07/05/一天一个Linux命令(chmod命令)/1562331931276.png" alt="1562331931276"></p>
+<p><img src="/2019/07/05/一天一个Linux命令(chmod命令)/1562331952298.png" alt="1562331952298"></p>
+<h2 id="使用数字"><a href="#使用数字" class="headerlink" title="使用数字"></a>使用数字</h2><h4 id="r-4，w-2，x-1"><a href="#r-4，w-2，x-1" class="headerlink" title="r=4，w=2，x=1"></a>r=4，w=2，x=1</h4><ul>
+<li><p>若要rwx属性则4+2+1=7；</p>
+</li>
+<li><p>若要rw-属性则4+2=6；</p>
+</li>
+<li><p>若要r-x属性则4+1=5。</p>
+</li>
+</ul>
+<p>  执行chmod 777 gansu.txt   可以赋予所有人所有的权限。</p>
+<p>  可以利用数字的增减来达到控制权限的目的。</p>
+<p>  <img src="/2019/07/05/一天一个Linux命令(chmod命令)/1562332298685.png" alt="1562332298685"></p>
+<p>  <img src="/2019/07/05/一天一个Linux命令(chmod命令)/1562332310601.png" alt="1562332310601"></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
     <article id="post-整数集合-压缩列表" class="article article-type-post" itemscope itemprop="blogPost">
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
@@ -1001,48 +1086,6 @@ Copyright (C) 2013 Free Software Foundation, Inc.
 <!-- Table of Contents -->
 
   
-    <article id="post-abc" class="article article-type-post" itemscope itemprop="blogPost">
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2019/06/27/abc/">abc</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2019/06/27/abc/" class="article-date">
-	  <time datetime="2019-06-27T12:41:16.000Z" itemprop="datePublished">June 27, 2019</time>
-	</a>
-
-       
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="/2019/06/27/abc/1561639397783.png" alt="1561639397783"></p>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-      
-      
-    </footer>
-    <hr class="entry-footer-hr">
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
 
 
   <nav id="page-nav">
@@ -1153,6 +1196,18 @@ Copyright (C) 2013 Free Software Foundation, Inc.
               <div class="widget-entry-summary" style="margin: 0;">
             
 
+              <h6 style="margin: 0;"><a href="/2019/07/05/一天一个Linux命令(chmod命令)/">一天一个Linux命令，chmod命令</a></h6>
+              <span>July 5, 2019</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
               <h6 style="margin: 0;"><a href="/2019/07/05/整数集合-压缩列表/">整数集合-压缩列表</a></h6>
               <span>July 5, 2019</span>
             </div>
@@ -1207,18 +1262,6 @@ Copyright (C) 2013 Free Software Foundation, Inc.
 
           </li>
         
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="/2019/06/28/一天一个Linux命令(df命令)/">一天一个Linux命令，df命令</a></h6>
-              <span>June 28, 2019</span>
-            </div>
-
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -1244,7 +1287,7 @@ Copyright (C) 2013 Free Software Foundation, Inc.
     <h3 class="widget-title">Archives</h3>
 
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">21</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">21</span></li></ul>
     </div>
   </div>
 
