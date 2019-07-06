@@ -3,31 +3,27 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
-  <title>一天一个Linux命令，chmod命令 | Hexo</title>
+  <title>一天一个Linux命令，useradd命令 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   
   
   
-  <meta name="description" content="chmod命令Linux/Unix 的文件调用权限分为三级 : 文件拥有者、群组、其他。利用 chmod 可以藉以控制文件如何被他人所调用。 语法chmod [-cfvR] [--help] [--version] mode file... 参数mode : 权限设定字串，格式如下 : 1[ugoa...][[+-=][rwxX]...][,...]  ###  其中：  u 表示该文件的拥有者，">
+  <meta name="description" content="useradd命令useradd命令用于Linux中创建的新的系统用户。useradd可用来建立用户帐号。帐号建好之后，再用passwd设定帐号的密码．而可用userdel删除帐号。使用useradd指令所建立的帐号，实际上是保存在/etc/passwd文本文件中。 在Slackware中，adduser指令是个script程序，利用交谈的方式取得输入的用户帐号资料，然后再交由真正建立帐号的use">
 <meta property="og:type" content="article">
-<meta property="og:title" content="一天一个Linux命令，chmod命令">
-<meta property="og:url" content="http://yoursite.com/2019/07/05/一天一个Linux命令(chmod命令)/index.html">
+<meta property="og:title" content="一天一个Linux命令，useradd命令">
+<meta property="og:url" content="http://yoursite.com/2019/07/07/一天一个Linux命令(useradd命令)/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="chmod命令Linux/Unix 的文件调用权限分为三级 : 文件拥有者、群组、其他。利用 chmod 可以藉以控制文件如何被他人所调用。 语法chmod [-cfvR] [--help] [--version] mode file... 参数mode : 权限设定字串，格式如下 : 1[ugoa...][[+-=][rwxX]...][,...]  ###  其中：  u 表示该文件的拥有者，">
+<meta property="og:description" content="useradd命令useradd命令用于Linux中创建的新的系统用户。useradd可用来建立用户帐号。帐号建好之后，再用passwd设定帐号的密码．而可用userdel删除帐号。使用useradd指令所建立的帐号，实际上是保存在/etc/passwd文本文件中。 在Slackware中，adduser指令是个script程序，利用交谈的方式取得输入的用户帐号资料，然后再交由真正建立帐号的use">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2019/07/05/一天一个Linux命令(chmod命令)/1562331024159.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/05/一天一个Linux命令(chmod命令)/1562331237253.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/05/一天一个Linux命令(chmod命令)/1562331543618.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/05/一天一个Linux命令(chmod命令)/1562331931276.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/05/一天一个Linux命令(chmod命令)/1562331952298.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/05/一天一个Linux命令(chmod命令)/1562332298685.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/05/一天一个Linux命令(chmod命令)/1562332310601.png">
-<meta property="og:updated_time" content="2019-07-05T13:12:43.101Z">
+<meta property="og:image" content="http://yoursite.com/2019/07/07/一天一个Linux命令(useradd命令)/1562432184148.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/07/一天一个Linux命令(useradd命令)/1562432408380.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/07/一天一个Linux命令(useradd命令)/1562432463287.png">
+<meta property="og:updated_time" content="2019-07-06T17:03:26.837Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一天一个Linux命令，chmod命令">
-<meta name="twitter:description" content="chmod命令Linux/Unix 的文件调用权限分为三级 : 文件拥有者、群组、其他。利用 chmod 可以藉以控制文件如何被他人所调用。 语法chmod [-cfvR] [--help] [--version] mode file... 参数mode : 权限设定字串，格式如下 : 1[ugoa...][[+-=][rwxX]...][,...]  ###  其中：  u 表示该文件的拥有者，">
-<meta name="twitter:image" content="http://yoursite.com/2019/07/05/一天一个Linux命令(chmod命令)/1562331024159.png">
+<meta name="twitter:title" content="一天一个Linux命令，useradd命令">
+<meta name="twitter:description" content="useradd命令useradd命令用于Linux中创建的新的系统用户。useradd可用来建立用户帐号。帐号建好之后，再用passwd设定帐号的密码．而可用userdel删除帐号。使用useradd指令所建立的帐号，实际上是保存在/etc/passwd文本文件中。 在Slackware中，adduser指令是个script程序，利用交谈的方式取得输入的用户帐号资料，然后再交由真正建立帐号的use">
+<meta name="twitter:image" content="http://yoursite.com/2019/07/07/一天一个Linux命令(useradd命令)/1562432184148.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -109,7 +105,7 @@
             
       <div id="content" class="outer">
         
-          <section id="main" style="float:none;"><article id="post-一天一个Linux命令(chmod命令)" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost">
+          <section id="main" style="float:none;"><article id="post-一天一个Linux命令(useradd命令)" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost">
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
     
@@ -117,7 +113,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      一天一个Linux命令，chmod命令
+      一天一个Linux命令，useradd命令
     </h1>
   
 
@@ -125,8 +121,8 @@
     
     <div class="article-meta">
       
-	<a href="/2019/07/05/一天一个Linux命令(chmod命令)/" class="article-date">
-	  <time datetime="2019-07-05T12:38:49.610Z" itemprop="datePublished">July 5, 2019</time>
+	<a href="/2019/07/07/一天一个Linux命令(useradd命令)/" class="article-date">
+	  <time datetime="2019-07-06T16:43:27.047Z" itemprop="datePublished">July 7, 2019</time>
 	</a>
 
        
@@ -138,50 +134,18 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="chmod命令"><a href="#chmod命令" class="headerlink" title="chmod命令"></a>chmod命令</h3><p>Linux/Unix 的文件调用权限分为三级 : 文件拥有者、群组、其他。利用 chmod 可以藉以控制文件如何被他人所调用。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p><code>chmod [-cfvR] [--help] [--version] mode file...</code></p>
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>mode : 权限设定字串，格式如下 :</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ugoa...][[+-=][rwxX]...][,...]</span><br></pre></td></tr></table></figure>
+        <h3 id="useradd命令"><a href="#useradd命令" class="headerlink" title="useradd命令"></a>useradd命令</h3><p><strong>useradd命令</strong>用于Linux中创建的新的系统用户。useradd可用来建立用户帐号。帐号建好之后，再用<a href="http://man.linuxde.net/passwd" target="_blank" rel="noopener">passwd</a>设定帐号的密码．而可用<a href="http://man.linuxde.net/userdel" target="_blank" rel="noopener">userdel</a>删除帐号。使用useradd指令所建立的帐号，实际上是保存在<code>/etc/passwd</code>文本文件中。</p>
+<p>在Slackware中，adduser指令是个script程序，利用交谈的方式取得输入的用户帐号资料，然后再交由真正建立帐号的useradd命令建立新用户，如此可方便管理员建立用户帐号。在Red Hat Linux中，<strong>adduser命令</strong>则是useradd命令的符号连接，两者实际上是同一个指令。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p><code>useradd [-mMnr][-c &lt;备注&gt;][-d &lt;登入目录&gt;][-e &lt;有效期限&gt;][-f &lt;缓冲天数&gt;][-g &lt;群组&gt;][-G &lt;群组&gt;][-s &lt;shell&gt;][-u &lt;uid&gt;][用户帐号]</code></p>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">-c&lt;备注&gt;：加上备注文字。备注文字会保存在passwd的备注栏位中；</span><br><span class="line">-d&lt;登入目录&gt;：指定用户登入时的启始目录；</span><br><span class="line">-D：变更预设值；</span><br><span class="line">-e&lt;有效期限&gt;：指定帐号的有效期限；</span><br><span class="line">-f&lt;缓冲天数&gt;：指定在密码过期后多少天即关闭该帐号；</span><br><span class="line">-g&lt;群组&gt;：指定用户所属的群组；</span><br><span class="line">-G&lt;群组&gt;：指定用户所属的附加群组；</span><br><span class="line">-m：自动建立用户的登入目录；</span><br><span class="line">-M：不要自动建立用户的登入目录；</span><br><span class="line">-n：取消建立以用户名称为名的群组；</span><br><span class="line">-r：建立系统帐号；</span><br><span class="line">-s&lt;shell&gt;：指定用户登入后所使用的shell；</span><br><span class="line">-u&lt;uid&gt;：指定用户id。</span><br></pre></td></tr></table></figure>
 
-<p>### </p>
-<p>其中：</p>
-<ul>
-<li>u 表示该文件的拥有者，g 表示与该文件的拥有者属于同一个群体(group)者，o 表示其他以外的人，a 表示这三者皆是。</li>
-<li>+ 表示增加权限、- 表示取消权限、= 表示唯一设定权限。</li>
-<li>r 表示可读取，w 表示可写入，x 表示可执行，X 表示只有当该文件是个子目录或者该文件已经被设定过为可执行。</li>
-</ul>
-<p>其他参数说明：</p>
-<ul>
-<li>-c : 若该文件权限确实已经更改，才显示其更改动作</li>
-<li>-f : 若该文件权限无法被更改也不要显示错误讯息</li>
-<li>-v : 显示权限变更的详细资料</li>
-<li>-R : 对目前目录下的所有文件与子目录进行相同的权限变更(即以递回的方式逐个变更)</li>
-<li>–help : 显示辅助说明</li>
-<li>–version : 显示版本</li>
-</ul>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>文件dong.txt当前的权限是文件拥有者可以读写权限，群组的人也具有读写的权限，其他人具有读的权限，</p>
-<p>执行如下命令后，给所有人都赋予执行的权限。  chmod ugo+x dong.txt</p>
-<p><img src="/2019/07/05/一天一个Linux命令(chmod命令)/1562331024159.png" alt="1562331024159"></p>
-<p>执行 chmod o+w dong.txt  给其他人赋予写的权限。</p>
-<p><img src="/2019/07/05/一天一个Linux命令(chmod命令)/1562331237253.png" alt="1562331237253"></p>
-<p>执行 chmod  -R a+w *  将当前目录下的所有文件及文件夹设置为可以执行的权限</p>
-<p><img src="/2019/07/05/一天一个Linux命令(chmod命令)/1562331543618.png" alt="1562331543618"></p>
-<p>创建两个文件 zhengzhou.txt 和 lanzhou.txt,   文件所有者具有读写的权限， 群组的人具有读的权限，其他人具有读的权限。</p>
-<p>执行 chmod ug+w,o-r zhengzhou.txt lanzhou.txt 命令，赋予文件所有者和群组的人写的权限，其他人剥夺读的权限。</p>
-<p><img src="/2019/07/05/一天一个Linux命令(chmod命令)/1562331931276.png" alt="1562331931276"></p>
-<p><img src="/2019/07/05/一天一个Linux命令(chmod命令)/1562331952298.png" alt="1562331952298"></p>
-<h2 id="使用数字"><a href="#使用数字" class="headerlink" title="使用数字"></a>使用数字</h2><h4 id="r-4，w-2，x-1"><a href="#r-4，w-2，x-1" class="headerlink" title="r=4，w=2，x=1"></a>r=4，w=2，x=1</h4><ul>
-<li><p>若要rwx属性则4+2+1=7；</p>
-</li>
-<li><p>若要rw-属性则4+2=6；</p>
-</li>
-<li><p>若要r-x属性则4+1=5。</p>
-</li>
-</ul>
-<p>  执行chmod 777 gansu.txt   可以赋予所有人所有的权限。</p>
-<p>  可以利用数字的增减来达到控制权限的目的。</p>
-<p>  <img src="/2019/07/05/一天一个Linux命令(chmod命令)/1562332298685.png" alt="1562332298685"></p>
-<p>  <img src="/2019/07/05/一天一个Linux命令(chmod命令)/1562332310601.png" alt="1562332310601"></p>
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>useradd lanzhou 创建了一个普通用户</p>
+<p>useradd -g root yuzhong 创建一个用户，并指定用户组root</p>
+<p>useradd -r donggang 创建一个系统账号</p>
+<p><img src="/2019/07/07/一天一个Linux命令(useradd命令)/1562432184148.png" alt="1562432184148"></p>
+<p>执行 cat /etc/passwd 命令可以查看本机有那些用户</p>
+<p><img src="/2019/07/07/一天一个Linux命令(useradd命令)/1562432408380.png" alt="1562432408380"></p>
+<p><img src="/2019/07/07/一天一个Linux命令(useradd命令)/1562432463287.png" alt="1562432463287"></p>
 
       
     </div>
@@ -221,19 +185,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2019/07/07/一天一个Linux命令(useradd命令)/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          一天一个Linux命令，useradd命令
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/07/05/整数集合-压缩列表/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2019/07/05/一天一个Linux命令(chmod命令)/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">整数集合-压缩列表</div>
+      <div class="article-nav-title">一天一个Linux命令，chmod命令</div>
     </a>
   
 </nav>
@@ -247,7 +202,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">Contents</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#chmod命令"><span class="nav-number">1.</span> <span class="nav-text">chmod命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法"><span class="nav-number">2.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数"><span class="nav-number">3.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例"><span class="nav-number">4.</span> <span class="nav-text">实例</span></a></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#使用数字"><span class="nav-number"></span> <span class="nav-text">使用数字</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#r-4，w-2，x-1"><span class="nav-number">0.1.</span> <span class="nav-text">r=4，w=2，x=1</span></a></li></ol></li>
+      <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#useradd命令"><span class="nav-number">1.</span> <span class="nav-text">useradd命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法"><span class="nav-number">2.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#选项"><span class="nav-number">3.</span> <span class="nav-text">选项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数"><span class="nav-number">4.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例"><span class="nav-number">5.</span> <span class="nav-text">实例</span></a></li></ol>
     
     </div>
   </aside>
