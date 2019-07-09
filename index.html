@@ -99,6 +99,60 @@
         
           <section id="main">
   
+    <article id="post-一天一个Linux命令(axel命令)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2019/07/09/一天一个Linux命令(axel命令)/">一天一个Linux命令，axel命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/07/09/一天一个Linux命令(axel命令)/" class="article-date">
+	  <time datetime="2019-07-09T13:07:07.645Z" itemprop="datePublished">July 9, 2019</time>
+	</a>
+
+       
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="axel命令"><a href="#axel命令" class="headerlink" title="axel命令"></a>axel命令</h3><p><strong>axel</strong>是Linux下一个不错的HTTP/<a href="http://man.linuxde.net/ftp" target="_blank" rel="noopener">ftp</a>高速下载工具。支持多线程下载、断点续传，且可以从多个地址或者从一个地址的多个连接来下载同一个文件。适合网速不给力时多线程下载提高下载速度。比如在国内VPS或服务器上下载lnmp一键安装包用Axel就比<a href="http://man.linuxde.net/wget" target="_blank" rel="noopener">wget</a>快。</p>
+<p>默认Linux上是没有安装这个命令的，需要自己手动安装。</p>
+<p>基于我的Centos64位系统，使用下面的命令即可：</p>
+<p>wget -c <a href="http://mirrors.sohu.com/dag/redhat/el6/en/x86_64/rpmforge/RPMS/axel-2.4-1.el6.rf.x86_64.rpm" target="_blank" rel="noopener">http://mirrors.sohu.com/dag/redhat/el6/en/x86_64/rpmforge/RPMS/axel-2.4-1.el6.rf.x86_64.rpm</a><br>rpm -ivh axel-2.4-1.el6.rf.x86_64.rpm</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p><code>axel [options] url1 [url2] [url...]</code></p>
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">--max-speed=x , -s x         最高速度x</span><br><span class="line">--num-connections=x , -n x   连接数x</span><br><span class="line">--output=f , -o f            下载为本地文件f</span><br><span class="line">--search[=x] , -S [x]        搜索镜像</span><br><span class="line">--header=x , -H x            添加头文件字符串x（指定 HTTP header）</span><br><span class="line">--user-agent=x , -U x        设置用户代理（指定 HTTP user agent）</span><br><span class="line">--no-proxy ， -N             不使用代理服务器</span><br><span class="line">--quiet ， -q                静默模式</span><br><span class="line">--verbose ，-v               更多状态信息</span><br><span class="line">--alternate ， -a            Alternate progress indicator</span><br><span class="line">--help ，-h                  帮助</span><br><span class="line">--version ，-V               版本信息</span><br></pre></td></tr></table></figure>
+
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>执行命令  [root@localhost fenglangjuxu]# axel -n 10 -o /tmp <a href="http://soft.vpser.net/lnmp/lnmp1.5-full.tar.gz" target="_blank" rel="noopener">http://soft.vpser.net/lnmp/lnmp1.5-full.tar.gz</a></p>
+<p>指定为 指定为10个连接线程，-o /tmp ：下载到本地tmp文件夹， 安装lnmp包。</p>
+<p>可以看到下面的命令显示很快，第二张图，可以清楚的看到每个连接线程的下载情况</p>
+<p><img src="/2019/07/09/一天一个Linux命令(axel命令)/1562678393520.png" alt="1562678393520"></p>
+<p><img src="/2019/07/09/一天一个Linux命令(axel命令)/1562678715538.png" alt="1562678715538"></p>
+<p>如果下载过程中下载中断可以再执行下载命令即可恢复上次的下载进度。</p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
     <article id="post-一天一个Linux命令(file命令)" class="article article-type-post" itemscope itemprop="blogPost">
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
@@ -997,94 +1051,6 @@ fusectl                        0       0       0     - /sys/fs/fuse/connections
 <!-- Table of Contents -->
 
   
-    <article id="post-Redis跳跃表" class="article article-type-post" itemscope itemprop="blogPost">
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2019/06/28/Redis跳跃表/">Redis跳跃表</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2019/06/28/Redis跳跃表/" class="article-date">
-	  <time datetime="2019-06-28T04:20:38.134Z" itemprop="datePublished">June 28, 2019</time>
-	</a>
-
-       
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="跳跃表"><a href="#跳跃表" class="headerlink" title="跳跃表"></a>跳跃表</h2><ul>
-<li><blockquote>
-<p>跳跃表（skiplist）是一种<strong>有序</strong>数据结构，它通过在每个节点中维持多个指向其他节点的指针，从而达到快捷访问节点的目的。</p>
-</blockquote>
-<p>在大多数情况先，<strong>跳跃表</strong>的效率可以与平衡树媲美，并且因为跳跃表的实现比平衡树更为简单，所以有不少程序都使用跳跃表来代替平衡树。</p>
-<p>Redis使用跳跃表作为<strong>有序集合键</strong>的底层实现之一。</p>
-<h2 id="I、跳跃表实现"><a href="#I、跳跃表实现" class="headerlink" title="I、跳跃表实现"></a>I、跳跃表实现</h2><p>Redis的跳跃表由zskiplistNode和zskiplist两个结构定义，其中zskiplistNode结构用于表示跳跃表节点，而zskiplist结构用于保存跳跃表节点的相关信息（如节点数量，表头指针，表尾指针等）。</p>
-<p>下图为一个跳跃表示意图：</p>
-</li>
-</ul>
-<pre><code>![1561695969873](Redis跳跃表/1561695969873.png)
-
-
-
-位于最左边的是zskiplist结构，该结构包含以下属性：
- ·header：指向跳跃表的表头节点。
- ·tail：指向跳跃表的表尾节点。
- ·level：表示目前跳跃表内，层数最大的节点的层数。
- ·length：记录跳跃表长度，即跳跃表包含的节点数量（不包含头结点）。
-
-位于zskiplist结构右方的是四个zskiplistNode结构，其属性如下：
- ·层：用L1、L2、L3等表示节点的各个层，每个层都有两个属性：**前进指针**和**跨度**。前进指针用于访问位于表尾方向的其他节点，跨度记录了前进指针指向节点和当前节点的距离。当程序从表头向表尾进行遍历时，访问会沿着层的前进指针进行。
- ·**后退指针**：节点中用BW表示后退指针，后退指针在程序从表尾向表头遍历时使用。
- · 分值：各个节点中的1.0、2.0是节点保存的分值。**在跳跃表中，节点按照各自所保存的分值从小到大排列**。
- · 成员对象： 各个节点中o1、o2是节点保存的成员对象。
-
-值的注意的是：表头节点和其他节点是不一样的，表头节点也有后退指针、分值和成员对象，但是表头节点的这些属性都不会被用到，所以图中忽略了这一部分。
-
-##### 1.1 跳跃表节点
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">typedef struct zskiplistNode &#123;</span><br><span class="line"></span><br><span class="line">    // 后退指针</span><br><span class="line">    struct zskiplistNode *backward;</span><br><span class="line"></span><br><span class="line">    // 分值</span><br><span class="line">    double score;</span><br><span class="line"></span><br><span class="line">    // 成员对象</span><br><span class="line">    robj *obj;</span><br><span class="line"></span><br><span class="line">    // 层</span><br><span class="line">    struct zskiplistLevel &#123;</span><br><span class="line"></span><br><span class="line">        // 前进指针</span><br><span class="line">        struct zskiplistNode *forward;</span><br><span class="line"></span><br><span class="line">        // 跨度</span><br><span class="line">        unsigned int span;</span><br><span class="line"></span><br><span class="line">    &#125; level[];</span><br><span class="line"></span><br><span class="line">&#125; zskiplistNode;</span><br></pre></td></tr></table></figure>
-
-
-**层：**  
- 每次创建一个新跳跃表节点的时候，程序都会**随机生成一个介于1和32之间的值作为level数组的大小**，这个大小就是层的“高度”。</code></pre><ul>
-<li><img src="/2019/06/28/Redis跳跃表/1561696052378.png" alt="1561696052378"></li>
-</ul>
-<p><strong>前进指针：</strong><br>每个层都有一个指向表尾方向的前进指针。下图用虚线表示了从表头遍历到表尾的路径：</p>
-<p><img src="/2019/06/28/Redis跳跃表/1561696088361.png" alt="1561696088361"></p>
-<p><strong>跨度：</strong><br> 层的跨度用于记录两个节点之间的距离：<br> 初看上去，很容易以为跨度与遍历操作有关，但其实<strong>跨度是用来计算排位的</strong>，在查找某个节点的过程中，将沿途访问过的所有层的跨度累积起来，得到的结果就是目标节点在跳跃表中的排位。</p>
-<p><strong>后退指针：</strong><br> 与每个节点有多个前进指针不同，每个节点只有一个后退指针，所以每次只能后退至前一个节点。</p>
-<p><strong>分值和成员：</strong><br> 节点的分值用来对所有节点从小到大排序。<br> 节点的成员是一个指针，其指向一个字符串对象，而字符串对象保存着一个SDS值。</p>
-<p>在同一个跳跃表中，各个节点保存的成员对象必须是唯一的，但是多个节点保存的分值却可以是相同的：<strong>分值相同的节点将按照成员对象在字典序中的大小进行排序。</strong></p>
-<h5 id="1-2-跳跃表"><a href="#1-2-跳跃表" class="headerlink" title="1.2 跳跃表"></a>1.2 跳跃表</h5><p>Redis使用一个zskiplist结构来持有zskiplistNode节点，程序可以更方便的对整个跳跃表进行处理，<strong>比如，快速访问表头节点和表尾节点，或者快速获取表中节点数量。</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> typedef struct zskiplist &#123;</span><br><span class="line"></span><br><span class="line">    // 表头节点和表尾节点</span><br><span class="line">    struct zskiplistNode *header, *tail;</span><br><span class="line"></span><br><span class="line">    // 表中节点的数量</span><br><span class="line">    unsigned long length;</span><br><span class="line"></span><br><span class="line">    // 表中层数最大的节点的层数</span><br><span class="line">    int level;</span><br><span class="line"></span><br><span class="line">&#125; zskiplist;</span><br></pre></td></tr></table></figure>
-
-<h2 id="II、跳跃表API"><a href="#II、跳跃表API" class="headerlink" title="II、跳跃表API"></a>II、跳跃表API</h2><p><img src="/2019/06/28/Redis跳跃表/1561696136110.png" alt="1561696136110"></p>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-      
-      
-    </footer>
-    <hr class="entry-footer-hr">
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
 
 
   <nav id="page-nav">
@@ -1195,6 +1161,18 @@ fusectl                        0       0       0     - /sys/fs/fuse/connections
               <div class="widget-entry-summary" style="margin: 0;">
             
 
+              <h6 style="margin: 0;"><a href="/2019/07/09/一天一个Linux命令(axel命令)/">一天一个Linux命令，axel命令</a></h6>
+              <span>July 9, 2019</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
               <h6 style="margin: 0;"><a href="/2019/07/08/一天一个Linux命令(file命令)/">一天一个Linux命令，file命令</a></h6>
               <span>July 8, 2019</span>
             </div>
@@ -1249,18 +1227,6 @@ fusectl                        0       0       0     - /sys/fs/fuse/connections
 
           </li>
         
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="/2019/07/03/一天一个Linux命令(alias命令)/">一天一个Linux命令，alias命令</a></h6>
-              <span>July 3, 2019</span>
-            </div>
-
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -1286,7 +1252,7 @@ fusectl                        0       0       0     - /sys/fs/fuse/connections
     <h3 class="widget-title">Archives</h3>
 
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">21</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">21</span></li></ul>
     </div>
   </div>
 
