@@ -99,6 +99,55 @@
         
           <section id="main">
   
+    <article id="post-一天一个Linux命令(ps命令)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2019/07/10/一天一个Linux命令(ps命令)/">一天一个Linux命令，ps命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/07/10/一天一个Linux命令(ps命令)/" class="article-date">
+	  <time datetime="2019-07-10T15:30:09.709Z" itemprop="datePublished">July 10, 2019</time>
+	</a>
+
+       
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="ps命令"><a href="#ps命令" class="headerlink" title="ps命令"></a>ps命令</h3><p><strong>ps命令</strong>用于报告当前系统的进程状态。可以搭配<a href="http://man.linuxde.net/kill" target="_blank" rel="noopener">kill</a>指令随时中断、删除不必要的程序。ps命令是最基本同时也是非常强大的进程查看命令，使用该命令可以确定有哪些进程正在运行和运行的状态、进程是否结束、进程有没有僵死、哪些进程占用了过多的资源等等，总之大部分信息都是可以通过执行该命令得到的。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p><code>ps(选项)</code></p>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">-a：显示所有终端机下执行的程序，除了阶段作业领导者之外。</span><br><span class="line">a：显示现行终端机下的所有程序，包括其他用户的程序。</span><br><span class="line">-A：显示所有程序。</span><br><span class="line">-c：显示CLS和PRI栏位。</span><br><span class="line">c：列出程序时，显示每个程序真正的指令名称，而不包含路径，选项或常驻服务的标示。</span><br><span class="line">-C&lt;指令名称&gt;：指定执行指令的名称，并列出该指令的程序的状况。</span><br><span class="line">-d：显示所有程序，但不包括阶段作业领导者的程序。</span><br><span class="line">-e：此选项的效果和指定&quot;A&quot;选项相同。</span><br><span class="line">e：列出程序时，显示每个程序所使用的环境变量。</span><br><span class="line">-f：显示UID,PPIP,C与STIME栏位。</span><br><span class="line">f：用ASCII字符显示树状结构，表达程序间的相互关系。</span><br><span class="line">-g&lt;群组名称&gt;：此选项的效果和指定&quot;-G&quot;选项相同，当亦能使用阶段作业领导者的名称来指定。</span><br><span class="line">g：显示现行终端机下的所有程序，包括群组领导者的程序。</span><br><span class="line">-G&lt;群组识别码&gt;：列出属于该群组的程序的状况，也可使用群组名称来指定。</span><br><span class="line">h：不显示标题列。</span><br><span class="line">-H：显示树状结构，表示程序间的相互关系。</span><br><span class="line">-j或j：采用工作控制的格式显示程序状况。</span><br><span class="line">-l或l：采用详细的格式来显示程序状况。</span><br><span class="line">L：列出栏位的相关信息。</span><br><span class="line">-m或m：显示所有的执行绪。</span><br><span class="line">n：以数字来表示USER和WCHAN栏位。</span><br><span class="line">-N：显示所有的程序，除了执行ps指令终端机下的程序之外。</span><br><span class="line">-p&lt;程序识别码&gt;：指定程序识别码，并列出该程序的状况。</span><br><span class="line">p&lt;程序识别码&gt;：此选项的效果和指定&quot;-p&quot;选项相同，只在列表格式方面稍有差异。</span><br><span class="line">r：只列出现行终端机正在执行中的程序。</span><br><span class="line">-s&lt;阶段作业&gt;：指定阶段作业的程序识别码，并列出隶属该阶段作业的程序的状况。</span><br><span class="line">s：采用程序信号的格式显示程序状况。</span><br><span class="line">S：列出程序时，包括已中断的子程序资料。</span><br><span class="line">-t&lt;终端机编号&gt;：指定终端机编号，并列出属于该终端机的程序的状况。</span><br><span class="line">t&lt;终端机编号&gt;：此选项的效果和指定&quot;-t&quot;选项相同，只在列表格式方面稍有差异。</span><br><span class="line">-T：显示现行终端机下的所有程序。</span><br><span class="line">-u&lt;用户识别码&gt;：此选项的效果和指定&quot;-U&quot;选项相同。</span><br><span class="line">u：以用户为主的格式来显示程序状况。</span><br><span class="line">-U&lt;用户识别码&gt;：列出属于该用户的程序的状况，也可使用用户名称来指定。</span><br><span class="line">U&lt;用户名称&gt;：列出属于该用户的程序的状况。</span><br><span class="line">v：采用虚拟内存的格式显示程序状况。</span><br><span class="line">-V或V：显示版本信息。</span><br><span class="line">-w或w：采用宽阔的格式来显示程序状况。　</span><br><span class="line">x：显示所有程序，不以终端机来区分。</span><br><span class="line">X：采用旧式的Linux i386登陆格式显示程序状况。</span><br><span class="line">-y：配合选项&quot;-l&quot;使用时，不显示F(flag)栏位，并以RSS栏位取代ADDR栏位　。</span><br><span class="line">-&lt;程序识别码&gt;：此选项的效果和指定&quot;p&quot;选项相同。</span><br><span class="line">--cols&lt;每列字符数&gt;：设置每列的最大字符数。</span><br><span class="line">--columns&lt;每列字符数&gt;：此选项的效果和指定&quot;--cols&quot;选项相同。</span><br><span class="line">--cumulative：此选项的效果和指定&quot;S&quot;选项相同。</span><br><span class="line">--deselect：此选项的效果和指定&quot;-N&quot;选项相同。</span><br><span class="line">--forest：此选项的效果和指定&quot;f&quot;选项相同。</span><br><span class="line">--headers：重复显示标题列。</span><br><span class="line">--help：在线帮助。</span><br><span class="line">--info：显示排错信息。</span><br><span class="line">--lines&lt;显示列数&gt;：设置显示画面的列数。</span><br><span class="line">--no-headers：此选项的效果和指定&quot;h&quot;选项相同，只在列表格式方面稍有差异。</span><br><span class="line">--group&lt;群组名称&gt;：此选项的效果和指定&quot;-G&quot;选项相同。</span><br><span class="line">--Group&lt;群组识别码&gt;：此选项的效果和指定&quot;-G&quot;选项相同。</span><br><span class="line">--pid&lt;程序识别码&gt;：此选项的效果和指定&quot;-p&quot;选项相同。</span><br><span class="line">--rows&lt;显示列数&gt;：此选项的效果和指定&quot;--lines&quot;选项相同。</span><br><span class="line">--sid&lt;阶段作业&gt;：此选项的效果和指定&quot;-s&quot;选项相同。</span><br><span class="line">--tty&lt;终端机编号&gt;：此选项的效果和指定&quot;-t&quot;选项相同。</span><br><span class="line">--user&lt;用户名称&gt;：此选项的效果和指定&quot;-U&quot;选项相同。</span><br><span class="line">--User&lt;用户识别码&gt;：此选项的效果和指定&quot;-U&quot;选项相同。</span><br><span class="line">--version：此选项的效果和指定&quot;-V&quot;选项相同。</span><br><span class="line">--widty&lt;每列字符数&gt;：此选项的效果和指定&quot;-cols&quot;选项相同。</span><br></pre></td></tr></table></figure>
+
+<h3 id="实例："><a href="#实例：" class="headerlink" title="实例："></a>实例：</h3><p>ps  -ef | grep java 列出所有程序，显示UID,PPIP，并使用管道符 | grep 过滤 Java关键字的进程。</p>
+<p><img src="/2019/07/10/一天一个Linux命令(ps命令)/1562773001376.png" alt="1562773001376"></p>
+<p>ps  -ef 列出所有程序，显示UID,PPIP，不过滤</p>
+<p><img src="/2019/07/10/一天一个Linux命令(ps命令)/1562773215172.png" alt="1562773215172"></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
     <article id="post-一天一个Linux命令(axel命令)" class="article article-type-post" itemscope itemprop="blogPost">
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
@@ -941,121 +990,11 @@ drwxr-xr-x.  2 root root    6 7月   3 06:24 zhao
 <!-- Table of Contents -->
 
   
-    <article id="post-一天一个Linux命令(df命令)" class="article article-type-post" itemscope itemprop="blogPost">
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2019/06/28/一天一个Linux命令(df命令)/">一天一个Linux命令，df命令</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2019/06/28/一天一个Linux命令(df命令)/" class="article-date">
-	  <time datetime="2019-06-28T14:39:47.214Z" itemprop="datePublished">June 28, 2019</time>
-	</a>
-
-       
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="df命令"><a href="#df命令" class="headerlink" title="df命令"></a>df命令</h3><p>df命令用于显示磁盘分区上的可使用的磁盘空间。默认显示单位为KB。可以利用该命令来获取硬盘被占用了多少空间，目前还剩下多少空间等信息。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p><code>df(选项)(参数)</code></p>
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">-a或--all：包含全部的文件系统；</span><br><span class="line">--block-size=&lt;区块大小&gt;：以指定的区块大小来显示区块数目；</span><br><span class="line">-h或--human-readable：以可读性较高的方式来显示信息；</span><br><span class="line">-H或--si：与-h参数相同，但在计算时是以1000 Bytes为换算单位而非1024 Bytes；</span><br><span class="line">-i或--inodes：显示inode的信息；</span><br><span class="line">-k或--kilobytes：指定区块大小为1024字节；</span><br><span class="line">-l或--local：仅显示本地端的文件系统；</span><br><span class="line">-m或--megabytes：指定区块大小为1048576字节；</span><br><span class="line">--no-sync：在取得磁盘使用信息前，不要执行sync指令，此为预设值；</span><br><span class="line">-P或--portability：使用POSIX的输出格式；</span><br><span class="line">--sync：在取得磁盘使用信息前，先执行sync指令；</span><br><span class="line">-t&lt;文件系统类型&gt;或--type=&lt;文件系统类型&gt;：仅显示指定文件系统类型的磁盘信息；</span><br><span class="line">-T或--print-type：显示文件系统的类型；</span><br><span class="line">-x&lt;文件系统类型&gt;或--exclude-type=&lt;文件系统类型&gt;：不要显示指定文件系统类型的磁盘信息；</span><br><span class="line">--help：显示帮助；</span><br><span class="line">--version：显示版本信息。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>文件：指定文件系统上的文件。</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>查看系统磁盘设备，默认是KB为单位：</p>
-<p><img src="/2019/06/28/一天一个Linux命令(df命令)/1561733441216.png" alt="1561733441216"></p>
-<p>使用<code>-h</code>选项以KB以上的单位来显示，可读性高：</p>
-<p><img src="/2019/06/28/一天一个Linux命令(df命令)/1561733519472.png" alt="1561733519472"></p>
-<p>df -a 查看全部文件系统： </p>
-<pre><code>[fenglangjuxu@localhost ~]$ 
-[fenglangjuxu@localhost ~]$ df -h
-文件系统                 容量  已用  可用 已用% 挂载点
-/dev/mapper/centos-root   13G  3.7G  8.9G   30% /
-devtmpfs                 403M     0  403M    0% /dev
-tmpfs                    420M     0  420M    0% /dev/shm
-tmpfs                    420M  7.7M  412M    2% /run
-tmpfs                    420M     0  420M    0% /sys/fs/cgroup
-/dev/sda1               1014M  166M  849M   17% /boot
-tmpfs                     84M   24K   84M    1% /run/user/1000
-/dev/sr0                 4.3G  4.3G     0  100% /run/media/fenglangjuxu/CentOS 7 x86_64
-[fenglangjuxu@localhost ~]$ 
-[fenglangjuxu@localhost ~]$ df -a
-文件系统                   1K-块    已用    可用 已用% 挂载点
-rootfs                         -       -       -     - /
-sysfs                          0       0       0     - /sys
-proc                           0       0       0     - /proc
-devtmpfs                  412268       0  412268    0% /dev
-securityfs                     0       0       0     - /sys/kernel/security
-tmpfs                     429340       0  429340    0% /dev/shm
-devpts                         0       0       0     - /dev/pts
-tmpfs                     429340    7808  421532    2% /run
-tmpfs                     429340       0  429340    0% /sys/fs/cgroup
-cgroup                         0       0       0     - /sys/fs/cgroup/systemd
-pstore                         0       0       0     - /sys/fs/pstore
-cgroup                         0       0       0     - /sys/fs/cgroup/freezer
-cgroup                         0       0       0     - /sys/fs/cgroup/cpuset
-cgroup                         0       0       0     - /sys/fs/cgroup/net_cls,net_prio
-cgroup                         0       0       0     - /sys/fs/cgroup/pids
-cgroup                         0       0       0     - /sys/fs/cgroup/cpu,cpuacct
-cgroup                         0       0       0     - /sys/fs/cgroup/devices
-cgroup                         0       0       0     - /sys/fs/cgroup/hugetlb
-cgroup                         0       0       0     - /sys/fs/cgroup/perf_event
-cgroup                         0       0       0     - /sys/fs/cgroup/memory
-cgroup                         0       0       0     - /sys/fs/cgroup/blkio
-configfs                       0       0       0     - /sys/kernel/config
-/dev/mapper/centos-root 13092864 3852376 9240488   30% /
-selinuxfs                      0       0       0     - /sys/fs/selinux
-systemd-1                      0       0       0     - /proc/sys/fs/binfmt_misc
-debugfs                        0       0       0     - /sys/kernel/debug
-hugetlbfs                      0       0       0     - /dev/hugepages
-mqueue                         0       0       0     - /dev/mqueue
-/dev/sda1                1038336  169500  868836   17% /boot
-sunrpc                         0       0       0     - /var/lib/nfs/rpc_pipefs
-tmpfs                      85868      24   85844    1% /run/user/1000
-gvfsd-fuse                     0       0       0     - /run/user/1000/gvfs
-fusectl                        0       0       0     - /sys/fs/fuse/connections
-/dev/sr0                 4480476 4480476       0  100% /run/media/fenglangjuxu/CentOS 7 x86_64
-[fenglangjuxu@localhost ~]$                                              </code></pre><p><img src="/2019/06/28/一天一个Linux命令(df命令)/1561733719527.png" alt="1561733719527"></p>
-<p>df -i 显示inode的信息：</p>
-<p>补充下iNode inode包含文件的元信息，具体来说有以下内容：</p>
-<p>　　* 文件的字节数</p>
-<p>　　* 文件拥有者的User ID</p>
-<p>　　* 文件的Group ID</p>
-<p>　　* 文件的读、写、执行权限</p>
-<p>　　* 文件的时间戳，共有三个：ctime指inode上一次变动的时间，mtime指文件内容上一次变动的时间，atime       指文件上一次打开的时间。</p>
-<p>　　* 链接数，即有多少文件名指向这个inode</p>
-<p>　　* 文件数据block的位置</p>
-<p><img src="/2019/06/28/一天一个Linux命令(df命令)/1561733873139.png" alt="1561733873139"></p>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-      
-      
-    </footer>
-    <hr class="entry-footer-hr">
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
 
 
   <nav id="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next</a>
   </nav>
 
 </section>
@@ -1161,6 +1100,18 @@ fusectl                        0       0       0     - /sys/fs/fuse/connections
               <div class="widget-entry-summary" style="margin: 0;">
             
 
+              <h6 style="margin: 0;"><a href="/2019/07/10/一天一个Linux命令(ps命令)/">一天一个Linux命令，ps命令</a></h6>
+              <span>July 10, 2019</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
               <h6 style="margin: 0;"><a href="/2019/07/09/一天一个Linux命令(axel命令)/">一天一个Linux命令，axel命令</a></h6>
               <span>July 9, 2019</span>
             </div>
@@ -1215,18 +1166,6 @@ fusectl                        0       0       0     - /sys/fs/fuse/connections
 
           </li>
         
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="/2019/07/04/一天一个Linux命令(screen命令)/">一天一个Linux命令，screen命令</a></h6>
-              <span>July 4, 2019</span>
-            </div>
-
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -1252,7 +1191,7 @@ fusectl                        0       0       0     - /sys/fs/fuse/connections
     <h3 class="widget-title">Archives</h3>
 
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">21</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">21</span></li></ul>
     </div>
   </div>
 
