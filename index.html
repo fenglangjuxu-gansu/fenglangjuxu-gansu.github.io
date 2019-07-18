@@ -99,6 +99,55 @@
         
           <section id="main">
   
+    <article id="post-一天一个Linux命令(tee命令)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2019/07/18/一天一个Linux命令(tee命令)/">一天一个Linux命令，tee命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/07/18/一天一个Linux命令(tee命令)/" class="article-date">
+	  <time datetime="2019-07-18T15:47:36.833Z" itemprop="datePublished">July 18, 2019</time>
+	</a>
+
+       
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="alias命令"><a href="#alias命令" class="headerlink" title="alias命令"></a>alias命令</h3><p>Linux tee命令用于读取标准输入的数据，并将其内容输出成文件。</p>
+<p>tee指令会从标准输入设备读取数据，将其内容输出到标准输出设备，同时保存成文件。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p><code>tee [-ai][--help][--version][文件...]</code></p>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-a或--append 　附加到既有文件的后面，而非覆盖它．</span><br><span class="line">-i或--ignore-interrupts 　忽略中断信号。</span><br><span class="line">--help 　在线帮助。</span><br><span class="line">--version 　显示版本信息。</span><br></pre></td></tr></table></figure>
+
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>tee zhengzhou lanzhou 同时输入到两个文件中</p>
+<p><img src="/2019/07/18/一天一个Linux命令(tee命令)/1563465397948.png" alt="1563465397948"></p>
+<p><img src="/2019/07/18/一天一个Linux命令(tee命令)/1563465592586.png" alt="1563465592586"></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
     <article id="post-一天一个Linux命令(date命令)" class="article article-type-post" itemscope itemprop="blogPost">
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
@@ -670,59 +719,6 @@ unsigned int span;</code></pre><p>  } level[];<br>} zskiplistNode;<br>head和tai
 <!-- Table of Contents -->
 
   
-    <article id="post-一天一个Linux命令(useradd命令)" class="article article-type-post" itemscope itemprop="blogPost">
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2019/07/07/一天一个Linux命令(useradd命令)/">一天一个Linux命令，useradd命令</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2019/07/07/一天一个Linux命令(useradd命令)/" class="article-date">
-	  <time datetime="2019-07-06T16:43:27.047Z" itemprop="datePublished">July 7, 2019</time>
-	</a>
-
-       
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="useradd命令"><a href="#useradd命令" class="headerlink" title="useradd命令"></a>useradd命令</h3><p><strong>useradd命令</strong>用于Linux中创建的新的系统用户。useradd可用来建立用户帐号。帐号建好之后，再用<a href="http://man.linuxde.net/passwd" target="_blank" rel="noopener">passwd</a>设定帐号的密码．而可用<a href="http://man.linuxde.net/userdel" target="_blank" rel="noopener">userdel</a>删除帐号。使用useradd指令所建立的帐号，实际上是保存在<code>/etc/passwd</code>文本文件中。</p>
-<p>在Slackware中，adduser指令是个script程序，利用交谈的方式取得输入的用户帐号资料，然后再交由真正建立帐号的useradd命令建立新用户，如此可方便管理员建立用户帐号。在Red Hat Linux中，<strong>adduser命令</strong>则是useradd命令的符号连接，两者实际上是同一个指令。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p><code>useradd [-mMnr][-c &lt;备注&gt;][-d &lt;登入目录&gt;][-e &lt;有效期限&gt;][-f &lt;缓冲天数&gt;][-g &lt;群组&gt;][-G &lt;群组&gt;][-s &lt;shell&gt;][-u &lt;uid&gt;][用户帐号]</code></p>
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">-c&lt;备注&gt;：加上备注文字。备注文字会保存在passwd的备注栏位中；</span><br><span class="line">-d&lt;登入目录&gt;：指定用户登入时的启始目录；</span><br><span class="line">-D：变更预设值；</span><br><span class="line">-e&lt;有效期限&gt;：指定帐号的有效期限；</span><br><span class="line">-f&lt;缓冲天数&gt;：指定在密码过期后多少天即关闭该帐号；</span><br><span class="line">-g&lt;群组&gt;：指定用户所属的群组；</span><br><span class="line">-G&lt;群组&gt;：指定用户所属的附加群组；</span><br><span class="line">-m：自动建立用户的登入目录；</span><br><span class="line">-M：不要自动建立用户的登入目录；</span><br><span class="line">-n：取消建立以用户名称为名的群组；</span><br><span class="line">-r：建立系统帐号；</span><br><span class="line">-s&lt;shell&gt;：指定用户登入后所使用的shell；</span><br><span class="line">-u&lt;uid&gt;：指定用户id。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>useradd lanzhou 创建了一个普通用户</p>
-<p>useradd -g root yuzhong 创建一个用户，并指定用户组root</p>
-<p>useradd -r donggang 创建一个系统账号</p>
-<p><img src="/2019/07/07/一天一个Linux命令(useradd命令)/1562432184148.png" alt="1562432184148"></p>
-<p>执行 cat /etc/passwd 命令可以查看本机有那些用户</p>
-<p><img src="/2019/07/07/一天一个Linux命令(useradd命令)/1562432408380.png" alt="1562432408380"></p>
-<p><img src="/2019/07/07/一天一个Linux命令(useradd命令)/1562432463287.png" alt="1562432463287"></p>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-      
-      
-    </footer>
-    <hr class="entry-footer-hr">
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
 
 
   <nav id="page-nav">
@@ -833,6 +829,18 @@ unsigned int span;</code></pre><p>  } level[];<br>} zskiplistNode;<br>head和tai
               <div class="widget-entry-summary" style="margin: 0;">
             
 
+              <h6 style="margin: 0;"><a href="/2019/07/18/一天一个Linux命令(tee命令)/">一天一个Linux命令，tee命令</a></h6>
+              <span>July 18, 2019</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
               <h6 style="margin: 0;"><a href="/2019/07/17/一天一个Linux命令(date命令)/">一天一个Linux命令，date命令</a></h6>
               <span>July 17, 2019</span>
             </div>
@@ -887,18 +895,6 @@ unsigned int span;</code></pre><p>  } level[];<br>} zskiplistNode;<br>head和tai
 
           </li>
         
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="/2019/07/11/一天一个Linux命令(whereis命令)/">一天一个Linux命令，whereis命令</a></h6>
-              <span>July 11, 2019</span>
-            </div>
-
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -924,7 +920,7 @@ unsigned int span;</code></pre><p>  } level[];<br>} zskiplistNode;<br>head和tai
     <h3 class="widget-title">Archives</h3>
 
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">21</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">21</span></li></ul>
     </div>
   </div>
 
