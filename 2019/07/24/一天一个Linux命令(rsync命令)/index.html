@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>一天一个Linux命令，rsync命令 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  
+  <meta name="description" content="rsync命令rsync命令是一个远程数据同步工具，可通过LAN/WAN快速同步多台主机间的文件。rsync使用所谓的“rsync算法”来使本地和远程两个主机之间的文件达到同步，这个算法只传送两个文件的不同部分，而不是每次都整份传送，因此速度相当快。 rsync是一个功能非常强大的工具，其命令也有很多功能特色选项。 语法123456rsync [OPTION]... SRC DESTrsync [">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一天一个Linux命令，rsync命令">
+<meta property="og:url" content="http://yoursite.com/2019/07/24/一天一个Linux命令(rsync命令)/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="rsync命令rsync命令是一个远程数据同步工具，可通过LAN/WAN快速同步多台主机间的文件。rsync使用所谓的“rsync算法”来使本地和远程两个主机之间的文件达到同步，这个算法只传送两个文件的不同部分，而不是每次都整份传送，因此速度相当快。 rsync是一个功能非常强大的工具，其命令也有很多功能特色选项。 语法123456rsync [OPTION]... SRC DESTrsync [">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2019/07/24/一天一个Linux命令(rsync命令)/1563901405754.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/24/一天一个Linux命令(rsync命令)/1563901912096.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/24/一天一个Linux命令(rsync命令)/1563902090185.png">
+<meta property="og:updated_time" content="2019-07-23T17:16:56.688Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一天一个Linux命令，rsync命令">
+<meta name="twitter:description" content="rsync命令rsync命令是一个远程数据同步工具，可通过LAN/WAN快速同步多台主机间的文件。rsync使用所谓的“rsync算法”来使本地和远程两个主机之间的文件达到同步，这个算法只传送两个文件的不同部分，而不是每次都整份传送，因此速度相当快。 rsync是一个功能非常强大的工具，其命令也有很多功能特色选项。 语法123456rsync [OPTION]... SRC DESTrsync [">
+<meta name="twitter:image" content="http://yoursite.com/2019/07/24/一天一个Linux命令(rsync命令)/1563901405754.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fashion.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+<header id="allheader" class="site-header" role="banner">
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" title="Hexo" rel="home"> Hexo </a>
+            
+          </h1>
+          
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+
+            <div class="clearfix sf-menu">
+              <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class href="/">Home</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class href="/archives">Archives</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class href="/categories">Categories</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class href="/tags">Tags</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class href="/about">About</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-一天一个Linux命令(rsync命令)" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost">
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      一天一个Linux命令，rsync命令
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/07/24/一天一个Linux命令(rsync命令)/" class="article-date">
+	  <time datetime="2019-07-23T16:54:14.855Z" itemprop="datePublished">July 24, 2019</time>
+	</a>
+
+       
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="rsync命令"><a href="#rsync命令" class="headerlink" title="rsync命令"></a>rsync命令</h3><p><strong>rsync命令</strong>是一个远程数据同步工具，可通过LAN/WAN快速同步多台主机间的文件。rsync使用所谓的“rsync算法”来使本地和远程两个主机之间的文件达到同步，这个算法只传送两个文件的不同部分，而不是每次都整份传送，因此速度相当快。 rsync是一个功能非常强大的工具，其命令也有很多功能特色选项。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">rsync [OPTION]... SRC DEST</span><br><span class="line">rsync [OPTION]... SRC [USER@]host:DEST</span><br><span class="line">rsync [OPTION]... [USER@]HOST:SRC DEST</span><br><span class="line">rsync [OPTION]... [USER@]HOST::SRC DEST</span><br><span class="line">rsync [OPTION]... SRC [USER@]HOST::DEST</span><br><span class="line">rsync [OPTION]... rsync://[USER@]HOST[:PORT]/SRC [DEST]</span><br></pre></td></tr></table></figure>
+
+<p>对应于以上六种命令格式，rsync有六种不同的工作模式：</p>
+<ol>
+<li>拷贝本地文件。当SRC和DES路径信息都不包含有单个冒号”:”分隔符时就启动这种工作模式。如：<code>rsync -a /data /backup</code></li>
+<li>使用一个远程shell程序(如<a href="http://man.linuxde.net/rsh" target="_blank" rel="noopener">rsh</a>、<a href="http://man.linuxde.net/ssh" target="_blank" rel="noopener">ssh</a>)来实现将本地机器的内容拷贝到远程机器。当DST路径地址包含单个冒号”:”分隔符时启动该模式。如：<code>rsync -avz *.c foo:src</code></li>
+<li>使用一个远程shell程序(如rsh、ssh)来实现将远程机器的内容拷贝到本地机器。当SRC地址路径包含单个冒号”:”分隔符时启动该模式。如：<code>rsync -avz foo:src/bar /data</code></li>
+<li>从远程rsync服务器中拷贝文件到本地机。当SRC路径信息包含”::”分隔符时启动该模式。如：<code>rsync -av root@192.168.78.192::www /databack</code></li>
+<li>从本地机器拷贝文件到远程rsync服务器中。当DST路径信息包含”::”分隔符时启动该模式。如：<code>rsync -av /databack root@192.168.78.192::www</code></li>
+<li>列远程机的文件列表。这类似于rsync传输，不过只要在命令中省略掉本地机信息即可。如：<code>rsync -v rsync://192.168.78.192/www</code></li>
+</ol>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">-v, --verbose 详细模式输出。</span><br><span class="line">-q, --quiet 精简输出模式。</span><br><span class="line">-c, --checksum 打开校验开关，强制对文件传输进行校验。</span><br><span class="line">-a, --archive 归档模式，表示以递归方式传输文件，并保持所有文件属性，等于-rlptgoD。</span><br><span class="line">-r, --recursive 对子目录以递归模式处理。</span><br><span class="line">-R, --relative 使用相对路径信息。</span><br><span class="line">-b, --backup 创建备份，也就是对于目的已经存在有同样的文件名时，将老的文件重新命名为~filename。可以使用--suffix选项来指定不同的备份文件前缀。</span><br><span class="line">--backup-dir 将备份文件(如~filename)存放在在目录下。</span><br><span class="line">-suffix=SUFFIX 定义备份文件前缀。</span><br><span class="line">-u, --update 仅仅进行更新，也就是跳过所有已经存在于DST，并且文件时间晚于要备份的文件，不覆盖更新的文件。</span><br><span class="line">-l, --links 保留软链结。</span><br><span class="line">-L, --copy-links 想对待常规文件一样处理软链结。</span><br><span class="line">--copy-unsafe-links 仅仅拷贝指向SRC路径目录树以外的链结。</span><br><span class="line">--safe-links 忽略指向SRC路径目录树以外的链结。</span><br><span class="line">-H, --hard-links 保留硬链结。</span><br><span class="line">-p, --perms 保持文件权限。</span><br><span class="line">-o, --owner 保持文件属主信息。</span><br><span class="line">-g, --group 保持文件属组信息。</span><br><span class="line">-D, --devices 保持设备文件信息。</span><br><span class="line">-t, --times 保持文件时间信息。</span><br><span class="line">-S, --sparse 对稀疏文件进行特殊处理以节省DST的空间。</span><br><span class="line">-n, --dry-run现实哪些文件将被传输。</span><br><span class="line">-w, --whole-file 拷贝文件，不进行增量检测。</span><br><span class="line">-x, --one-file-system 不要跨越文件系统边界。</span><br><span class="line">-B, --block-size=SIZE 检验算法使用的块尺寸，默认是700字节。</span><br><span class="line">-e, --rsh=command 指定使用rsh、ssh方式进行数据同步。</span><br><span class="line">--rsync-path=PATH 指定远程服务器上的rsync命令所在路径信息。</span><br><span class="line">-C, --cvs-exclude 使用和CVS一样的方法自动忽略文件，用来排除那些不希望传输的文件。</span><br><span class="line">--existing 仅仅更新那些已经存在于DST的文件，而不备份那些新创建的文件。</span><br><span class="line">--delete 删除那些DST中SRC没有的文件。</span><br><span class="line">--delete-excluded 同样删除接收端那些被该选项指定排除的文件。</span><br><span class="line">--delete-after 传输结束以后再删除。</span><br><span class="line">--ignore-errors 及时出现IO错误也进行删除。</span><br><span class="line">--max-delete=NUM 最多删除NUM个文件。</span><br><span class="line">--partial 保留那些因故没有完全传输的文件，以是加快随后的再次传输。</span><br><span class="line">--force 强制删除目录，即使不为空。</span><br><span class="line">--numeric-ids 不将数字的用户和组id匹配为用户名和组名。</span><br><span class="line">--timeout=time ip超时时间，单位为秒。</span><br><span class="line">-I, --ignore-times 不跳过那些有同样的时间和长度的文件。</span><br><span class="line">--size-only 当决定是否要备份文件时，仅仅察看文件大小而不考虑文件时间。</span><br><span class="line">--modify-window=NUM 决定文件是否时间相同时使用的时间戳窗口，默认为0。</span><br><span class="line">-T --temp-dir=DIR 在DIR中创建临时文件。</span><br><span class="line">--compare-dest=DIR 同样比较DIR中的文件来决定是否需要备份。</span><br><span class="line">-P 等同于 --partial。</span><br><span class="line">--progress 显示备份过程。</span><br><span class="line">-z, --compress 对备份的文件在传输时进行压缩处理。</span><br><span class="line">--exclude=PATTERN 指定排除不需要传输的文件模式。</span><br><span class="line">--include=PATTERN 指定不排除而需要传输的文件模式。</span><br><span class="line">--exclude-from=FILE 排除FILE中指定模式的文件。</span><br><span class="line">--include-from=FILE 不排除FILE指定模式匹配的文件。</span><br><span class="line">--version 打印版本信息。</span><br><span class="line">--address 绑定到特定的地址。</span><br><span class="line">--config=FILE 指定其他的配置文件，不使用默认的rsyncd.conf文件。</span><br><span class="line">--port=PORT 指定其他的rsync服务端口。</span><br><span class="line">--blocking-io 对远程shell使用阻塞IO。</span><br><span class="line">-stats 给出某些文件的传输状态。</span><br><span class="line">--progress 在传输时现实传输过程。</span><br><span class="line">--log-format=formAT 指定日志文件格式。</span><br><span class="line">--password-file=FILE 从FILE中得到密码。</span><br><span class="line">--bwlimit=KBPS 限制I/O带宽，KBytes per second。</span><br><span class="line">-h, --help 显示帮助信息。</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>rsync /etc/fstab /tmp  此命令实现了在本地两个文件夹内容的同步。</p>
+<p><img src="/2019/07/24/一天一个Linux命令(rsync命令)/1563901405754.png" alt="1563901405754"></p>
+<p>rsync -r /etc/ 127.0.0.1:/tmp/  此命令以递归的方式把当前主机/etc目录下的所有文件拷贝到远程主机的/tmp/目录下， 我这里使用127.0.0.1模拟了远程主机的调用，  图一是调用过程， 图二是调用结果：</p>
+<p><img src="/2019/07/24/一天一个Linux命令(rsync命令)/1563901912096.png" alt="1563901912096"></p>
+<p><img src="/2019/07/24/一天一个Linux命令(rsync命令)/1563902090185.png" alt="1563902090185"></p>
+<p>还可以通过配置 /etc/rsyncd.conf 文件的形式来进行远程传送</p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/07/23/一天一个Linux命令(su命令)/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">一天一个Linux命令，su命令</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#rsync命令"><span class="nav-number">1.</span> <span class="nav-text">rsync命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法"><span class="nav-number">2.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#选项"><span class="nav-number">3.</span> <span class="nav-text">选项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数"><span class="nav-number">4.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例"><span class="nav-number">5.</span> <span class="nav-text">实例</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2019 Hexo All Rights Reserved.
+        
+            <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+          
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
