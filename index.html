@@ -99,6 +99,65 @@
         
           <section id="main">
   
+    <article id="post-一天一个Linux命令(more命令)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2019/07/25/一天一个Linux命令(more命令)/">一天一个Linux命令，more命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/07/25/一天一个Linux命令(more命令)/" class="article-date">
+	  <time datetime="2019-07-24T16:01:57.255Z" itemprop="datePublished">July 25, 2019</time>
+	</a>
+
+       
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="more命令"><a href="#more命令" class="headerlink" title="more命令"></a>more命令</h3><p><strong>more命令</strong>是一个基于<a href="http://man.linuxde.net/vi" target="_blank" rel="noopener">vi</a>编辑器文本过滤器，它以全屏幕的方式按页显示文本文件的内容，支持vi中的关键字定位操作。more名单中内置了若干快捷键，常用的有H（获得帮助信息），Enter（向下翻滚一行），空格（向下滚动一屏），Q（退出命令）。</p>
+<p>该命令一次显示一屏文本，满屏后停下来，并且在屏幕的底部出现一个提示信息，给出至今己显示的该文件的百分比：–More–（XX%）可以用下列不同的方法对提示做出回答：</p>
+<ul>
+<li>按Space键：显示文本的下一屏内容。</li>
+<li>按Enier键：只显示文本的下一行内容。</li>
+<li>按斜线符<code>|</code>：接着输入一个模式，可以在文本中寻找下一个相匹配的模式。</li>
+<li>按H键：显示帮助屏，该屏上有相关的帮助信息。</li>
+<li>按B键：显示上一屏内容。</li>
+<li>按Q键：退出rnore命令。</li>
+</ul>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p><code>more(选项)(参数)</code></p>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-&lt;数字&gt;：指定每屏显示的行数；</span><br><span class="line">-d：显示“[press space to continue,&apos;q&apos; to quit.]”和“[Press &apos;h&apos; for instructions]”；</span><br><span class="line">-c：不进行滚屏操作。每次刷新这个屏幕；</span><br><span class="line">-s：将多个空行压缩成一行显示；</span><br><span class="line">-u：禁止下划线；</span><br><span class="line">+&lt;数字&gt;：从指定数字的行开始显示。</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>命令别名设置：定义命令别名，格式为“命令别名=‘实际命令’”。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>more gc.log  分屏展示当前文件的内容</p>
+<p><img src="/2019/07/25/一天一个Linux命令(more命令)/1563984813195.png" alt="1563984813195"></p>
+<p>more -c -10 gc.log    显示文件gc.log的内容，每10行显示一次，而且在显示之前先清屏。</p>
+<p><img src="/2019/07/25/一天一个Linux命令(more命令)/1563984982069.png" alt="1563984982069"></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
     <article id="post-一天一个Linux命令(rsync命令)" class="article article-type-post" itemscope itemprop="blogPost">
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
@@ -672,60 +731,11 @@ unsigned int span;</code></pre><p>  } level[];<br>} zskiplistNode;<br>head和tai
 <!-- Table of Contents -->
 
   
-    <article id="post-一天一个Linux命令(ps命令)" class="article article-type-post" itemscope itemprop="blogPost">
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2019/07/10/一天一个Linux命令(ps命令)/">一天一个Linux命令，ps命令</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2019/07/10/一天一个Linux命令(ps命令)/" class="article-date">
-	  <time datetime="2019-07-10T15:30:09.709Z" itemprop="datePublished">July 10, 2019</time>
-	</a>
-
-       
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="ps命令"><a href="#ps命令" class="headerlink" title="ps命令"></a>ps命令</h3><p><strong>ps命令</strong>用于报告当前系统的进程状态。可以搭配<a href="http://man.linuxde.net/kill" target="_blank" rel="noopener">kill</a>指令随时中断、删除不必要的程序。ps命令是最基本同时也是非常强大的进程查看命令，使用该命令可以确定有哪些进程正在运行和运行的状态、进程是否结束、进程有没有僵死、哪些进程占用了过多的资源等等，总之大部分信息都是可以通过执行该命令得到的。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p><code>ps(选项)</code></p>
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">-a：显示所有终端机下执行的程序，除了阶段作业领导者之外。</span><br><span class="line">a：显示现行终端机下的所有程序，包括其他用户的程序。</span><br><span class="line">-A：显示所有程序。</span><br><span class="line">-c：显示CLS和PRI栏位。</span><br><span class="line">c：列出程序时，显示每个程序真正的指令名称，而不包含路径，选项或常驻服务的标示。</span><br><span class="line">-C&lt;指令名称&gt;：指定执行指令的名称，并列出该指令的程序的状况。</span><br><span class="line">-d：显示所有程序，但不包括阶段作业领导者的程序。</span><br><span class="line">-e：此选项的效果和指定&quot;A&quot;选项相同。</span><br><span class="line">e：列出程序时，显示每个程序所使用的环境变量。</span><br><span class="line">-f：显示UID,PPIP,C与STIME栏位。</span><br><span class="line">f：用ASCII字符显示树状结构，表达程序间的相互关系。</span><br><span class="line">-g&lt;群组名称&gt;：此选项的效果和指定&quot;-G&quot;选项相同，当亦能使用阶段作业领导者的名称来指定。</span><br><span class="line">g：显示现行终端机下的所有程序，包括群组领导者的程序。</span><br><span class="line">-G&lt;群组识别码&gt;：列出属于该群组的程序的状况，也可使用群组名称来指定。</span><br><span class="line">h：不显示标题列。</span><br><span class="line">-H：显示树状结构，表示程序间的相互关系。</span><br><span class="line">-j或j：采用工作控制的格式显示程序状况。</span><br><span class="line">-l或l：采用详细的格式来显示程序状况。</span><br><span class="line">L：列出栏位的相关信息。</span><br><span class="line">-m或m：显示所有的执行绪。</span><br><span class="line">n：以数字来表示USER和WCHAN栏位。</span><br><span class="line">-N：显示所有的程序，除了执行ps指令终端机下的程序之外。</span><br><span class="line">-p&lt;程序识别码&gt;：指定程序识别码，并列出该程序的状况。</span><br><span class="line">p&lt;程序识别码&gt;：此选项的效果和指定&quot;-p&quot;选项相同，只在列表格式方面稍有差异。</span><br><span class="line">r：只列出现行终端机正在执行中的程序。</span><br><span class="line">-s&lt;阶段作业&gt;：指定阶段作业的程序识别码，并列出隶属该阶段作业的程序的状况。</span><br><span class="line">s：采用程序信号的格式显示程序状况。</span><br><span class="line">S：列出程序时，包括已中断的子程序资料。</span><br><span class="line">-t&lt;终端机编号&gt;：指定终端机编号，并列出属于该终端机的程序的状况。</span><br><span class="line">t&lt;终端机编号&gt;：此选项的效果和指定&quot;-t&quot;选项相同，只在列表格式方面稍有差异。</span><br><span class="line">-T：显示现行终端机下的所有程序。</span><br><span class="line">-u&lt;用户识别码&gt;：此选项的效果和指定&quot;-U&quot;选项相同。</span><br><span class="line">u：以用户为主的格式来显示程序状况。</span><br><span class="line">-U&lt;用户识别码&gt;：列出属于该用户的程序的状况，也可使用用户名称来指定。</span><br><span class="line">U&lt;用户名称&gt;：列出属于该用户的程序的状况。</span><br><span class="line">v：采用虚拟内存的格式显示程序状况。</span><br><span class="line">-V或V：显示版本信息。</span><br><span class="line">-w或w：采用宽阔的格式来显示程序状况。　</span><br><span class="line">x：显示所有程序，不以终端机来区分。</span><br><span class="line">X：采用旧式的Linux i386登陆格式显示程序状况。</span><br><span class="line">-y：配合选项&quot;-l&quot;使用时，不显示F(flag)栏位，并以RSS栏位取代ADDR栏位　。</span><br><span class="line">-&lt;程序识别码&gt;：此选项的效果和指定&quot;p&quot;选项相同。</span><br><span class="line">--cols&lt;每列字符数&gt;：设置每列的最大字符数。</span><br><span class="line">--columns&lt;每列字符数&gt;：此选项的效果和指定&quot;--cols&quot;选项相同。</span><br><span class="line">--cumulative：此选项的效果和指定&quot;S&quot;选项相同。</span><br><span class="line">--deselect：此选项的效果和指定&quot;-N&quot;选项相同。</span><br><span class="line">--forest：此选项的效果和指定&quot;f&quot;选项相同。</span><br><span class="line">--headers：重复显示标题列。</span><br><span class="line">--help：在线帮助。</span><br><span class="line">--info：显示排错信息。</span><br><span class="line">--lines&lt;显示列数&gt;：设置显示画面的列数。</span><br><span class="line">--no-headers：此选项的效果和指定&quot;h&quot;选项相同，只在列表格式方面稍有差异。</span><br><span class="line">--group&lt;群组名称&gt;：此选项的效果和指定&quot;-G&quot;选项相同。</span><br><span class="line">--Group&lt;群组识别码&gt;：此选项的效果和指定&quot;-G&quot;选项相同。</span><br><span class="line">--pid&lt;程序识别码&gt;：此选项的效果和指定&quot;-p&quot;选项相同。</span><br><span class="line">--rows&lt;显示列数&gt;：此选项的效果和指定&quot;--lines&quot;选项相同。</span><br><span class="line">--sid&lt;阶段作业&gt;：此选项的效果和指定&quot;-s&quot;选项相同。</span><br><span class="line">--tty&lt;终端机编号&gt;：此选项的效果和指定&quot;-t&quot;选项相同。</span><br><span class="line">--user&lt;用户名称&gt;：此选项的效果和指定&quot;-U&quot;选项相同。</span><br><span class="line">--User&lt;用户识别码&gt;：此选项的效果和指定&quot;-U&quot;选项相同。</span><br><span class="line">--version：此选项的效果和指定&quot;-V&quot;选项相同。</span><br><span class="line">--widty&lt;每列字符数&gt;：此选项的效果和指定&quot;-cols&quot;选项相同。</span><br></pre></td></tr></table></figure>
-
-<h3 id="实例："><a href="#实例：" class="headerlink" title="实例："></a>实例：</h3><p>ps  -ef | grep java 列出所有程序，显示UID,PPIP，并使用管道符 | grep 过滤 Java关键字的进程。</p>
-<p><img src="/2019/07/10/一天一个Linux命令(ps命令)/1562773001376.png" alt="1562773001376"></p>
-<p>ps  -ef 列出所有程序，显示UID,PPIP，不过滤</p>
-<p><img src="/2019/07/10/一天一个Linux命令(ps命令)/1562773215172.png" alt="1562773215172"></p>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-      
-      
-    </footer>
-    <hr class="entry-footer-hr">
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
 
 
   <nav id="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next</a>
   </nav>
 
 </section>
@@ -831,6 +841,18 @@ unsigned int span;</code></pre><p>  } level[];<br>} zskiplistNode;<br>head和tai
               <div class="widget-entry-summary" style="margin: 0;">
             
 
+              <h6 style="margin: 0;"><a href="/2019/07/25/一天一个Linux命令(more命令)/">一天一个Linux命令，more命令</a></h6>
+              <span>July 25, 2019</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
               <h6 style="margin: 0;"><a href="/2019/07/24/一天一个Linux命令(rsync命令)/">一天一个Linux命令，rsync命令</a></h6>
               <span>July 24, 2019</span>
             </div>
@@ -885,18 +907,6 @@ unsigned int span;</code></pre><p>  } level[];<br>} zskiplistNode;<br>head和tai
 
           </li>
         
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="/2019/07/15/一天一个Linux命令(hostname命令)/">一天一个Linux命令，hostname命令</a></h6>
-              <span>July 15, 2019</span>
-            </div>
-
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -922,7 +932,7 @@ unsigned int span;</code></pre><p>  } level[];<br>} zskiplistNode;<br>head和tai
     <h3 class="widget-title">Archives</h3>
 
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">21</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">21</span></li></ul>
     </div>
   </div>
 
