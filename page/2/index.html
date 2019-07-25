@@ -99,6 +99,60 @@
         
           <section id="main">
   
+    <article id="post-一天一个Linux命令(whereis命令)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2019/07/11/一天一个Linux命令(whereis命令)/">一天一个Linux命令，whereis命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/07/11/一天一个Linux命令(whereis命令)/" class="article-date">
+	  <time datetime="2019-07-11T13:58:51.001Z" itemprop="datePublished">July 11, 2019</time>
+	</a>
+
+       
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="whereis命令"><a href="#whereis命令" class="headerlink" title="whereis命令"></a>whereis命令</h3><p><strong>whereis命令</strong>用来定位指令的二进制程序、源代码文件和<a href="http://man.linuxde.net/man" target="_blank" rel="noopener">man</a>手册页等相关文件的路径。</p>
+<p>whereis命令只能用于程序名的搜索，而且只搜索二进制文件（参数-b）、man说明文件（参数-m）和源代码文件（参数-s）。如果省略参数，则返回所有信息。</p>
+<p>和<a href="http://man.linuxde.net/find" target="_blank" rel="noopener">find</a>相比，whereis查找的速度非常快，这是因为linux系统会将 系统内的所有文件都记录在一个数据库文件中，当使用whereis和下面即将介绍的<a href="http://man.linuxde.net/locate_slocate" target="_blank" rel="noopener">locate</a>时，会从数据库中查找数据，而不是像find命令那样，通 过遍历硬盘来查找，效率自然会很高。 但是该数据库文件并不是实时更新，默认情况下时一星期更新一次，因此，我们在用whereis和locate 查找文件时，有时会找到已经被删除的数据，或者刚刚建立文件，却无法查找到，原因就是因为数据库文件没有被更新。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p><code>whereis(选项)(参数)</code></p>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-b：只查找二进制文件；</span><br><span class="line">-B&lt;目录&gt;：只在设置的目录下查找二进制文件；</span><br><span class="line">-f：不显示文件名前的路径名称；</span><br><span class="line">-m：只查找说明文件；</span><br><span class="line">-M&lt;目录&gt;：只在设置的目录下查找说明文件；</span><br><span class="line">-s：只查找原始代码文件；</span><br><span class="line">-S&lt;目录&gt;只在设置的目录下查找原始代码文件；</span><br><span class="line">-u：查找不包含指定类型的文件。</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>指令名：要查找的二进制程序、源文件和man手册页的指令名。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>whereis java 查找所有的包含java的文件。</p>
+<p><img src="/2019/07/11/一天一个Linux命令(whereis命令)/1562853781500.png" alt="1562853781500"></p>
+<p>whereis -b java   只查找二进制文件,  与上面的结果相比，非二进制的文件 .gz被过滤掉了。</p>
+<p><img src="/2019/07/11/一天一个Linux命令(whereis命令)/1562853876707.png" alt="1562853876707"></p>
+<p>whereis -m java 只查找说明文件，和上面的结果相比，过滤掉二进制文件。</p>
+<p><img src="/2019/07/11/一天一个Linux命令(whereis命令)/1562853977086.png" alt="1562853977086"></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
     <article id="post-一天一个Linux命令(ps命令)" class="article article-type-post" itemscope itemprop="blogPost">
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
@@ -936,60 +990,6 @@ drwxr-xr-x.  2 root root    6 7月   3 06:24 zhao
 <!-- Table of Contents -->
 
   
-    <article id="post-一天一个Linux命令(find命令)" class="article article-type-post" itemscope itemprop="blogPost">
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2019/07/01/一天一个Linux命令(find命令)/">一天一个Linux命令，find命令</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2019/07/01/一天一个Linux命令(find命令)/" class="article-date">
-	  <time datetime="2019-07-01T14:56:50.770Z" itemprop="datePublished">July 1, 2019</time>
-	</a>
-
-       
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="find命令"><a href="#find命令" class="headerlink" title="find命令"></a>find命令</h3><p><strong>find命令</strong>用来在指定目录下查找文件。任何位于参数之前的字符串都将被视为欲查找的目录名。如果使用该命令时，不设置任何参数，则find命令将在当前目录下查找子目录与文件。并且将查找到的子目录和文件全部进行显示。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p><code>find(选项)(参数)</code></p>
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">-amin&lt;分钟&gt;：查找在指定时间曾被存取过的文件或目录，单位以分钟计算；</span><br><span class="line">-anewer&lt;参考文件或目录&gt;：查找其存取时间较指定文件或目录的存取时间更接近现在的文件或目录；</span><br><span class="line">-atime&lt;24小时数&gt;：查找在指定时间曾被存取过的文件或目录，单位以24小时计算；</span><br><span class="line">-cmin&lt;分钟&gt;：查找在指定时间之时被更改过的文件或目录；</span><br><span class="line">-cnewer&lt;参考文件或目录&gt;查找其更改时间较指定文件或目录的更改时间更接近现在的文件或目录；</span><br><span class="line">-ctime&lt;24小时数&gt;：查找在指定时间之时被更改的文件或目录，单位以24小时计算；</span><br><span class="line">-daystart：从本日开始计算时间；</span><br><span class="line">-depth：从指定目录下最深层的子目录开始查找；</span><br><span class="line">-expty：寻找文件大小为0 Byte的文件，或目录下没有任何子目录或文件的空目录；</span><br><span class="line">-exec&lt;执行指令&gt;：假设find指令的回传值为True，就执行该指令；</span><br><span class="line">-false：将find指令的回传值皆设为False；</span><br><span class="line">-fls&lt;列表文件&gt;：此参数的效果和指定“-ls”参数类似，但会把结果保存为指定的列表文件；</span><br><span class="line">-follow：排除符号连接；</span><br><span class="line">-fprint&lt;列表文件&gt;：此参数的效果和指定“-print”参数类似，但会把结果保存成指定的列表文件；</span><br><span class="line">-fprint0&lt;列表文件&gt;：此参数的效果和指定“-print0”参数类似，但会把结果保存成指定的列表文件；</span><br><span class="line">-fprintf&lt;列表文件&gt;&lt;输出格式&gt;：此参数的效果和指定“-printf”参数类似，但会把结果保存成指定的列表文件；</span><br><span class="line">-fstype&lt;文件系统类型&gt;：只寻找该文件系统类型下的文件或目录；</span><br><span class="line">-gid&lt;群组识别码&gt;：查找符合指定之群组识别码的文件或目录；</span><br><span class="line">-group&lt;群组名称&gt;：查找符合指定之群组名称的文件或目录；</span><br><span class="line">-help或——help：在线帮助；</span><br><span class="line">-ilname&lt;范本样式&gt;：此参数的效果和指定“-lname”参数类似，但忽略字符大小写的差别；</span><br><span class="line">-iname&lt;范本样式&gt;：此参数的效果和指定“-name”参数类似，但忽略字符大小写的差别；</span><br><span class="line">-inum&lt;inode编号&gt;：查找符合指定的inode编号的文件或目录；</span><br><span class="line">-ipath&lt;范本样式&gt;：此参数的效果和指定“-path”参数类似，但忽略字符大小写的差别；</span><br><span class="line">-iregex&lt;范本样式&gt;：此参数的效果和指定“-regexe”参数类似，但忽略字符大小写的差别；</span><br><span class="line">-links&lt;连接数目&gt;：查找符合指定的硬连接数目的文件或目录；</span><br><span class="line">-iname&lt;范本样式&gt;：指定字符串作为寻找符号连接的范本样式；</span><br><span class="line">-ls：假设find指令的回传值为Ture，就将文件或目录名称列出到标准输出；</span><br><span class="line">-maxdepth&lt;目录层级&gt;：设置最大目录层级；</span><br><span class="line">-mindepth&lt;目录层级&gt;：设置最小目录层级；</span><br><span class="line">-mmin&lt;分钟&gt;：查找在指定时间曾被更改过的文件或目录，单位以分钟计算；</span><br><span class="line">-mount：此参数的效果和指定“-xdev”相同；</span><br><span class="line">-mtime&lt;24小时数&gt;：查找在指定时间曾被更改过的文件或目录，单位以24小时计算；</span><br><span class="line">-name&lt;范本样式&gt;：指定字符串作为寻找文件或目录的范本样式；</span><br><span class="line">-newer&lt;参考文件或目录&gt;：查找其更改时间较指定文件或目录的更改时间更接近现在的文件或目录；</span><br><span class="line">-nogroup：找出不属于本地主机群组识别码的文件或目录；</span><br><span class="line">-noleaf：不去考虑目录至少需拥有两个硬连接存在；</span><br><span class="line">-nouser：找出不属于本地主机用户识别码的文件或目录；</span><br><span class="line">-ok&lt;执行指令&gt;：此参数的效果和指定“-exec”类似，但在执行指令之前会先询问用户，若回答“y”或“Y”，则放弃执行命令；</span><br><span class="line">-path&lt;范本样式&gt;：指定字符串作为寻找目录的范本样式；</span><br><span class="line">-perm&lt;权限数值&gt;：查找符合指定的权限数值的文件或目录；</span><br><span class="line">-print：假设find指令的回传值为Ture，就将文件或目录名称列出到标准输出。格式为每列一个名称，每个名称前皆有“./”字符串；</span><br><span class="line">-print0：假设find指令的回传值为Ture，就将文件或目录名称列出到标准输出。格式为全部的名称皆在同一行；</span><br><span class="line">-printf&lt;输出格式&gt;：假设find指令的回传值为Ture，就将文件或目录名称列出到标准输出。格式可以自行指定；</span><br><span class="line">-prune：不寻找字符串作为寻找文件或目录的范本样式;</span><br><span class="line">-regex&lt;范本样式&gt;：指定字符串作为寻找文件或目录的范本样式；</span><br><span class="line">-size&lt;文件大小&gt;：查找符合指定的文件大小的文件；</span><br><span class="line">-true：将find指令的回传值皆设为True；</span><br><span class="line">-typ&lt;文件类型&gt;：只寻找符合指定的文件类型的文件；</span><br><span class="line">-uid&lt;用户识别码&gt;：查找符合指定的用户识别码的文件或目录；</span><br><span class="line">-used&lt;日数&gt;：查找文件或目录被更改之后在指定时间曾被存取过的文件或目录，单位以日计算；</span><br><span class="line">-user&lt;拥有者名称&gt;：查找符和指定的拥有者名称的文件或目录；</span><br><span class="line">-version或——version：显示版本信息；</span><br><span class="line">-xdev：将范围局限在先行的文件系统中；</span><br><span class="line">-xtype&lt;文件类型&gt;：此参数的效果和指定“-type”参数类似，差别在于它针对符号连接检查。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>起始目录：查找文件的起始目录。</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>列出当前目录及子目录下所有文件和文件夹:</p>
-<p><img src="/2019/07/01/一天一个Linux命令(find命令)/1561993599386.png" alt="1561993599386"></p>
-<p>在<code>/home</code>目录下查找以.txt结尾的文件名:</p>
-<p><img src="/2019/07/01/一天一个Linux命令(find命令)/1561993731683.png" alt="1561993731683"></p>
-<p>在<code>/home</code>目录下查找以.txt结尾的文件名(忽略大小写)</p>
-<p><img src="/2019/07/01/一天一个Linux命令(find命令)/1561993833251.png" alt="1561993833251"></p>
-<p>当前目录及子目录下查找所有以.txt和.pdf结尾的文件：</p>
-<p><img src="/2019/07/01/一天一个Linux命令(find命令)/1561993969968.png" alt="1561993969968"></p>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-      
-      
-    </footer>
-    <hr class="entry-footer-hr">
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
 
 
   <nav id="page-nav">
@@ -1100,6 +1100,18 @@ drwxr-xr-x.  2 root root    6 7月   3 06:24 zhao
               <div class="widget-entry-summary" style="margin: 0;">
             
 
+              <h6 style="margin: 0;"><a href="/2019/07/25/一天一个Linux命令(kill命令)/">一天一个Linux命令，kill命令</a></h6>
+              <span>July 25, 2019</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
               <h6 style="margin: 0;"><a href="/2019/07/25/一天一个Linux命令(more命令)/">一天一个Linux命令，more命令</a></h6>
               <span>July 25, 2019</span>
             </div>
@@ -1154,18 +1166,6 @@ drwxr-xr-x.  2 root root    6 7月   3 06:24 zhao
 
           </li>
         
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="/2019/07/16/一天一个Linux命令(look命令)/">一天一个Linux命令，look命令</a></h6>
-              <span>July 16, 2019</span>
-            </div>
-
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -1191,7 +1191,7 @@ drwxr-xr-x.  2 root root    6 7月   3 06:24 zhao
     <h3 class="widget-title">Archives</h3>
 
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">21</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">21</span></li></ul>
     </div>
   </div>
 

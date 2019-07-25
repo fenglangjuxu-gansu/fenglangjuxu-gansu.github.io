@@ -3,26 +3,28 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
-  <title>一天一个Linux命令，more命令 | Hexo</title>
+  <title>一天一个Linux命令，kill命令 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   
   
   
-  <meta name="description" content="more命令more命令是一个基于vi编辑器文本过滤器，它以全屏幕的方式按页显示文本文件的内容，支持vi中的关键字定位操作。more名单中内置了若干快捷键，常用的有H（获得帮助信息），Enter（向下翻滚一行），空格（向下滚动一屏），Q（退出命令）。 该命令一次显示一屏文本，满屏后停下来，并且在屏幕的底部出现一个提示信息，给出至今己显示的该文件的百分比：–More–（XX%）可以用下列不同的方法对">
+  <meta name="description" content="kill命令kill命令用来删除执行中的程序或工作。kill可将指定的信息送至程序。预设的信息为SIGTERM(15),可将指定程序终止。若仍无法终止该程序，可使用SIGKILL(9)信息尝试强制删除程序。程序或工作的编号可利用ps指令或job指令查看。 语法kill(选项)(参数) 选项12345-a：当处理当前进程时，不限制命令名和进程号的对应关系；-l &amp;lt;信息编号&amp;gt;：若不加&amp;lt">
 <meta property="og:type" content="article">
-<meta property="og:title" content="一天一个Linux命令，more命令">
-<meta property="og:url" content="http://yoursite.com/2019/07/25/一天一个Linux命令(more命令)/index.html">
+<meta property="og:title" content="一天一个Linux命令，kill命令">
+<meta property="og:url" content="http://yoursite.com/2019/07/25/一天一个Linux命令(kill命令)/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="more命令more命令是一个基于vi编辑器文本过滤器，它以全屏幕的方式按页显示文本文件的内容，支持vi中的关键字定位操作。more名单中内置了若干快捷键，常用的有H（获得帮助信息），Enter（向下翻滚一行），空格（向下滚动一屏），Q（退出命令）。 该命令一次显示一屏文本，满屏后停下来，并且在屏幕的底部出现一个提示信息，给出至今己显示的该文件的百分比：–More–（XX%）可以用下列不同的方法对">
+<meta property="og:description" content="kill命令kill命令用来删除执行中的程序或工作。kill可将指定的信息送至程序。预设的信息为SIGTERM(15),可将指定程序终止。若仍无法终止该程序，可使用SIGKILL(9)信息尝试强制删除程序。程序或工作的编号可利用ps指令或job指令查看。 语法kill(选项)(参数) 选项12345-a：当处理当前进程时，不限制命令名和进程号的对应关系；-l &amp;lt;信息编号&amp;gt;：若不加&amp;lt">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2019/07/25/一天一个Linux命令(more命令)/1563984813195.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/25/一天一个Linux命令(more命令)/1563984982069.png">
-<meta property="og:updated_time" content="2019-07-24T16:16:46.924Z">
+<meta property="og:image" content="http://yoursite.com/2019/07/25/一天一个Linux命令(kill命令)/1564070137328.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/25/一天一个Linux命令(kill命令)/1564070388840.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/25/一天一个Linux命令(kill命令)/1564070492577.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/25/一天一个Linux命令(kill命令)/1564070567097.png">
+<meta property="og:updated_time" content="2019-07-25T16:03:25.961Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一天一个Linux命令，more命令">
-<meta name="twitter:description" content="more命令more命令是一个基于vi编辑器文本过滤器，它以全屏幕的方式按页显示文本文件的内容，支持vi中的关键字定位操作。more名单中内置了若干快捷键，常用的有H（获得帮助信息），Enter（向下翻滚一行），空格（向下滚动一屏），Q（退出命令）。 该命令一次显示一屏文本，满屏后停下来，并且在屏幕的底部出现一个提示信息，给出至今己显示的该文件的百分比：–More–（XX%）可以用下列不同的方法对">
-<meta name="twitter:image" content="http://yoursite.com/2019/07/25/一天一个Linux命令(more命令)/1563984813195.png">
+<meta name="twitter:title" content="一天一个Linux命令，kill命令">
+<meta name="twitter:description" content="kill命令kill命令用来删除执行中的程序或工作。kill可将指定的信息送至程序。预设的信息为SIGTERM(15),可将指定程序终止。若仍无法终止该程序，可使用SIGKILL(9)信息尝试强制删除程序。程序或工作的编号可利用ps指令或job指令查看。 语法kill(选项)(参数) 选项12345-a：当处理当前进程时，不限制命令名和进程号的对应关系；-l &amp;lt;信息编号&amp;gt;：若不加&amp;lt">
+<meta name="twitter:image" content="http://yoursite.com/2019/07/25/一天一个Linux命令(kill命令)/1564070137328.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -104,7 +106,7 @@
             
       <div id="content" class="outer">
         
-          <section id="main" style="float:none;"><article id="post-一天一个Linux命令(more命令)" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost">
+          <section id="main" style="float:none;"><article id="post-一天一个Linux命令(kill命令)" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost">
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
     
@@ -112,7 +114,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      一天一个Linux命令，more命令
+      一天一个Linux命令，kill命令
     </h1>
   
 
@@ -120,8 +122,8 @@
     
     <div class="article-meta">
       
-	<a href="/2019/07/25/一天一个Linux命令(more命令)/" class="article-date">
-	  <time datetime="2019-07-24T16:01:57.255Z" itemprop="datePublished">July 25, 2019</time>
+	<a href="/2019/07/25/一天一个Linux命令(kill命令)/" class="article-date">
+	  <time datetime="2019-07-25T15:37:18.839Z" itemprop="datePublished">July 25, 2019</time>
 	</a>
 
        
@@ -133,24 +135,19 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="more命令"><a href="#more命令" class="headerlink" title="more命令"></a>more命令</h3><p><strong>more命令</strong>是一个基于<a href="http://man.linuxde.net/vi" target="_blank" rel="noopener">vi</a>编辑器文本过滤器，它以全屏幕的方式按页显示文本文件的内容，支持vi中的关键字定位操作。more名单中内置了若干快捷键，常用的有H（获得帮助信息），Enter（向下翻滚一行），空格（向下滚动一屏），Q（退出命令）。</p>
-<p>该命令一次显示一屏文本，满屏后停下来，并且在屏幕的底部出现一个提示信息，给出至今己显示的该文件的百分比：–More–（XX%）可以用下列不同的方法对提示做出回答：</p>
-<ul>
-<li>按Space键：显示文本的下一屏内容。</li>
-<li>按Enier键：只显示文本的下一行内容。</li>
-<li>按斜线符<code>|</code>：接着输入一个模式，可以在文本中寻找下一个相匹配的模式。</li>
-<li>按H键：显示帮助屏，该屏上有相关的帮助信息。</li>
-<li>按B键：显示上一屏内容。</li>
-<li>按Q键：退出rnore命令。</li>
-</ul>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p><code>more(选项)(参数)</code></p>
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-&lt;数字&gt;：指定每屏显示的行数；</span><br><span class="line">-d：显示“[press space to continue,&apos;q&apos; to quit.]”和“[Press &apos;h&apos; for instructions]”；</span><br><span class="line">-c：不进行滚屏操作。每次刷新这个屏幕；</span><br><span class="line">-s：将多个空行压缩成一行显示；</span><br><span class="line">-u：禁止下划线；</span><br><span class="line">+&lt;数字&gt;：从指定数字的行开始显示。</span><br></pre></td></tr></table></figure>
+        <h3 id="kill命令"><a href="#kill命令" class="headerlink" title="kill命令"></a>kill命令</h3><p><strong>kill命令</strong>用来删除执行中的程序或工作。kill可将指定的信息送至程序。预设的信息为SIGTERM(15),可将指定程序终止。若仍无法终止该程序，可使用SIGKILL(9)信息尝试强制删除程序。程序或工作的编号可利用<a href="http://man.linuxde.net/ps" target="_blank" rel="noopener">ps</a>指令或job指令查看。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p><code>kill(选项)(参数)</code></p>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-a：当处理当前进程时，不限制命令名和进程号的对应关系；</span><br><span class="line">-l &lt;信息编号&gt;：若不加&lt;信息编号&gt;选项，则-l参数会列出全部的信息名称；</span><br><span class="line">-p：指定kill 命令只打印相关进程的进程号，而不发送任何信号；</span><br><span class="line">-s &lt;信息名称或编号&gt;：指定要送出的信息；</span><br><span class="line">-u：指定用户。</span><br></pre></td></tr></table></figure>
 
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>命令别名设置：定义命令别名，格式为“命令别名=‘实际命令’”。</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>more gc.log  分屏展示当前文件的内容</p>
-<p><img src="/2019/07/25/一天一个Linux命令(more命令)/1563984813195.png" alt="1563984813195"></p>
-<p>more -c -10 gc.log    显示文件gc.log的内容，每10行显示一次，而且在显示之前先清屏。</p>
-<p><img src="/2019/07/25/一天一个Linux命令(more命令)/1563984982069.png" alt="1563984982069"></p>
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>进程或作业识别号：指定要删除的进程或作业。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>kill -l   列出全部的信息名称</p>
+<p><img src="/2019/07/25/一天一个Linux命令(kill命令)/1564070137328.png" alt="1564070137328"></p>
+<p>ps -ef | grep al   此处所有包含al的进程</p>
+<p><img src="/2019/07/25/一天一个Linux命令(kill命令)/1564070388840.png" alt="1564070388840"></p>
+<p>kill 3046  干掉进程，  上面有的操作会提示不允许的操作，因为刚开始我用的是普通账户权限。</p>
+<p><img src="/2019/07/25/一天一个Linux命令(kill命令)/1564070492577.png" alt="1564070492577"></p>
+<p>kill 666  如果干掉一个不存在的进程，那么就会提示不存在进程。</p>
+<p><img src="/2019/07/25/一天一个Linux命令(kill命令)/1564070567097.png" alt="1564070567097"></p>
 
       
     </div>
@@ -190,19 +187,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2019/07/25/一天一个Linux命令(kill命令)/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          一天一个Linux命令，kill命令
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/07/24/一天一个Linux命令(rsync命令)/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2019/07/25/一天一个Linux命令(more命令)/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">一天一个Linux命令，rsync命令</div>
+      <div class="article-nav-title">一天一个Linux命令，more命令</div>
     </a>
   
 </nav>
@@ -216,7 +204,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">Contents</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#more命令"><span class="nav-number">1.</span> <span class="nav-text">more命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法"><span class="nav-number">2.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#选项"><span class="nav-number">3.</span> <span class="nav-text">选项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数"><span class="nav-number">4.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例"><span class="nav-number">5.</span> <span class="nav-text">实例</span></a></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#kill命令"><span class="nav-number">1.</span> <span class="nav-text">kill命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法"><span class="nav-number">2.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#选项"><span class="nav-number">3.</span> <span class="nav-text">选项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数"><span class="nav-number">4.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例"><span class="nav-number">5.</span> <span class="nav-text">实例</span></a></li></ol>
     
     </div>
   </aside>
