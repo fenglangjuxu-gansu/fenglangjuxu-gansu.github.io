@@ -99,6 +99,148 @@
         
           <section id="main">
   
+    <article id="post-Redis的五种对象类型及其底层实现" class="article article-type-post" itemscope itemprop="blogPost">
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2019/07/12/Redis的五种对象类型及其底层实现/">Redis的五种对象类型及其底层实现</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/07/12/Redis的五种对象类型及其底层实现/" class="article-date">
+	  <time datetime="2019-07-12T06:36:44.065Z" itemprop="datePublished">July 12, 2019</time>
+	</a>
+
+       
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Redis对象类型简介<br>Redis是一种key/value型数据库，其中，每个key和value都是使用对象表示的。比如，我们执行以下代码：</p>
+<p>redis&gt;SET message “hello redis”</p>
+<p>其中的key是message，是一个包含了字符串”message”的对象。而value是一个包含了”hello redis”的对象。<br>Redis共有五种对象的类型，分别是：</p>
+<table>
+<thead>
+<tr>
+<th align="left">类型常量</th>
+<th align="left">对象的名称</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>REDIS_STRING</code></td>
+<td align="left">字符串对象</td>
+</tr>
+<tr>
+<td align="left"><code>REDIS_LIST</code></td>
+<td align="left">列表对象</td>
+</tr>
+<tr>
+<td align="left"><code>REDIS_HASH</code></td>
+<td align="left">哈希对象</td>
+</tr>
+<tr>
+<td align="left"><code>REDIS_SET</code></td>
+<td align="left">集合对象</td>
+</tr>
+<tr>
+<td align="left"><code>REDIS_ZSET</code></td>
+<td align="left">有序集合对象</td>
+</tr>
+</tbody></table>
+<p>Redis中的一个对象的结构体表示如下：</p>
+<p>/*</p>
+<ul>
+<li><p>Redis 对象</p>
+</li>
+<li><p>/
+typedef struct redisObject {</p>
+<p>  // 类型<br>  unsigned type:4;        </p>
+<p>  // 不使用(对齐位)<br>  unsigned notused:2;</p>
+<p>  // 编码方式<br>  unsigned encoding:4;</p>
+<p>  // LRU 时间（相对于 server.lruclock）<br>  unsigned lru:22;</p>
+<p>  // 引用计数<br>  int refcount;</p>
+<p>  // 指向对象的值<br>  void *ptr;</p>
+<p>  } robj;</p>
+</li>
+</ul>
+<p>type表示了该对象的对象类型，即上面五个中的一个。但为了提高存储效率与程序执行效率，每种对象的底层数据结构实现都可能不止一种。encoding就表示了对象底层所使用的编码。下面先介绍每种底层数据结构的实现，再介绍每种对象类型都用了什么底层结构并分析他们之间的关系。</p>
+<p>Redis对象底层数据结构<br>底层数据结构共有八种，如下所示:</p>
+<p>编码常量    编码所对应的底层数据结构<br>REDIS_ENCODING_INT    long 类型的整数<br>REDIS_ENCODING_EMBSTR    embstr 编码的简单动态字符串<br>REDIS_ENCODING_RAW    简单动态字符串<br>REDIS_ENCODING_HT    字典<br>REDIS_ENCODING_LINKEDLIST    双端链表<br>REDIS_ENCODING_ZIPLIST    压缩列表<br>REDIS_ENCODING_INTSET    整数集合</p>
+<p>REDIS_ENCODING_SKIPLIST    跳跃表和字典</p>
+<p>字符串对象<br>字符串对象的编码可以是int、raw或者embstr。</p>
+<p>如果一个字符串的内容可以转换为long，那么该字符串就会被转换成为long类型，对象的ptr就会指向该long，并且对象类型也用int类型表示。</p>
+<p>普通的字符串有两种，embstr和raw。embstr应该是Redis 3.0新增的数据结构,在2.8中是没有的。如果字符串对象的长度小于39字节，就用embstr对象。否则用传统的raw对象。可以从下面这段代码看出：</p>
+<p>#define REDIS_ENCODING_EMBSTR_SIZE_LIMIT 39<br>robj *createStringObject(char *ptr, size_t len) {<br>    if (len &lt;= REDIS_ENCODING_EMBSTR_SIZE_LIMIT)<br>        return createEmbeddedStringObject(ptr,len);<br>    else<br>        return createRawStringObject(ptr,len);<br>}
+embstr的好处有如下几点：<br>embstr的创建只需分配一次内存，而raw为两次（一次为sds分配对象，另一次为objet分配对象，embstr省去了第一次）。<br>相对地，释放内存的次数也由两次变为一次。<br>embstr的objet和sds放在一起，更好地利用缓存带来的优势。<br>需要注意的是，redis并未提供任何修改embstr的方式，即embstr是只读的形式。对embstr的修改实际上是先转换为raw再进行修改。</p>
+<p>raw和embstr的区别可以用下面两幅图所示：</p>
+<p><img src="https://img-blog.csdn.net/20150331210810536?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2Fpc2hlbmZhbnM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="img"></p>
+<p><img src="https://img-blog.csdn.net/20150331210831783?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2Fpc2hlbmZhbnM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="img"></p>
+<p>列表对象<br>列表对象的编码可以是ziplist或者linkedlist。</p>
+<p>ziplist是一种压缩链表，它的好处是更能节省内存空间，因为它所存储的内容都是在连续的内存区域当中的。当列表对象元素不大，每个元素也不大的时候，就采用ziplist存储。但当数据量过大时就ziplist就不是那么好用了。因为为了保证他存储内容在内存中的连续性，插入的复杂度是O(N)，即每次插入都会重新进行realloc。如下图所示，对象结构中ptr所指向的就是一个ziplist。整个ziplist只需要malloc一次，它们在内存中是一块连续的区域。</p>
+<p><img src="https://img-blog.csdn.net/20150401092405524?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2Fpc2hlbmZhbnM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="img"></p>
+<p>linkedlist是一种双向链表。它的结构比较简单，节点中存放pre和next两个指针，还有节点相关的信息。当每增加一个node的时候，就需要重新malloc一块内存。</p>
+<p><img src="https://img-blog.csdn.net/20150401092831461?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2Fpc2hlbmZhbnM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="img"></p>
+<p>哈希对象</p>
+<p>哈希对象的底层实现可以是ziplist或者hashtable。</p>
+<p>ziplist中的哈希对象是按照key1,value1,key2,value2这样的顺序存放来存储的。当对象数目不多且内容不大时，这种方式效率是很高的。</p>
+<p>hashtable的是由dict这个结构来实现的</p>
+<p>typedef struct dict {<br>    dictType <em>type;<br>    void *privdata;<br>    dictht ht[2];<br>    long rehashidx; /</em> rehashing not in progress if rehashidx == -1 <em>/
+    int iterators; /</em> number of iterators currently running <em>/
+} dict;<br>dict是一个字典，其中的指针dicht ht[2] 指向了两个哈希表<br>typedef struct dictht {<br>    dictEntry *</em>table;<br>    unsigned long size;<br>    unsigned long sizemask;<br>    unsigned long used;<br>} dictht;<br>dicht[0] 是用于真正存放数据，dicht[1]一般在哈希表元素过多进行rehash的时候用于中转数据。<br>dictht中的table用语真正存放元素了，每个key/value对用一个dictEntry表示，放在dictEntry数组中。</p>
+<p><img src="https://img-blog.csdn.net/20150401094334918?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2Fpc2hlbmZhbnM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="img"></p>
+<p>集合对象<br>集合对象的编码可以是intset或者hashtable。</p>
+<p>intset是一个整数集合，里面存的为某种同一类型的整数，支持如下三种长度的整数：</p>
+<p>#define INTSET_ENC_INT16 (sizeof(int16_t))</p>
+<p>#define INTSET_ENC_INT32 (sizeof(int32_t))</p>
+<p>#define INTSET_ENC_INT64 (sizeof(int64_t))<br>intset是一个有序集合，查找元素的复杂度为O(logN)，但插入时不一定为O(logN)，因为有可能涉及到升级操作。比如当集合里全是int16_t型的整数，这时要插入一个int32_t，那么为了维持集合中数据类型的一致，那么所有的数据都会被转换成int32_t类型，涉及到内存的重新分配，这时插入的复杂度就为O(N)了。是intset不支持降级操作。<br>有序集合对象<br>有序集合的编码可能两种，一种是ziplist，另一种是skiplist与dict的结合。</p>
+<p>ziplist作为集合和作为哈希对象是一样的，member和score顺序存放。按照score从小到大顺序排列。它的结构不再复述。</p>
+<p>skiplist是一种跳跃表，它实现了有序集合中的快速查找，在大多数情况下它的速度都可以和平衡树差不多。但它的实现比较简单，可以作为平衡树的替代品。它的结构比较特殊。下面分别是跳跃表skiplist和它内部的节点skiplistNode的结构体：</p>
+<p>/*</p>
+<ul>
+<li><p>跳跃表</p>
+</li>
+<li><p>/
+typedef struct zskiplist {<br>  // 头节点，尾节点<br>  struct zskiplistNode <em>header, *tail;<br>  // 节点数量<br>  unsigned long length;<br>  // 目前表内节点的最大层数<br>  int level;<br>} zskiplist;<br>/</em> ZSETs use a specialized version of Skiplists <em>/
+/</em></p>
+</li>
+<li><p>跳跃表节点</p>
+</li>
+<li><p>/
+typedef struct zskiplistNode {<br>  // member 对象<br>  robj *obj;<br>  // 分值<br>  double score;<br>  // 后退指针<br>  struct zskiplistNode *backward;<br>  // 层<br>  struct zskiplistLevel {</p>
+<pre><code>// 前进指针
+struct zskiplistNode *forward;
+// 这个层跨越的节点数量
+unsigned int span;</code></pre><p>  } level[];<br>} zskiplistNode;<br>head和tail分别指向头节点和尾节点，然后每个skiplistNode里面的结构又是分层的(即level数组)<br>用图表示，大概是下面这个样子：</p>
+<p><img src="https://img-blog.csdn.net/20150401145314582?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2Fpc2hlbmZhbnM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="img"></p>
+</li>
+</ul>
+<p>每一列都代表一个节点，保存了member和score，按score从小到大排序。每个节点有不同的层数，这个层数是在生成节点的时候随机生成的数值。每一层都是一个指向后面某个节点的指针。这种结构使得跳跃表可以跨越很多节点来快速访问。</p>
+<p>前面说到了，有序集合ZSET是有跳跃表和hashtable共同形成的。</p>
+<p>typedef struct zset {<br>    // 字典<br>    dict *dict;<br>    // 跳跃表<br>    zskiplist *zsl;<br>} zset;<br>为什么要用这种结构呢。试想如果单一用hashtable，那可以快速查找、添加和删除元素，但没法保持集合的有序性。如果单一用skiplist，有序性可以得到保障，但查找的速度太慢O（logN）。<br>结尾</p>
+<h2 id="简单介绍了Redis的五种对象类型和它们的底层实现。事实上，Redis的高效性和灵活性正是得益于对于同一个对象类型采取不同的底层结构，并在必要的时候对二者进行转换；以及各种底层结构对内存的合理利用。"><a href="#简单介绍了Redis的五种对象类型和它们的底层实现。事实上，Redis的高效性和灵活性正是得益于对于同一个对象类型采取不同的底层结构，并在必要的时候对二者进行转换；以及各种底层结构对内存的合理利用。" class="headerlink" title="简单介绍了Redis的五种对象类型和它们的底层实现。事实上，Redis的高效性和灵活性正是得益于对于同一个对象类型采取不同的底层结构，并在必要的时候对二者进行转换；以及各种底层结构对内存的合理利用。"></a>简单介绍了Redis的五种对象类型和它们的底层实现。事实上，Redis的高效性和灵活性正是得益于对于同一个对象类型采取不同的底层结构，并在必要的时候对二者进行转换；以及各种底层结构对内存的合理利用。</h2>
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
     <article id="post-一天一个Linux命令(whereis命令)" class="article article-type-post" itemscope itemprop="blogPost">
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
@@ -803,193 +945,6 @@
 <!-- Table of Contents -->
 
   
-    <article id="post-一天一个Linux命令(mv命令)" class="article article-type-post" itemscope itemprop="blogPost">
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2019/07/02/一天一个Linux命令(mv命令)/">一天一个Linux命令，mv命令</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2019/07/02/一天一个Linux命令(mv命令)/" class="article-date">
-	  <time datetime="2019-07-02T14:10:28.060Z" itemprop="datePublished">July 2, 2019</time>
-	</a>
-
-       
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="mv命令"><a href="#mv命令" class="headerlink" title="mv命令"></a>mv命令</h3><p><strong>mv命令</strong>用来对文件或目录重新命名，或者将文件从一个目录移到另一个目录中。source表示源文件或目录，target表示目标文件或目录。如果将一个文件移到一个已经存在的目标文件中，则目标文件的内容将被覆盖。</p>
-<p>mv命令可以用来将源文件移至一个目标文件中，或将一组文件移至一个目标目录中。源文件被移至目标文件有两种不同的结果：</p>
-<ol>
-<li>如果目标文件是到某一目录文件的路径，源文件会被移到此目录下，且文件名不变。</li>
-<li>如果目标文件不是目录文件，则源文件名（只能有一个）会变为此目标文件名，并覆盖己存在的同名文件。如果源文件和目标文件在同一个目录下，mv的作用就是改文件名。当目标文件是目录文件时，源文件或目录参数可以有多个，则所有的源文件都会被移至目标文件中。所有移到该目录下的文件都将保留以前的文件名。</li>
-</ol>
-<p>注意事项：mv与<a href="http://man.linuxde.net/cp" target="_blank" rel="noopener">cp</a>的结果不同，mv好像文件“搬家”，文件个数并未增加。而cp对文件进行复制，文件个数增加了。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p><code>mv(选项)(参数)</code></p>
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">--backup=&lt;备份模式&gt;：若需覆盖文件，则覆盖前先行备份；</span><br><span class="line">-b：当文件存在时，覆盖前，为其创建一个备份；</span><br><span class="line">-f：若目标文件或目录与现有的文件或目录重复，则直接覆盖现有的文件或目录；</span><br><span class="line">-i：交互式操作，覆盖前先行询问用户，如果源文件与目标文件或目标目录中的文件同名，则询问用户是否覆盖目标文件。用户输入”y”，表示将覆盖目标文件；输入”n”，表示取消对源文件的移动。这样可以避免误将文件覆盖。</span><br><span class="line">--strip-trailing-slashes：删除源文件中的斜杠“/”；</span><br><span class="line">-S&lt;后缀&gt;：为备份文件指定后缀，而不使用默认的后缀；</span><br><span class="line">--target-directory=&lt;目录&gt;：指定源文件要移动到目标目录；</span><br><span class="line">-u：当源文件比目标文件新或者目标文件不存在时，才执行移动操作。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><ul>
-<li>源文件：源文件列表。</li>
-<li>目标文件：如果“目标文件”是文件名则在移动文件的同时，将其改名为“目标文件”；如果“目标文件”是目录名则将源文件移动到“目标文件”下。</li>
-</ul>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>将新创建的文件dong改为wang</p>
-<pre><code>[root@localhost var]# 
-[root@localhost var]# 
-[root@localhost var]# 
-[root@localhost var]# touch dong
-[root@localhost var]# ll
-总用量 16
-drwxr-xr-x.  2 root root   19 6月  22 04:36 account
-drwxr-xr-x.  2 root root    6 4月  11 2018 adm
-drwxr-xr-x. 13 root root  159 6月  22 05:27 cache
-drwxr-xr-x.  2 root root    6 11月  5 2018 crash
-drwxr-xr-x.  3 root root   34 6月  22 04:36 db
--rw-r--r--.  1 root root    0 7月   3 06:19 dong
-drwxr-xr-x.  3 root root   18 6月  22 04:35 empty
-drwxr-xr-x.  2 root root    6 4月  11 2018 games
-drwxr-xr-x.  2 root root    6 4月  11 2018 gopher
-drwxr-xr-x.  3 root root   18 6月  22 04:08 kerberos
-drwxr-xr-x. 61 root root 4096 6月  22 05:26 lib
-drwxr-xr-x.  4 root root   44 6月  26 05:30 local
-lrwxrwxrwx.  1 root root   11 6月  22 04:06 lock -&gt; ../run/lock
-drwxr-xr-x. 20 root root 4096 7月   3 06:16 log
-lrwxrwxrwx.  1 root root   10 6月  22 04:07 mail -&gt; spool/mail
-drwxr-xr-x.  2 root root    6 4月  11 2018 nis
-drwxr-xr-x.  2 root root    6 4月  11 2018 opt
-drwxr-xr-x.  2 root root    6 4月  11 2018 preserve
-lrwxrwxrwx.  1 root root    6 6月  22 04:06 run -&gt; ../run
-drwxr-xr-x. 12 root root  140 6月  22 04:36 spool
-drwxr-xr-x.  4 root root   28 6月  22 04:14 target
-drwxrwxrwt. 36 root root 4096 7月   3 06:19 tmp
-drwxr-xr-x.  2 root root    6 4月  11 2018 yp
-[root@localhost var]# mv dong wang
-[root@localhost var]# ll
-总用量 16
-drwxr-xr-x.  2 root root   19 6月  22 04:36 account
-drwxr-xr-x.  2 root root    6 4月  11 2018 adm
-drwxr-xr-x. 13 root root  159 6月  22 05:27 cache
-drwxr-xr-x.  2 root root    6 11月  5 2018 crash
-drwxr-xr-x.  3 root root   34 6月  22 04:36 db
-drwxr-xr-x.  3 root root   18 6月  22 04:35 empty
-drwxr-xr-x.  2 root root    6 4月  11 2018 games
-drwxr-xr-x.  2 root root    6 4月  11 2018 gopher
-drwxr-xr-x.  3 root root   18 6月  22 04:08 kerberos
-drwxr-xr-x. 61 root root 4096 6月  22 05:26 lib
-drwxr-xr-x.  4 root root   44 6月  26 05:30 local
-lrwxrwxrwx.  1 root root   11 6月  22 04:06 lock -&gt; ../run/lock
-drwxr-xr-x. 20 root root 4096 7月   3 06:16 log
-lrwxrwxrwx.  1 root root   10 6月  22 04:07 mail -&gt; spool/mail
-drwxr-xr-x.  2 root root    6 4月  11 2018 nis
-drwxr-xr-x.  2 root root    6 4月  11 2018 opt
-drwxr-xr-x.  2 root root    6 4月  11 2018 preserve
-lrwxrwxrwx.  1 root root    6 6月  22 04:06 run -&gt; ../run
-drwxr-xr-x. 12 root root  140 6月  22 04:36 spool
-drwxr-xr-x.  4 root root   28 6月  22 04:14 target
-drwxrwxrwt. 36 root root 4096 7月   3 06:19 tmp
--rw-r--r--.  1 root root    0 7月   3 06:19 wang
-drwxr-xr-x.  2 root root    6 4月  11 2018 yp
-[root@localhost var]#                                             </code></pre><p><img src="/2019/07/02/一天一个Linux命令(mv命令)/1562077313112.png" alt="1562077313112"></p>
-<p> 把/var/zhang/下的所有文件移到/var/zhao/目录下</p>
-<pre><code>[root@localhost var]# cd zhang/
-[root@localhost zhang]# touch wang
-[root@localhost zhang]# touch dong
-[root@localhost zhang]# ll
-总用量 0
--rw-r--r--. 1 root root 0 7月   3 06:23 dong
--rw-r--r--. 1 root root 0 7月   3 06:23 wang
-[root@localhost zhang]# pwd
-/var/zhang
-[root@localhost zhang]# cd ../
-[root@localhost var]# ll
-总用量 16
-drwxr-xr-x.  2 root root   19 6月  22 04:36 account
-drwxr-xr-x.  2 root root    6 4月  11 2018 adm
-drwxr-xr-x. 13 root root  159 6月  22 05:27 cache
-drwxr-xr-x.  2 root root    6 11月  5 2018 crash
-drwxr-xr-x.  3 root root   34 6月  22 04:36 db
-drwxr-xr-x.  3 root root   18 6月  22 04:35 empty
-drwxr-xr-x.  2 root root    6 4月  11 2018 games
-drwxr-xr-x.  2 root root    6 4月  11 2018 gopher
-drwxr-xr-x.  3 root root   18 6月  22 04:08 kerberos
-drwxr-xr-x. 61 root root 4096 6月  22 05:26 lib
-drwxr-xr-x.  4 root root   44 6月  26 05:30 local
-lrwxrwxrwx.  1 root root   11 6月  22 04:06 lock -&gt; ../run/lock
-drwxr-xr-x. 20 root root 4096 7月   3 06:16 log
-lrwxrwxrwx.  1 root root   10 6月  22 04:07 mail -&gt; spool/mail
-drwxr-xr-x.  2 root root    6 4月  11 2018 nis
-drwxr-xr-x.  2 root root    6 4月  11 2018 opt
-drwxr-xr-x.  2 root root    6 4月  11 2018 preserve
-lrwxrwxrwx.  1 root root    6 6月  22 04:06 run -&gt; ../run
-drwxr-xr-x. 12 root root  140 6月  22 04:36 spool
-drwxr-xr-x.  4 root root   28 6月  22 04:14 target
-drwxrwxrwt. 34 root root 4096 7月   3 06:19 tmp
--rw-r--r--.  1 root root    0 7月   3 06:19 wang
-drwxr-xr-x.  2 root root    6 4月  11 2018 yp
-drwxr-xr-x.  2 root root   30 7月   3 06:23 zhang
-[root@localhost var]# mkdir zhao
-[root@localhost var]# ll
-总用量 16
-drwxr-xr-x.  2 root root   19 6月  22 04:36 account
-drwxr-xr-x.  2 root root    6 4月  11 2018 adm
-drwxr-xr-x. 13 root root  159 6月  22 05:27 cache
-drwxr-xr-x.  2 root root    6 11月  5 2018 crash
-drwxr-xr-x.  3 root root   34 6月  22 04:36 db
-drwxr-xr-x.  3 root root   18 6月  22 04:35 empty
-drwxr-xr-x.  2 root root    6 4月  11 2018 games
-drwxr-xr-x.  2 root root    6 4月  11 2018 gopher
-drwxr-xr-x.  3 root root   18 6月  22 04:08 kerberos
-drwxr-xr-x. 61 root root 4096 6月  22 05:26 lib
-drwxr-xr-x.  4 root root   44 6月  26 05:30 local
-lrwxrwxrwx.  1 root root   11 6月  22 04:06 lock -&gt; ../run/lock
-drwxr-xr-x. 20 root root 4096 7月   3 06:16 log
-lrwxrwxrwx.  1 root root   10 6月  22 04:07 mail -&gt; spool/mail
-drwxr-xr-x.  2 root root    6 4月  11 2018 nis
-drwxr-xr-x.  2 root root    6 4月  11 2018 opt
-drwxr-xr-x.  2 root root    6 4月  11 2018 preserve
-lrwxrwxrwx.  1 root root    6 6月  22 04:06 run -&gt; ../run
-drwxr-xr-x. 12 root root  140 6月  22 04:36 spool
-drwxr-xr-x.  4 root root   28 6月  22 04:14 target
-drwxrwxrwt. 34 root root 4096 7月   3 06:19 tmp
--rw-r--r--.  1 root root    0 7月   3 06:19 wang
-drwxr-xr-x.  2 root root    6 4月  11 2018 yp
-drwxr-xr-x.  2 root root   30 7月   3 06:23 zhang
-drwxr-xr-x.  2 root root    6 7月   3 06:24 zhao
-[root@localhost var]# pwd
-/var
-[root@localhost var]# mv /var/zhang/ /var/zhao/
-[root@localhost var]# 
-[root@localhost var]# cd zhao/zhang/
-[root@localhost zhang]# ll
-总用量 0
--rw-r--r--. 1 root root 0 7月   3 06:23 dong
--rw-r--r--. 1 root root 0 7月   3 06:23 wang
-[root@localhost zhang]# </code></pre><p><img src="/2019/07/02/一天一个Linux命令(mv命令)/1562077613508.png" alt="1562077613508"></p>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-      
-      
-    </footer>
-    <hr class="entry-footer-hr">
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
 
 
   <nav id="page-nav">
@@ -1100,6 +1055,18 @@ drwxr-xr-x.  2 root root    6 7月   3 06:24 zhao
               <div class="widget-entry-summary" style="margin: 0;">
             
 
+              <h6 style="margin: 0;"><a href="/2019/07/29/一天一个Linux命令(nohup命令)/">一天一个Linux命令，nohup命令</a></h6>
+              <span>July 29, 2019</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
               <h6 style="margin: 0;"><a href="/2019/07/25/一天一个Linux命令(kill命令)/">一天一个Linux命令，kill命令</a></h6>
               <span>July 25, 2019</span>
             </div>
@@ -1154,18 +1121,6 @@ drwxr-xr-x.  2 root root    6 7月   3 06:24 zhao
 
           </li>
         
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="/2019/07/17/一天一个Linux命令(date命令)/">一天一个Linux命令，date命令</a></h6>
-              <span>July 17, 2019</span>
-            </div>
-
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -1191,7 +1146,7 @@ drwxr-xr-x.  2 root root    6 7月   3 06:24 zhao
     <h3 class="widget-title">Archives</h3>
 
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">21</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">21</span></li></ul>
     </div>
   </div>
 

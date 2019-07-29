@@ -3,28 +3,25 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
-  <title>一天一个Linux命令，kill命令 | Hexo</title>
+  <title>一天一个Linux命令，nohup命令 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   
   
   
-  <meta name="description" content="kill命令kill命令用来删除执行中的程序或工作。kill可将指定的信息送至程序。预设的信息为SIGTERM(15),可将指定程序终止。若仍无法终止该程序，可使用SIGKILL(9)信息尝试强制删除程序。程序或工作的编号可利用ps指令或job指令查看。 语法kill(选项)(参数) 选项12345-a：当处理当前进程时，不限制命令名和进程号的对应关系；-l &amp;lt;信息编号&amp;gt;：若不加&amp;lt">
+  <meta name="description" content="nohup命令nohup命令可以将程序以忽略挂起信号的方式运行起来，被运行的程序的输出信息将不会显示到终端。 无论是否将 nohup 命令的输出重定向到终端，输出都将附加到当前目录的 nohup.out 文件中。如果当前目录的 nohup.out 文件不可写，输出重定向到$HOME/nohup.out文件中。如果没有文件能创建或打开以用于追加，那么 command 参数指定的命令不可调用。如果标准">
 <meta property="og:type" content="article">
-<meta property="og:title" content="一天一个Linux命令，kill命令">
-<meta property="og:url" content="http://yoursite.com/2019/07/25/一天一个Linux命令(kill命令)/index.html">
+<meta property="og:title" content="一天一个Linux命令，nohup命令">
+<meta property="og:url" content="http://yoursite.com/2019/07/29/一天一个Linux命令(nohup命令)/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="kill命令kill命令用来删除执行中的程序或工作。kill可将指定的信息送至程序。预设的信息为SIGTERM(15),可将指定程序终止。若仍无法终止该程序，可使用SIGKILL(9)信息尝试强制删除程序。程序或工作的编号可利用ps指令或job指令查看。 语法kill(选项)(参数) 选项12345-a：当处理当前进程时，不限制命令名和进程号的对应关系；-l &amp;lt;信息编号&amp;gt;：若不加&amp;lt">
+<meta property="og:description" content="nohup命令nohup命令可以将程序以忽略挂起信号的方式运行起来，被运行的程序的输出信息将不会显示到终端。 无论是否将 nohup 命令的输出重定向到终端，输出都将附加到当前目录的 nohup.out 文件中。如果当前目录的 nohup.out 文件不可写，输出重定向到$HOME/nohup.out文件中。如果没有文件能创建或打开以用于追加，那么 command 参数指定的命令不可调用。如果标准">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2019/07/25/一天一个Linux命令(kill命令)/1564070137328.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/25/一天一个Linux命令(kill命令)/1564070388840.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/25/一天一个Linux命令(kill命令)/1564070492577.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/25/一天一个Linux命令(kill命令)/1564070567097.png">
-<meta property="og:updated_time" content="2019-07-25T16:03:25.961Z">
+<meta property="og:image" content="http://yoursite.com/2019/07/29/一天一个Linux命令(nohup命令)/1564414587111.png">
+<meta property="og:updated_time" content="2019-07-29T15:36:27.757Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一天一个Linux命令，kill命令">
-<meta name="twitter:description" content="kill命令kill命令用来删除执行中的程序或工作。kill可将指定的信息送至程序。预设的信息为SIGTERM(15),可将指定程序终止。若仍无法终止该程序，可使用SIGKILL(9)信息尝试强制删除程序。程序或工作的编号可利用ps指令或job指令查看。 语法kill(选项)(参数) 选项12345-a：当处理当前进程时，不限制命令名和进程号的对应关系；-l &amp;lt;信息编号&amp;gt;：若不加&amp;lt">
-<meta name="twitter:image" content="http://yoursite.com/2019/07/25/一天一个Linux命令(kill命令)/1564070137328.png">
+<meta name="twitter:title" content="一天一个Linux命令，nohup命令">
+<meta name="twitter:description" content="nohup命令nohup命令可以将程序以忽略挂起信号的方式运行起来，被运行的程序的输出信息将不会显示到终端。 无论是否将 nohup 命令的输出重定向到终端，输出都将附加到当前目录的 nohup.out 文件中。如果当前目录的 nohup.out 文件不可写，输出重定向到$HOME/nohup.out文件中。如果没有文件能创建或打开以用于追加，那么 command 参数指定的命令不可调用。如果标准">
+<meta name="twitter:image" content="http://yoursite.com/2019/07/29/一天一个Linux命令(nohup命令)/1564414587111.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -106,7 +103,7 @@
             
       <div id="content" class="outer">
         
-          <section id="main" style="float:none;"><article id="post-一天一个Linux命令(kill命令)" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost">
+          <section id="main" style="float:none;"><article id="post-一天一个Linux命令(nohup命令)" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost">
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
     
@@ -114,7 +111,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      一天一个Linux命令，kill命令
+      一天一个Linux命令，nohup命令
     </h1>
   
 
@@ -122,8 +119,8 @@
     
     <div class="article-meta">
       
-	<a href="/2019/07/25/一天一个Linux命令(kill命令)/" class="article-date">
-	  <time datetime="2019-07-25T15:37:18.839Z" itemprop="datePublished">July 25, 2019</time>
+	<a href="/2019/07/29/一天一个Linux命令(nohup命令)/" class="article-date">
+	  <time datetime="2019-07-29T15:29:43.591Z" itemprop="datePublished">July 29, 2019</time>
 	</a>
 
        
@@ -135,19 +132,14 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="kill命令"><a href="#kill命令" class="headerlink" title="kill命令"></a>kill命令</h3><p><strong>kill命令</strong>用来删除执行中的程序或工作。kill可将指定的信息送至程序。预设的信息为SIGTERM(15),可将指定程序终止。若仍无法终止该程序，可使用SIGKILL(9)信息尝试强制删除程序。程序或工作的编号可利用<a href="http://man.linuxde.net/ps" target="_blank" rel="noopener">ps</a>指令或job指令查看。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p><code>kill(选项)(参数)</code></p>
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-a：当处理当前进程时，不限制命令名和进程号的对应关系；</span><br><span class="line">-l &lt;信息编号&gt;：若不加&lt;信息编号&gt;选项，则-l参数会列出全部的信息名称；</span><br><span class="line">-p：指定kill 命令只打印相关进程的进程号，而不发送任何信号；</span><br><span class="line">-s &lt;信息名称或编号&gt;：指定要送出的信息；</span><br><span class="line">-u：指定用户。</span><br></pre></td></tr></table></figure>
+        <h3 id="nohup命令"><a href="#nohup命令" class="headerlink" title="nohup命令"></a>nohup命令</h3><p><strong>nohup命令</strong>可以将程序以忽略挂起信号的方式运行起来，被运行的程序的输出信息将不会显示到终端。</p>
+<p>无论是否将 nohup 命令的输出重定向到终端，输出都将附加到当前目录的 nohup.out 文件中。如果当前目录的 nohup.out 文件不可写，输出重定向到<code>$HOME/nohup.out</code>文件中。如果没有文件能创建或打开以用于追加，那么 <a href="http://man.linuxde.net/command" target="_blank" rel="noopener">command</a> 参数指定的命令不可调用。如果标准错误是一个终端，那么把指定的命令写给标准错误的所有输出作为标准输出重定向到相同的文件描述符。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p><code>nohup(选项)(参数)</code></p>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">--help：在线帮助；</span><br><span class="line">--version：显示版本信息。</span><br></pre></td></tr></table></figure>
 
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>进程或作业识别号：指定要删除的进程或作业。</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>kill -l   列出全部的信息名称</p>
-<p><img src="/2019/07/25/一天一个Linux命令(kill命令)/1564070137328.png" alt="1564070137328"></p>
-<p>ps -ef | grep al   此处所有包含al的进程</p>
-<p><img src="/2019/07/25/一天一个Linux命令(kill命令)/1564070388840.png" alt="1564070388840"></p>
-<p>kill 3046  干掉进程，  上面有的操作会提示不允许的操作，因为刚开始我用的是普通账户权限。</p>
-<p><img src="/2019/07/25/一天一个Linux命令(kill命令)/1564070492577.png" alt="1564070492577"></p>
-<p>kill 666  如果干掉一个不存在的进程，那么就会提示不存在进程。</p>
-<p><img src="/2019/07/25/一天一个Linux命令(kill命令)/1564070567097.png" alt="1564070567097"></p>
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>如果使用nohup命令提交作业，那么在缺省情况下该作业的所有输出都被重定向到一个名为nohup.out的文件中，除非另外指定了输出文件：</p>
+<p><img src="/2019/07/29/一天一个Linux命令(nohup命令)/1564414587111.png" alt="1564414587111"></p>
+<p>输出被重定向到zhang.file文件中。</p>
 
       
     </div>
@@ -187,19 +179,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2019/07/29/一天一个Linux命令(nohup命令)/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          一天一个Linux命令，nohup命令
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/07/25/一天一个Linux命令(more命令)/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2019/07/25/一天一个Linux命令(kill命令)/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">一天一个Linux命令，more命令</div>
+      <div class="article-nav-title">一天一个Linux命令，kill命令</div>
     </a>
   
 </nav>
@@ -213,7 +196,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">Contents</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#kill命令"><span class="nav-number">1.</span> <span class="nav-text">kill命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法"><span class="nav-number">2.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#选项"><span class="nav-number">3.</span> <span class="nav-text">选项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数"><span class="nav-number">4.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例"><span class="nav-number">5.</span> <span class="nav-text">实例</span></a></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#nohup命令"><span class="nav-number">1.</span> <span class="nav-text">nohup命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法"><span class="nav-number">2.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#选项"><span class="nav-number">3.</span> <span class="nav-text">选项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数"><span class="nav-number">4.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例"><span class="nav-number">5.</span> <span class="nav-text">实例</span></a></li></ol>
     
     </div>
   </aside>
