@@ -99,6 +99,56 @@
         
           <section id="main">
   
+    <article id="post-一天一个Linux命令(groupadd命令)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2019/07/31/一天一个Linux命令(groupadd命令)/">一天一个Linux命令，groupadd命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/07/31/一天一个Linux命令(groupadd命令)/" class="article-date">
+	  <time datetime="2019-07-30T16:09:53.295Z" itemprop="datePublished">July 31, 2019</time>
+	</a>
+
+       
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="groupadd命令"><a href="#groupadd命令" class="headerlink" title="groupadd命令"></a>groupadd命令</h3><p><strong>groupadd命令</strong>用于创建一个新的工作组，新工作组的信息将被添加到系统文件中。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p><code>groupadd(选项)(参数)</code></p>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-g：指定新建工作组的id；</span><br><span class="line">-r：创建系统工作组，系统工作组的组ID小于500；</span><br><span class="line">-K：覆盖配置文件“/ect/login.defs”；</span><br><span class="line">-o：允许添加组ID号不唯一的工作组。</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>组名：指定新建工作组的组名。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>建立一个新组，并设置组ID加入系统：</p>
+<p><img src="/2019/07/31/一天一个Linux命令(groupadd命令)/1564503490742.png" alt="1564503490742"></p>
+<p>此时在<code>/etc/group</code>文件中产生一个组ID（GID）是666的项目。</p>
+<p><img src="/2019/07/31/一天一个Linux命令(groupadd命令)/1564503877206.png" alt="1564503877206"></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
     <article id="post-一天一个Linux命令(nohup命令)" class="article article-type-post" itemscope itemprop="blogPost">
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
@@ -581,63 +631,6 @@
 <!-- Table of Contents -->
 
   
-    <article id="post-一天一个Linux命令(type命令)" class="article article-type-post" itemscope itemprop="blogPost">
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2019/07/13/一天一个Linux命令(type命令)/">一天一个Linux命令，type命令</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2019/07/13/一天一个Linux命令(type命令)/" class="article-date">
-	  <time datetime="2019-07-12T16:28:07.801Z" itemprop="datePublished">July 13, 2019</time>
-	</a>
-
-       
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="type命令"><a href="#type命令" class="headerlink" title="type命令"></a>type命令</h3><p><strong>type命令</strong>用来显示指定命令的类型，判断给出的指令是内部指令还是外部指令。</p>
-<p>命令类型：</p>
-<ul>
-<li><a href="http://man.linuxde.net/alias" target="_blank" rel="noopener">alias</a>：别名。</li>
-<li>keyword：关键字，Shell保留字。</li>
-<li>function：函数，Shell函数。</li>
-<li><a href="http://man.linuxde.net/builtin" target="_blank" rel="noopener">builtin</a>：内建命令，Shell内建命令。</li>
-<li><a href="http://man.linuxde.net/file" target="_blank" rel="noopener">file</a>：文件，磁盘文件，外部命令。</li>
-<li>unfound：没有找到。</li>
-</ul>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p><code>type(选项)(参数)</code></p>
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-t：输出“file”、“alias”或者“builtin”，分别表示给定的指令为“外部指令”、“命令别名”或者“内部指令”；</span><br><span class="line">-p：如果给出的指令为外部指令，则显示其绝对路径；</span><br><span class="line">-a：在环境变量“PATH”指定的路径中，显示给定指令的信息，包括命令别名。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>指令：要显示类型的指令。</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>如下是type命令的具体演示，可以结合上面的文字理解：</p>
-<p><img src="/2019/07/13/一天一个Linux命令(type命令)/1562949377930.png" alt="1562949377930"></p>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-      
-      
-    </footer>
-    <hr class="entry-footer-hr">
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
 
 
   <nav id="page-nav">
@@ -748,6 +741,18 @@
               <div class="widget-entry-summary" style="margin: 0;">
             
 
+              <h6 style="margin: 0;"><a href="/2019/07/31/一天一个Linux命令(groupadd命令)/">一天一个Linux命令，groupadd命令</a></h6>
+              <span>July 31, 2019</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
               <h6 style="margin: 0;"><a href="/2019/07/29/一天一个Linux命令(nohup命令)/">一天一个Linux命令，nohup命令</a></h6>
               <span>July 29, 2019</span>
             </div>
@@ -802,18 +807,6 @@
 
           </li>
         
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="/2019/07/18/一天一个Linux命令(tee命令)/">一天一个Linux命令，tee命令</a></h6>
-              <span>July 18, 2019</span>
-            </div>
-
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -839,7 +832,7 @@
     <h3 class="widget-title">Archives</h3>
 
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">21</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">21</span></li></ul>
     </div>
   </div>
 

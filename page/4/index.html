@@ -99,6 +99,87 @@
         
           <section id="main">
   
+    <article id="post-一天一个Linux命令(touch命令) " class="article article-type-post" itemscope itemprop="blogPost">
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2019/06/24/一天一个Linux命令(touch命令) /">一天一个Linux命令(第6天touch命令)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/06/24/一天一个Linux命令(touch命令) /" class="article-date">
+	  <time datetime="2019-06-24T14:37:32.076Z" itemprop="datePublished">June 24, 2019</time>
+	</a>
+
+       
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="touch命令"><a href="#touch命令" class="headerlink" title="touch命令"></a>touch命令</h2><ul>
+<li><p><strong>touch命令</strong>有两个功能：一是用于把已存在文件的时间标签更新为系统当前的时间（默认方式），它们的数据将原封不动地保留下来；二是用来创建新的空文件。</p>
+<p>当然了touch主要的功能是用来创建空文件，至少我常用来这么做。</p>
+</li>
+</ul>
+<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><p>   <code>touch(选项)(参数)</code></p>
+<h3 id="选项："><a href="#选项：" class="headerlink" title="选项："></a>选项：</h3><pre><code>-a：或--time=atime或--time=access或--time=use  只更改存取时间；
+-c：或--no-create  不建立任何文件；
+-d：&lt;时间日期&gt; 使用指定的日期时间，而非现在的时间；
+-f：此参数将忽略不予处理，仅负责解决BSD版本touch指令的兼容性问题；
+-m：或--time=mtime或--time=modify  只更该变动时间；
+-r：&lt;参考文件或目录&gt;  把指定文件或目录的日期时间，统统设成和参考文件或目录的日期时间相同；
+-t：&lt;日期时间&gt;  使用指定的日期时间，而非现在的时间；
+--help：在线帮助；
+--version：显示版本信息。</code></pre><h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>  创建文件夹dongpengju，可以看到文件夹大小为0，是为空的：</p>
+<pre><code>[fenglangjuxu@localhost usr]$ touch dongpengju
+touch: 无法创建&quot;dongpengju&quot;: 权限不够
+[fenglangjuxu@localhost usr]$ su root
+密码：
+[root@localhost usr]# pwd
+/usr
+[root@localhost usr]# touch dongpengju
+[root@localhost usr]# ls
+bin         etc    include  lib64    local  share  tmp
+dongpengju  games  lib      libexec  sbin   src
+[root@localhost usr]# ll
+总用量 264
+dr-xr-xr-x.   2 root root 49152 6月  22 04:37 bin
+-rw-r--r--.   1 root root     0 6月  25 06:55 dongpengju
+drwxr-xr-x.   2 root root     6 4月  11 2018 etc
+drwxr-xr-x.   2 root root     6 4月  11 2018 games
+drwxr-xr-x.   9 root root  4096 6月  22 04:34 include
+dr-xr-xr-x.  42 root root  4096 6月  22 04:36 lib
+dr-xr-xr-x. 142 root root 81920 6月  22 04:39 lib64
+drwxr-xr-x.  49 root root 12288 6月  22 04:36 libexec
+drwxr-xr-x.  12 root root   131 6月  22 04:07 local
+dr-xr-xr-x.   2 root root 20480 6月  22 04:37 sbin
+drwxr-xr-x. 235 root root  8192 6月  22 04:37 share
+drwxr-xr-x.   4 root root    34 6月  22 04:07 src
+lrwxrwxrwx.   1 root root    10 6月  22 04:07 tmp -&gt; ../var/tmp
+[root@localhost usr]# </code></pre>
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
     <article id="post-一天一个Linux命令(第12天which命令)" class="article article-type-post" itemscope itemprop="blogPost">
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
@@ -851,71 +932,6 @@ mv: 无法将&quot;/var/tmp&quot; 移动至&quot;./tmp&quot;: 设备或资源忙
 <!-- Table of Contents -->
 
   
-    <article id="post-一天一个Linux命令(第五天mdir命令)" class="article article-type-post" itemscope itemprop="blogPost">
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2019/06/17/一天一个Linux命令(第五天mdir命令)/">一天一个Linux命令(第五天mdir命令)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2019/06/17/一天一个Linux命令(第五天mdir命令)/" class="article-date">
-	  <time datetime="2019-06-17T12:13:16.957Z" itemprop="datePublished">June 17, 2019</time>
-	</a>
-
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
- 
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1、语法"><a href="#1、语法" class="headerlink" title="1、语法"></a>1、语法</h2><p> <code>mdir [-afwx/][目录]</code></p>
-<h2 id="2、参数"><a href="#2、参数" class="headerlink" title="2、参数"></a>2、参数</h2><ul>
-<li>-/ 显示目录下所有子目录与文件。</li>
-<li>-a 　显示隐藏文件。</li>
-<li>-f 　不显示磁盘所剩余的可用空间。</li>
-<li>-w 　仅显示目录或文件名称，并以横排方式呈现，以便一次能显示较多的目录或文件。</li>
-<li>-X 　仅显示目录下所有子目录与文件的完整路径，不显示其他信息。</li>
-</ul>
-<h2 id="3、实例"><a href="#3、实例" class="headerlink" title="3、实例"></a>3、实例</h2><p>显示a盘中的内容：</p>
-<pre><code>$ mdir -/ a:\*</code></pre><p>以上命令执行后，mdir将显示指定盘”a:&quot;中的所有子目录及其中的文件信息，如下所示：</p>
-<pre><code>Volume in drive A has no label  #加载信息  
-Volume Serial Number is 13D2~055C  
-Directory for A:\                   #以下为目录信息  
-./test &lt;DIR&gt; 2011-08-23 16:59     
-#显示格式为文件名，目录大小，修改时间  
-AUTORUN.INF 265 2011-08-23 16:53  
-AUTORUN.BAT 43 2011-08-23 16:56  
-3 files 308 bytes               #统计总大小  
-724 325 bytes free              #剩余空间  </code></pre>
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-
-      
-      
-    </footer>
-    <hr class="entry-footer-hr">
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
 
 
   <nav id="page-nav">
@@ -1026,6 +1042,18 @@ AUTORUN.BAT 43 2011-08-23 16:56
               <div class="widget-entry-summary" style="margin: 0;">
             
 
+              <h6 style="margin: 0;"><a href="/2019/07/31/一天一个Linux命令(groupadd命令)/">一天一个Linux命令，groupadd命令</a></h6>
+              <span>July 31, 2019</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
               <h6 style="margin: 0;"><a href="/2019/07/29/一天一个Linux命令(nohup命令)/">一天一个Linux命令，nohup命令</a></h6>
               <span>July 29, 2019</span>
             </div>
@@ -1080,18 +1108,6 @@ AUTORUN.BAT 43 2011-08-23 16:56
 
           </li>
         
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="/2019/07/18/一天一个Linux命令(tee命令)/">一天一个Linux命令，tee命令</a></h6>
-              <span>July 18, 2019</span>
-            </div>
-
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -1117,7 +1133,7 @@ AUTORUN.BAT 43 2011-08-23 16:56
     <h3 class="widget-title">Archives</h3>
 
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">21</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">21</span></li></ul>
     </div>
   </div>
 
