@@ -99,6 +99,59 @@
         
           <section id="main">
   
+    <article id="post-一天一个Linux命令(hostname命令)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2019/07/15/一天一个Linux命令(hostname命令)/">一天一个Linux命令，hostname命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/07/15/一天一个Linux命令(hostname命令)/" class="article-date">
+	  <time datetime="2019-07-15T13:21:21.157Z" itemprop="datePublished">July 15, 2019</time>
+	</a>
+
+       
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="hostname命令"><a href="#hostname命令" class="headerlink" title="hostname命令"></a>hostname命令</h3><p><strong>hostname命令</strong>用于显示和设置系统的主机名称。环境变量HOSTNAME也保存了当前的主机名。在使用hostname命令设置主机名后，系统并不会永久保存新的主机名，重新启动机器之后还是原来的主机名。如果需要永久修改主机名，需要同时修改<code>/etc/hosts</code>和<code>/etc/sysconfig/network</code>的相关内容。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p><code>hostname(选项)(参数)</code></p>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-v：详细信息模式；</span><br><span class="line">-a：显示主机别名；</span><br><span class="line">-d：显示DNS域名；</span><br><span class="line">-f：显示FQDN名称；</span><br><span class="line">-i：显示主机的ip地址；</span><br><span class="line">-s：显示短主机名称，在第一个点处截断；</span><br><span class="line">-y：显示NIS域名。</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>主机名：指定要设置的主机名。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>显示当前的主机名：</p>
+<p><img src="/2019/07/15/一天一个Linux命令(hostname命令)/1563197138020.png" alt="1563197138020"></p>
+<p>设置新的主机名：</p>
+<p><img src="/2019/07/15/一天一个Linux命令(hostname命令)/1563197286812.png" alt="1563197286812"></p>
+<p>也可以进入/etc/目录修改 hosts文件来永久改变主机名， /etc/sysconfig/network：</p>
+<p><img src="/2019/07/15/一天一个Linux命令(hostname命令)/1563197374802.png" alt="1563197374802"></p>
+<p><img src="/2019/07/15/一天一个Linux命令(hostname命令)/1563197587633.png" alt="1563197587633"></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
     <article id="post-一天一个Linux命令(type命令)" class="article article-type-post" itemscope itemprop="blogPost">
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
@@ -880,75 +933,6 @@ unsigned int span;</code></pre><p>  } level[];<br>} zskiplistNode;<br>head和tai
 <!-- Table of Contents -->
 
   
-    <article id="post-一天一个Linux命令(screen命令)" class="article article-type-post" itemscope itemprop="blogPost">
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2019/07/04/一天一个Linux命令(screen命令)/">一天一个Linux命令，screen命令</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2019/07/04/一天一个Linux命令(screen命令)/" class="article-date">
-	  <time datetime="2019-07-04T12:08:25.726Z" itemprop="datePublished">July 4, 2019</time>
-	</a>
-
-       
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="screen命令"><a href="#screen命令" class="headerlink" title="screen命令"></a>screen命令</h3><p><strong>Screen</strong>是一款由GNU计划开发的用于命令行终端切换的自由软件。用户可以通过该软件同时连接多个本地或远程的命令行会话，并在其间自由切换。GNU Screen可以看作是窗口管理器的命令行界面版本。它提供了统一的管理多个会话的界面和相应的功能。</p>
-<p><strong>会话恢复</strong></p>
-<p>只要Screen本身没有终止，在其内部运行的会话都可以恢复。这一点对于远程登录的用户特别有用——即使网络连接中断，用户也不会失去对已经打开的命令行会话的控制。只要再次登录到主机上执行screen -r就可以恢复会话的运行。同样在暂时离开的时候，也可以执行分离命令detach，在保证里面的程序正常运行的情况下让Screen挂起（切换到后台）。这一点和图形界面下的VNC很相似。</p>
-<p><strong>多窗口</strong></p>
-<p>在Screen环境下，所有的会话都独立的运行，并拥有各自的编号、输入、输出和窗口缓存。用户可以通过快捷键在不同的窗口下切换，并可以自由的重定向各个窗口的输入和输出。Screen实现了基本的文本操作，如复制粘贴等；还提供了类似滚动条的功能，可以查看窗口状况的历史记录。窗口还可以被分区和命名，还可以监视后台窗口的活动。 会话共享 Screen可以让一个或多个用户从不同终端多次登录一个会话，并共享会话的所有特性（比如可以看到完全相同的输出）。它同时提供了窗口访问权限的机制，可以对窗口进行密码保护。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p><code># screen [-AmRvx -ls -wipe][-d &lt;作业名称&gt;][-h &lt;行数&gt;][-r &lt;作业名称&gt;][-s ][-S &lt;作业名称&gt;]</code></p>
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">-A 　将所有的视窗都调整为目前终端机的大小。</span><br><span class="line">-d &lt;作业名称&gt; 　将指定的screen作业离线。</span><br><span class="line">-h &lt;行数&gt; 　指定视窗的缓冲区行数。</span><br><span class="line">-m 　即使目前已在作业中的screen作业，仍强制建立新的screen作业。</span><br><span class="line">-r &lt;作业名称&gt; 　恢复离线的screen作业。</span><br><span class="line">-R 　先试图恢复离线的作业。若找不到离线的作业，即建立新的screen作业。</span><br><span class="line">-s 　指定建立新视窗时，所要执行的shell。</span><br><span class="line">-S &lt;作业名称&gt; 　指定screen作业的名称。</span><br><span class="line">-v 　显示版本信息。</span><br><span class="line">-x 　恢复之前离线的screen作业。</span><br><span class="line">-ls或--list 　显示目前所有的screen作业。</span><br><span class="line">-wipe 　检查目前所有的screen作业，并删除已经无法使用的screen作业。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>直接敲命令screen就可以启动它。但是这样启动的screen会话没有名字，实践上推荐为每个screen会话取一个名字，方便分辨：</p>
-<p><img src="/2019/07/04/一天一个Linux命令(screen命令)/1562246277049.png" alt="1562246277049"></p>
-<p>回车后，实际上进入另一个屏幕：</p>
-<p><img src="/2019/07/04/一天一个Linux命令(screen命令)/1562246393689.png" alt="1562246393689"></p>
-<p>screen启动后，会创建第一个窗口，也就是窗口No. 0，并在其中打开一个系统默认的shell，一般都会是bash。所以你敲入命令screen之后，会立刻又返回到命令提示符，仿佛什么也没有发生似的，其实你已经进入Screen的世界了。当然，也可以在screen命令之后加入你喜欢的参数，使之直接打开你指定的程序，例如：</p>
-<p>执行  screen -S dong.txt</p>
-<p><img src="/2019/07/04/一天一个Linux命令(screen命令)/1562246510949.png" alt="1562246510949"></p>
-<p><img src="/2019/07/04/一天一个Linux命令(screen命令)/1562246477731.png" alt="1562246477731"></p>
-<p>screen创建一个执行vi david.txt的单窗口会话，退出vi 将退出该窗口/会话。</p>
-<p>Ctrl+a键可以切换窗口，我刚才创建了2个窗口，就可以看到屏幕在切换。</p>
-<p><strong>会话分离与恢复</strong></p>
-<p>你可以不中断screen窗口中程序的运行而暂时断开（detach）screen会话，并在随后时间重新连接（attach）该会话，重新控制各窗口中运行的程序。例如，我们打开一个screen窗口编辑/tmp/dong.txt文件：</p>
-<p><img src="/2019/07/04/一天一个Linux命令(screen命令)/1562246862893.png" alt="1562246862893"></p>
-<p>之后我们想暂时退出做点别的事情，比如出去散散步，那么在screen窗口键入Ctrl + a + d，Screen会给出detached提示：</p>
-<p>暂时中断会话</p>
-<p><img src="/2019/07/04/一天一个Linux命令(screen命令)/1562247014536.png" alt="1562247014536"></p>
-<p>半个小时之后回来了，找到该screen会话：</p>
-<p><img src="/2019/07/04/一天一个Linux命令(screen命令)/1562247061834.png" alt="1562247061834"></p>
-<p>输入命令 screen -r 10940    重新连接会话： </p>
-<p><img src="/2019/07/04/一天一个Linux命令(screen命令)/1562247157854.png" alt="1562247157854"></p>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-      
-      
-    </footer>
-    <hr class="entry-footer-hr">
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
 
 
   <nav id="page-nav">
@@ -1059,6 +1043,18 @@ unsigned int span;</code></pre><p>  } level[];<br>} zskiplistNode;<br>head和tai
               <div class="widget-entry-summary" style="margin: 0;">
             
 
+              <h6 style="margin: 0;"><a href="/2019/08/01/一天一个Linux命令(less命令)/">一天一个Linux命令，less命令</a></h6>
+              <span>August 1, 2019</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
               <h6 style="margin: 0;"><a href="/2019/07/31/一天一个Linux命令(groupadd命令)/">一天一个Linux命令，groupadd命令</a></h6>
               <span>July 31, 2019</span>
             </div>
@@ -1113,18 +1109,6 @@ unsigned int span;</code></pre><p>  } level[];<br>} zskiplistNode;<br>head和tai
 
           </li>
         
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="/2019/07/23/一天一个Linux命令(su命令)/">一天一个Linux命令，su命令</a></h6>
-              <span>July 23, 2019</span>
-            </div>
-
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -1150,7 +1134,7 @@ unsigned int span;</code></pre><p>  } level[];<br>} zskiplistNode;<br>head和tai
     <h3 class="widget-title">Archives</h3>
 
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">21</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">21</span></li></ul>
     </div>
   </div>
 

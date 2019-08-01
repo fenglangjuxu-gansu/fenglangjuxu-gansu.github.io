@@ -3,26 +3,29 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
-  <title>一天一个Linux命令，groupadd命令 | Hexo</title>
+  <title>一天一个Linux命令，less命令 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   
   
   
-  <meta name="description" content="groupadd命令groupadd命令用于创建一个新的工作组，新工作组的信息将被添加到系统文件中。 语法groupadd(选项)(参数) 选项1234-g：指定新建工作组的id；-r：创建系统工作组，系统工作组的组ID小于500；-K：覆盖配置文件“/ect/login.defs”；-o：允许添加组ID号不唯一的工作组。  参数组名：指定新建工作组的组名。 实例建立一个新组，并设置组ID加入系统">
+  <meta name="description" content="less命令less命令的作用与more十分相似，都可以用来浏览文字档案的内容，不同的是less命令允许用户向前或向后浏览文件，而more命令只能向前浏览。用less命令显示文件时，用PageUp键向上翻页，用PageDown键向下翻页。要退出less程序，应按Q键。 语法less(选项)(参数) 选项12345678-e：文件内容显示完毕后，自动退出；-f：强制显示文件；-g：不加亮显示搜索到的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="一天一个Linux命令，groupadd命令">
-<meta property="og:url" content="http://yoursite.com/2019/07/31/一天一个Linux命令(groupadd命令)/index.html">
+<meta property="og:title" content="一天一个Linux命令，less命令">
+<meta property="og:url" content="http://yoursite.com/2019/08/01/一天一个Linux命令(less命令)/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="groupadd命令groupadd命令用于创建一个新的工作组，新工作组的信息将被添加到系统文件中。 语法groupadd(选项)(参数) 选项1234-g：指定新建工作组的id；-r：创建系统工作组，系统工作组的组ID小于500；-K：覆盖配置文件“/ect/login.defs”；-o：允许添加组ID号不唯一的工作组。  参数组名：指定新建工作组的组名。 实例建立一个新组，并设置组ID加入系统">
+<meta property="og:description" content="less命令less命令的作用与more十分相似，都可以用来浏览文字档案的内容，不同的是less命令允许用户向前或向后浏览文件，而more命令只能向前浏览。用less命令显示文件时，用PageUp键向上翻页，用PageDown键向下翻页。要退出less程序，应按Q键。 语法less(选项)(参数) 选项12345678-e：文件内容显示完毕后，自动退出；-f：强制显示文件；-g：不加亮显示搜索到的">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2019/07/31/一天一个Linux命令(groupadd命令)/1564503490742.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/31/一天一个Linux命令(groupadd命令)/1564503877206.png">
-<meta property="og:updated_time" content="2019-07-30T16:24:53.521Z">
+<meta property="og:image" content="http://yoursite.com/2019/08/01/一天一个Linux命令(less命令)/1564673930860.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/01/一天一个Linux命令(less命令)/1564673912410.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/01/一天一个Linux命令(less命令)/1564674017529.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/01/一天一个Linux命令(less命令)/1564674090353.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/01/一天一个Linux命令(less命令)/1564674081570.png">
+<meta property="og:updated_time" content="2019-08-01T15:42:51.437Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一天一个Linux命令，groupadd命令">
-<meta name="twitter:description" content="groupadd命令groupadd命令用于创建一个新的工作组，新工作组的信息将被添加到系统文件中。 语法groupadd(选项)(参数) 选项1234-g：指定新建工作组的id；-r：创建系统工作组，系统工作组的组ID小于500；-K：覆盖配置文件“/ect/login.defs”；-o：允许添加组ID号不唯一的工作组。  参数组名：指定新建工作组的组名。 实例建立一个新组，并设置组ID加入系统">
-<meta name="twitter:image" content="http://yoursite.com/2019/07/31/一天一个Linux命令(groupadd命令)/1564503490742.png">
+<meta name="twitter:title" content="一天一个Linux命令，less命令">
+<meta name="twitter:description" content="less命令less命令的作用与more十分相似，都可以用来浏览文字档案的内容，不同的是less命令允许用户向前或向后浏览文件，而more命令只能向前浏览。用less命令显示文件时，用PageUp键向上翻页，用PageDown键向下翻页。要退出less程序，应按Q键。 语法less(选项)(参数) 选项12345678-e：文件内容显示完毕后，自动退出；-f：强制显示文件；-g：不加亮显示搜索到的">
+<meta name="twitter:image" content="http://yoursite.com/2019/08/01/一天一个Linux命令(less命令)/1564673930860.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -104,7 +107,7 @@
             
       <div id="content" class="outer">
         
-          <section id="main" style="float:none;"><article id="post-一天一个Linux命令(groupadd命令)" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost">
+          <section id="main" style="float:none;"><article id="post-一天一个Linux命令(less命令)" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost">
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
     
@@ -112,7 +115,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      一天一个Linux命令，groupadd命令
+      一天一个Linux命令，less命令
     </h1>
   
 
@@ -120,8 +123,8 @@
     
     <div class="article-meta">
       
-	<a href="/2019/07/31/一天一个Linux命令(groupadd命令)/" class="article-date">
-	  <time datetime="2019-07-30T16:09:53.295Z" itemprop="datePublished">July 31, 2019</time>
+	<a href="/2019/08/01/一天一个Linux命令(less命令)/" class="article-date">
+	  <time datetime="2019-08-01T15:31:46.506Z" itemprop="datePublished">August 1, 2019</time>
 	</a>
 
        
@@ -133,15 +136,18 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="groupadd命令"><a href="#groupadd命令" class="headerlink" title="groupadd命令"></a>groupadd命令</h3><p><strong>groupadd命令</strong>用于创建一个新的工作组，新工作组的信息将被添加到系统文件中。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p><code>groupadd(选项)(参数)</code></p>
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-g：指定新建工作组的id；</span><br><span class="line">-r：创建系统工作组，系统工作组的组ID小于500；</span><br><span class="line">-K：覆盖配置文件“/ect/login.defs”；</span><br><span class="line">-o：允许添加组ID号不唯一的工作组。</span><br></pre></td></tr></table></figure>
+        <h3 id="less命令"><a href="#less命令" class="headerlink" title="less命令"></a>less命令</h3><p><strong>less命令</strong>的作用与<a href="http://man.linuxde.net/more" target="_blank" rel="noopener">more</a>十分相似，都可以用来浏览文字档案的内容，不同的是less命令允许用户向前或向后浏览文件，而more命令只能向前浏览。用less命令显示文件时，用PageUp键向上翻页，用PageDown键向下翻页。要退出less程序，应按Q键。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p><code>less(选项)(参数)</code></p>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-e：文件内容显示完毕后，自动退出；</span><br><span class="line">-f：强制显示文件；</span><br><span class="line">-g：不加亮显示搜索到的所有关键词，仅显示当前显示的关键字，以提高显示速度；</span><br><span class="line">-l：搜索时忽略大小写的差异；</span><br><span class="line">-N：每一行行首显示行号；</span><br><span class="line">-s：将连续多个空行压缩成一行显示；</span><br><span class="line">-S：在单行显示较长的内容，而不换行显示；</span><br><span class="line">-x&lt;数字&gt;：将TAB字符显示为指定个数的空格字符。</span><br></pre></td></tr></table></figure>
 
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>组名：指定新建工作组的组名。</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>建立一个新组，并设置组ID加入系统：</p>
-<p><img src="/2019/07/31/一天一个Linux命令(groupadd命令)/1564503490742.png" alt="1564503490742"></p>
-<p>此时在<code>/etc/group</code>文件中产生一个组ID（GID）是666的项目。</p>
-<p><img src="/2019/07/31/一天一个Linux命令(groupadd命令)/1564503877206.png" alt="1564503877206"></p>
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>less zhengzhou.txt    可以查看此文件的内容，并可以上下翻页， 如需退出直接Q键就可以。</p>
+<p><img src="/2019/08/01/一天一个Linux命令(less命令)/1564673930860.png" alt="1564673930860"></p>
+<p><img src="/2019/08/01/一天一个Linux命令(less命令)/1564673912410.png" alt="1564673912410"></p>
+<p>less zhengzhou.txt lanzhou.txt  同时浏览两个文件</p>
+<p><img src="/2019/08/01/一天一个Linux命令(less命令)/1564674017529.png" alt="1564674017529"></p>
+<p>history | less    分页查看历史使用的命令， | 是管道符，类似于传输管道，由less 来展示管道里来的数据</p>
+<p><img src="/2019/08/01/一天一个Linux命令(less命令)/1564674090353.png" alt="1564674090353"></p>
+<p><img src="/2019/08/01/一天一个Linux命令(less命令)/1564674081570.png" alt="1564674081570"></p>
 
       
     </div>
@@ -181,19 +187,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2019/08/01/一天一个Linux命令(less命令)/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          一天一个Linux命令，less命令
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/07/29/一天一个Linux命令(nohup命令)/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2019/07/31/一天一个Linux命令(groupadd命令)/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">一天一个Linux命令，nohup命令</div>
+      <div class="article-nav-title">一天一个Linux命令，groupadd命令</div>
     </a>
   
 </nav>
@@ -207,7 +204,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">Contents</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#groupadd命令"><span class="nav-number">1.</span> <span class="nav-text">groupadd命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法"><span class="nav-number">2.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#选项"><span class="nav-number">3.</span> <span class="nav-text">选项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数"><span class="nav-number">4.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例"><span class="nav-number">5.</span> <span class="nav-text">实例</span></a></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#less命令"><span class="nav-number">1.</span> <span class="nav-text">less命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法"><span class="nav-number">2.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#选项"><span class="nav-number">3.</span> <span class="nav-text">选项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数"><span class="nav-number">4.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例"><span class="nav-number">5.</span> <span class="nav-text">实例</span></a></li></ol>
     
     </div>
   </aside>
