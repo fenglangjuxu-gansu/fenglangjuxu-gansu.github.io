@@ -99,6 +99,59 @@
         
           <section id="main">
   
+    <article id="post-一天一个Linux命令(du命令)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2019/08/02/一天一个Linux命令(du命令)/">一天一个Linux命令，du命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/08/02/一天一个Linux命令(du命令)/" class="article-date">
+	  <time datetime="2019-08-02T15:32:04.120Z" itemprop="datePublished">August 2, 2019</time>
+	</a>
+
+       
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="du命令"><a href="#du命令" class="headerlink" title="du命令"></a>du命令</h3><p><strong>du命令</strong>也是查看使用空间的，但是与<a href="http://man.linuxde.net/df" target="_blank" rel="noopener">df</a>命令不同的是Linux du命令是对文件和目录磁盘使用的空间的查看，还是和df命令有一些区别的。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p><code>du(选项)(参数)</code></p>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">-a或-all 显示目录中个别文件的大小。</span><br><span class="line">-b或-bytes 显示目录或文件大小时，以byte为单位。</span><br><span class="line">-c或--total 除了显示个别目录或文件的大小外，同时也显示所有目录或文件的总和。</span><br><span class="line">-k或--kilobytes 以KB(1024bytes)为单位输出。</span><br><span class="line">-m或--megabytes 以MB为单位输出。</span><br><span class="line">-s或--summarize 仅显示总计，只列出最后加总的值。</span><br><span class="line">-h或--human-readable 以K，M，G为单位，提高信息的可读性。</span><br><span class="line">-x或--one-file-xystem 以一开始处理时的文件系统为准，若遇上其它不同的文件系统目录则略过。</span><br><span class="line">-L&lt;符号链接&gt;或--dereference&lt;符号链接&gt; 显示选项中所指定符号链接的源文件大小。</span><br><span class="line">-S或--separate-dirs 显示个别目录的大小时，并不含其子目录的大小。</span><br><span class="line">-X&lt;文件&gt;或--exclude-from=&lt;文件&gt; 在&lt;文件&gt;指定目录或文件。</span><br><span class="line">--exclude=&lt;目录或文件&gt; 略过指定的目录或文件。</span><br><span class="line">-D或--dereference-args 显示指定符号链接的源文件大小。</span><br><span class="line">-H或--si 与-h参数相同，但是K，M，G是以1000为换算单位。</span><br><span class="line">-l或--count-links 重复计算硬件链接的文件。</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>显示目录或者文件所占空间：</p>
+<p><img src="/2019/08/02/一天一个Linux命令(du命令)/1564761963241.png" alt="1564761963241"></p>
+<p>下面的6576是当前目录的大小</p>
+<p><img src="/2019/08/02/一天一个Linux命令(du命令)/1564762007705.png" alt="1564762007705"></p>
+<p>du gansu.txt  显示此文件的大小</p>
+<p><img src="/2019/08/02/一天一个Linux命令(du命令)/1564762106137.png" alt="1564762106137"></p>
+<p>du /var  显示当前指定目录下的大小</p>
+<p><img src="/2019/08/02/一天一个Linux命令(du命令)/1564762181224.png" alt="1564762181224"></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
     <article id="post-一天一个Linux命令(less命令)" class="article article-type-post" itemscope itemprop="blogPost">
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
@@ -581,56 +634,6 @@
 <!-- Table of Contents -->
 
   
-    <article id="post-一天一个Linux命令(look命令)" class="article article-type-post" itemscope itemprop="blogPost">
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2019/07/16/一天一个Linux命令(look命令)/">一天一个Linux命令，look命令</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2019/07/16/一天一个Linux命令(look命令)/" class="article-date">
-	  <time datetime="2019-07-16T15:29:42.900Z" itemprop="datePublished">July 16, 2019</time>
-	</a>
-
-       
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="look命令"><a href="#look命令" class="headerlink" title="look命令"></a>look命令</h3><p><strong>look命令</strong>用于显示文件中以指定字符串开头的任意行。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p><code>look(选项)(参数)</code></p>
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-a：使用另一个字典文件web2，该文件也位于/usr/dict目录下；</span><br><span class="line">-d：只对比英文字母和数字，其余一概忽略不予比对；</span><br><span class="line">-f：忽略字符大小写差别；</span><br><span class="line">-t&lt;字尾字符串&gt;：设置字尾字符串。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>命令别名设置：定义命令别名，格式为“命令别名=‘实际命令’”。</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>输入look可以查看此命令的具体信息</p>
-<p><img src="/2019/07/16/一天一个Linux命令(look命令)/1563291147268.png" alt="1563291147268"></p>
-<p>在当前/var 目录下查看所有L开头的文件</p>
-<p><img src="/2019/07/16/一天一个Linux命令(look命令)/1563291463265.png" alt="1563291463265"></p>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-      
-      
-    </footer>
-    <hr class="entry-footer-hr">
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
 
 
   <nav id="page-nav">
@@ -741,6 +744,18 @@
               <div class="widget-entry-summary" style="margin: 0;">
             
 
+              <h6 style="margin: 0;"><a href="/2019/08/02/一天一个Linux命令(du命令)/">一天一个Linux命令，du命令</a></h6>
+              <span>August 2, 2019</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
               <h6 style="margin: 0;"><a href="/2019/08/01/一天一个Linux命令(less命令)/">一天一个Linux命令，less命令</a></h6>
               <span>August 1, 2019</span>
             </div>
@@ -795,18 +810,6 @@
 
           </li>
         
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="/2019/07/24/一天一个Linux命令(rsync命令)/">一天一个Linux命令，rsync命令</a></h6>
-              <span>July 24, 2019</span>
-            </div>
-
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -832,7 +835,7 @@
     <h3 class="widget-title">Archives</h3>
 
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">21</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">21</span></li></ul>
     </div>
   </div>
 

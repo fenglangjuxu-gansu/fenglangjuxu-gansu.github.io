@@ -99,6 +99,56 @@
         
           <section id="main">
   
+    <article id="post-一天一个Linux命令(look命令)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2019/07/16/一天一个Linux命令(look命令)/">一天一个Linux命令，look命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/07/16/一天一个Linux命令(look命令)/" class="article-date">
+	  <time datetime="2019-07-16T15:29:42.900Z" itemprop="datePublished">July 16, 2019</time>
+	</a>
+
+       
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="look命令"><a href="#look命令" class="headerlink" title="look命令"></a>look命令</h3><p><strong>look命令</strong>用于显示文件中以指定字符串开头的任意行。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p><code>look(选项)(参数)</code></p>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-a：使用另一个字典文件web2，该文件也位于/usr/dict目录下；</span><br><span class="line">-d：只对比英文字母和数字，其余一概忽略不予比对；</span><br><span class="line">-f：忽略字符大小写差别；</span><br><span class="line">-t&lt;字尾字符串&gt;：设置字尾字符串。</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>命令别名设置：定义命令别名，格式为“命令别名=‘实际命令’”。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>输入look可以查看此命令的具体信息</p>
+<p><img src="/2019/07/16/一天一个Linux命令(look命令)/1563291147268.png" alt="1563291147268"></p>
+<p>在当前/var 目录下查看所有L开头的文件</p>
+<p><img src="/2019/07/16/一天一个Linux命令(look命令)/1563291463265.png" alt="1563291463265"></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
     <article id="post-一天一个Linux命令(hostname命令)" class="article article-type-post" itemscope itemprop="blogPost">
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
@@ -701,238 +751,6 @@ unsigned int span;</code></pre><p>  } level[];<br>} zskiplistNode;<br>head和tai
 <!-- Table of Contents -->
 
   
-    <article id="post-整数集合-压缩列表" class="article article-type-post" itemscope itemprop="blogPost">
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2019/07/05/整数集合-压缩列表/">整数集合-压缩列表</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2019/07/05/整数集合-压缩列表/" class="article-date">
-	  <time datetime="2019-07-05T04:42:44.237Z" itemprop="datePublished">July 5, 2019</time>
-	</a>
-
-       
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="压缩列表"><a href="#压缩列表" class="headerlink" title="压缩列表"></a>压缩列表</h4><p>压缩列表（ziplist）是列表键和哈希键的底层实现之一。</p>
-<p>当一个列表键只包含少量列表项， 并且每个列表项要么就是小整数值， 要么就是长度比较短的字符串， 那么 Redis 就会使用压缩列表来做列表键的底层实现。</p>
-<p>比如说， 执行以下命令将创建一个压缩列表实现的列表键：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">redis&gt; RPUSH lst 1 3 5 10086 &quot;hello&quot; &quot;world&quot;</span><br><span class="line">(integer) 6</span><br><span class="line"></span><br><span class="line">redis&gt; OBJECT ENCODING lst</span><br><span class="line">&quot;ziplist&quot;</span><br></pre></td></tr></table></figure>
-
-<p>因为列表键里面包含的都是 1 、 3 、 5 、 10086 这样的小整数值， 以及 “hello” 、 “world” 这样的短字符串。</p>
-<p>另外， 当一个哈希键只包含少量键值对， 并且每个键值对的键和值要么就是小整数值， 要么就是长度比较短的字符串， 那么 Redis 就会使用压缩列表来做哈希键的底层实现。</p>
-<p>举个例子， 执行以下命令将创建一个压缩列表实现的哈希键：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">redis&gt; HMSET profile &quot;name&quot; &quot;Jack&quot; &quot;age&quot; 28 &quot;job&quot; &quot;Programmer&quot;</span><br><span class="line">OK</span><br><span class="line"></span><br><span class="line">redis&gt; OBJECT ENCODING profile</span><br><span class="line">&quot;ziplist&quot;</span><br></pre></td></tr></table></figure>
-
-<p>因为哈希键里面包含的所有键和值都是小整数值或者短字符串。</p>
-<p>本章将对压缩列表的定义以及相关操作进行详细的介绍。</p>
-<h4 id="压缩列表的构成"><a href="#压缩列表的构成" class="headerlink" title="压缩列表的构成"></a>压缩列表的构成</h4><p>压缩列表是 Redis 为了节约内存而开发的， 由一系列特殊编码的连续内存块组成的顺序型（sequential）数据结构。</p>
-<p>一个压缩列表可以包含任意多个节点（entry）， 每个节点可以保存一个字节数组或者一个整数值。</p>
-<p>图 7-1 展示了压缩列表的各个组成部分， 表 7-1 则记录了各个组成部分的类型、长度、以及用途。</p>
-<p><img src="https:////upload-images.jianshu.io/upload_images/4057005-e183f6108621e565.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/509/format/webp" alt="img"></p>
-<p>表 7-1 压缩列表各个组成部分的详细说明</p>
-<table>
-<thead>
-<tr>
-<th align="left">属性</th>
-<th align="left">类型</th>
-<th align="left">长度</th>
-<th align="left">用途</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">zlbytes</td>
-<td align="left">uint32_t</td>
-<td align="left">4 字节</td>
-<td align="left">记录整个压缩列表占用的内存字节数：在对压缩列表进行内存重分配， 或者计算 zlend 的位置时使用。</td>
-</tr>
-<tr>
-<td align="left">zltail</td>
-<td align="left">uint32_t</td>
-<td align="left">4 字节</td>
-<td align="left">记录压缩列表表尾节点距离压缩列表的起始地址有多少字节： 通过这个偏移量，程序无须遍历整个压缩列表就可以确定表尾节点的地址。</td>
-</tr>
-<tr>
-<td align="left">zllen</td>
-<td align="left">uint16_t</td>
-<td align="left">2 字节</td>
-<td align="left">记录了压缩列表包含的节点数量： 当这个属性的值小于 UINT16_MAX （65535）时， 这个属性的值就是压缩列表包含节点的数量； 当这个值等于 UINT16_MAX 时， 节点的真实数量需要遍历整个压缩列表才能计算得出。</td>
-</tr>
-<tr>
-<td align="left">entryX</td>
-<td align="left">列表节点</td>
-<td align="left">不定</td>
-<td align="left">压缩列表包含的各个节点，节点的长度由节点保存的内容决定。</td>
-</tr>
-<tr>
-<td align="left">zlend</td>
-<td align="left">uint8_t</td>
-<td align="left">1 字节</td>
-<td align="left">特殊值 0xFF （十进制 255 ），用于标记压缩列表的末端。</td>
-</tr>
-</tbody></table>
-<p>图 7-2 展示了一个压缩列表示例：</p>
-<ul>
-<li>列表 zlbytes 属性的值为 0x50 （十进制 80）， 表示压缩列表的总长为 80 字节。</li>
-<li>列表 zltail 属性的值为 0x3c （十进制 60）， 这表示如果我们有一个指向压缩列表起始地址的指针 p ， 那么只要用指针 p 加上偏移量 60 ， 就可以计算出表尾节点 entry3 的地址。</li>
-<li>列表 zllen 属性的值为 0x3 （十进制 3）， 表示压缩列表包含三个节点。</li>
-</ul>
-<p><img src="https:////upload-images.jianshu.io/upload_images/4057005-2d18bc354fb38eeb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/489/format/webp" alt="img"></p>
-<p>图 7-3 展示了另一个压缩列表示例：</p>
-<ul>
-<li>列表 zlbytes 属性的值为 0xd2 （十进制 210）， 表示压缩列表的总长为 210 字节。</li>
-<li>列表 zltail 属性的值为 0xb3 （十进制 179）， 这表示如果我们有一个指向压缩列表起始地址的指针 p ， 那么只要用指针 p 加上偏移量 179 ， 就可以计算出表尾节点 entry5 的地址。</li>
-<li>列表 zllen 属性的值为 0x5 （十进制 5）， 表示压缩列表包含五个节点。</li>
-</ul>
-<p><img src="https:////upload-images.jianshu.io/upload_images/4057005-cb66d5c1db5ac933.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/627/format/webp" alt="img"></p>
-<h4 id="连锁更新"><a href="#连锁更新" class="headerlink" title="连锁更新"></a>连锁更新</h4><p>前面说过， 每个节点的 previous_entry_length 属性都记录了前一个节点的长度：</p>
-<p>如果前一节点的长度小于 254 字节， 那么 previous_entry_length 属性需要用 1 字节长的空间来保存这个长度值。<br> 如果前一节点的长度大于等于 254 字节， 那么 previous_entry_length 属性需要用 5 字节长的空间来保存这个长度值。<br> 现在， 考虑这样一种情况： 在一个压缩列表中， 有多个连续的、长度介于 250 字节到 253 字节之间的节点 e1 至 eN ， 如图 7-11 所示。</p>
-<p><img src="https:////upload-images.jianshu.io/upload_images/4057005-645c6c7efe6c8f70.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/458/format/webp" alt="img"></p>
-<p>因为 e1 至 eN 的所有节点的长度都小于 254 字节， 所以记录这些节点的长度只需要 1 字节长的 previous_entry_length 属性， 换句话说， e1 至 eN 的所有节点的 previous_entry_length 属性都是 1 字节长的。</p>
-<p>这时， 如果我们将一个长度大于等于 254 字节的新节点 new 设置为压缩列表的表头节点， 那么 new 将成为 e1 的前置节点， 如图 7-12 所示。</p>
-<p><img src="https:////upload-images.jianshu.io/upload_images/4057005-4a18bb51e6ea66af.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/511/format/webp" alt="img"></p>
-<p>因为 e1 的 previous_entry_length 属性仅长 1 字节， 它没办法保存新节点 new 的长度， 所以程序将对压缩列表执行空间重分配操作， 并将 e1 节点的 previous_entry_length 属性从原来的 1 字节长扩展为 5 字节长。</p>
-<p>现在， 麻烦的事情来了 —— e1 原本的长度介于 250 字节至 253 字节之间， 在为 previous_entry_length 属性新增四个字节的空间之后， e1 的长度就变成了介于 254 字节至 257 字节之间， 而这种长度使用 1 字节长的 previous_entry_length 属性是没办法保存的。</p>
-<p>因此， 为了让 e2 的 previous_entry_length 属性可以记录下 e1 的长度， 程序需要再次对压缩列表执行空间重分配操作， 并将 e2 节点的 previous_entry_length 属性从原来的 1 字节长扩展为 5 字节长。</p>
-<p>正如扩展 e1 引发了对 e2 的扩展一样， 扩展 e2 也会引发对 e3 的扩展， 而扩展 e3 又会引发对 e4 的扩展……为了让每个节点的 previous_entry_length 属性都符合压缩列表对节点的要求， 程序需要不断地对压缩列表执行空间重分配操作， 直到 eN 为止。</p>
-<p>Redis 将这种在特殊情况下产生的连续多次空间扩展操作称之为“连锁更新”（cascade update）， 图 7-13 展示了这一过程。</p>
-<p><img src="https:////upload-images.jianshu.io/upload_images/4057005-ed7ce534dab58d75.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/511/format/webp" alt="img"></p>
-<p><img src="https:////upload-images.jianshu.io/upload_images/4057005-ad4564953532bdfc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/511/format/webp" alt="img"></p>
-<p><img src="https:////upload-images.jianshu.io/upload_images/4057005-65237e44b74e1180.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/511/format/webp" alt="img"></p>
-<p><img src="https:////upload-images.jianshu.io/upload_images/4057005-db13148bb7ca630e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/511/format/webp" alt="img"></p>
-<p><img src="https:////upload-images.jianshu.io/upload_images/4057005-e19702d441541b5b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/663/format/webp" alt="img"></p>
-<p>除了添加新节点可能会引发连锁更新之外， 删除节点也可能会引发连锁更新。</p>
-<p>考虑图 7-14 所示的压缩列表， 如果 e1 至 eN 都是大小介于 250 字节至 253 字节的节点， big 节点的长度大于等于 254 字节（需要 5 字节的 previous_entry_length 来保存）， 而 small 节点的长度小于 254 字节（只需要 1 字节的 previous_entry_length 来保存）， 那么当我们将 small 节点从压缩列表中删除之后， 为了让 e1 的 previous_entry_length 属性可以记录 big 节点的长度， 程序将扩展 e1 的空间， 并由此引发之后的连锁更新。</p>
-<p><img src="https:////upload-images.jianshu.io/upload_images/4057005-77193aa6bb962687.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/565/format/webp" alt="img"></p>
-<p>因为连锁更新在最坏情况下需要对压缩列表执行 N 次空间重分配操作， 而每次空间重分配的最坏复杂度为 O(N) ， 所以连锁更新的最坏复杂度为 O(N^2) 。</p>
-<p>要注意的是， 尽管连锁更新的复杂度较高， 但它真正造成性能问题的几率是很低的：</p>
-<ul>
-<li>首先， 压缩列表里要恰好有多个连续的、长度介于 250 字节至 253 字节之间的节点， 连锁更新才有可能被引发， 在实际中， 这种情况并不多见；</li>
-<li>其次， 即使出现连锁更新， 但只要被更新的节点数量不多， 就不会对性能造成任何影响： 比如说， 对三五个节点进行连锁更新是绝对不会影响性能的；</li>
-</ul>
-<p>因为以上原因， ziplistPush 等命令的平均复杂度仅为 O(N) ， 在实际中， 我们可以放心地使用这些函数， 而不必担心连锁更新会影响压缩列表的性能。</p>
-<h4 id="压缩列表-API"><a href="#压缩列表-API" class="headerlink" title="压缩列表 API"></a>压缩列表 API</h4><p>表 7-4 列出了所有用于操作压缩列表的 API 。</p>
-<hr>
-<p>表 7-4 压缩列表 API</p>
-<table>
-<thead>
-<tr>
-<th align="left">函数</th>
-<th align="left">作用</th>
-<th align="left">算法复杂度</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">ziplistNew</td>
-<td align="left">创建一个新的压缩列表。</td>
-<td align="left">O(1)</td>
-</tr>
-<tr>
-<td align="left">ziplistPush</td>
-<td align="left">创建一个包含给定值的新节点， 并将这个新节点添加到压缩列表的表头或者表尾。</td>
-<td align="left">平均 O(N) ，最坏 O(N^2) 。</td>
-</tr>
-<tr>
-<td align="left">ziplistInsert</td>
-<td align="left">将包含给定值的新节点插入到给定节点之后。</td>
-<td align="left">平均 O(N) ，最坏 O(N^2) 。</td>
-</tr>
-<tr>
-<td align="left">ziplistIndex</td>
-<td align="left">返回压缩列表给定索引上的节点。</td>
-<td align="left">O(N)</td>
-</tr>
-<tr>
-<td align="left">ziplistFind</td>
-<td align="left">在压缩列表中查找并返回包含了给定值的节点。</td>
-<td align="left">因为节点的值可能是一个字节数组， 所以检查节点值和给定值是否相同的复杂度为 O(N) ， 而查找整个列表的复杂度则为 O(N^2) 。</td>
-</tr>
-<tr>
-<td align="left">ziplistNext</td>
-<td align="left">返回给定节点的下一个节点。</td>
-<td align="left">O(1)</td>
-</tr>
-<tr>
-<td align="left">ziplistPrev</td>
-<td align="left">返回给定节点的前一个节点。</td>
-<td align="left">O(1)</td>
-</tr>
-<tr>
-<td align="left">ziplistGet</td>
-<td align="left">获取给定节点所保存的值。</td>
-<td align="left">O(1)</td>
-</tr>
-<tr>
-<td align="left">ziplistDelete</td>
-<td align="left">从压缩列表中删除给定的节点。</td>
-<td align="left">平均 O(N) ，最坏 O(N^2) 。</td>
-</tr>
-<tr>
-<td align="left">ziplistDeleteRange</td>
-<td align="left">删除压缩列表在给定索引上的连续多个节点。</td>
-<td align="left">平均 O(N) ，最坏 O(N^2) 。</td>
-</tr>
-<tr>
-<td align="left">ziplistBlobLen</td>
-<td align="left">返回压缩列表目前占用的内存字节数。</td>
-<td align="left">O(1)</td>
-</tr>
-<tr>
-<td align="left">ziplistLen</td>
-<td align="left">返回压缩列表目前包含的节点数量。</td>
-<td align="left">节点数量小于 65535 时 O(1) ， 大于 65535 时 O(N) 。</td>
-</tr>
-</tbody></table>
-<p>因为 ziplistPush 、 ziplistInsert 、 ziplistDelete 和 ziplistDeleteRange 四个函数都有可能会引发连锁更新， 所以它们的最坏复杂度都是 O(N^2) 。</p>
-<h2 id="整数集合"><a href="#整数集合" class="headerlink" title="整数集合"></a>整数集合</h2><p>整数集合（intset）是<strong>集合键</strong>的底层实现之一，当一个集合只包含整数值元素，并且这个集合的元素数量不多时，Redis就会使用整数集合作为集合键的底层实现。</p>
-<p>　　它可以保存类型为int16_t、int32_t或者int64_t的整数值，并且保证集合中不会出现重复元素。</p>
-<p><a href="javascript:void(0);" target="_blank" rel="noopener"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1 typedef struct intset &#123;</span><br><span class="line">2     // 编码方式</span><br><span class="line">3     uint32_t encoding;</span><br><span class="line">4     // 集合包含的元素数量</span><br><span class="line">5     uint32_t length;</span><br><span class="line">6     // 保存元素的数组</span><br><span class="line">7     int8_t contents[];</span><br><span class="line">8 &#125; intset;</span><br></pre></td></tr></table></figure>
-
-<p><a href="javascript:void(0);" target="_blank" rel="noopener"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
-<p><img src="https://images2018.cnblogs.com/blog/720994/201807/720994-20180704175038775-372816996.png" alt="img"></p>
-<p>　　contents数组是整数集合的底层实现：整数集合的每个元素都是contents数组的一个数组项，各个项在数组中按值的大小<strong>从小到大有序地排列</strong>，并且数组中<strong>不包含任何重复项</strong>。</p>
-<p><strong>升级：</strong></p>
-<p>每当我们要将一个新元素添加到整数集合里面，并且新元素的类型比整数集合现有所有元素的的类型都要长时，整数集合需要先进行升级，然后才能将新元素添加到整数集合里面。</p>
-<p>　　根据新元素的类型，扩展整数集合底层数组的空间大小，并为新元素分配空间。</p>
-<p>　　将底层数组现有的所有元素都转换成与新元素相同的类型，并将类型转换后的元素放置到正确的位上（从后往前），而且在放置元素的过程中，需要继续位置底层数组的有序性质不变。</p>
-<p>　　将新元素添加到底层数组里面。</p>
-<p>　　将encoding属性更改。</p>
-<p>　　整数集合添加新元素的时间复杂度为O(N)。</p>
-<p>　　因为引发升级的元素要么最大要么最小，所有它的位置要么是0要么是length-1。</p>
-<p><strong>升级的好处：</strong></p>
-<p>　　提升整数集合的灵活性，可以随意将int16，int32，int64的值放入集合。</p>
-<p>　　尽可能地节约内存</p>
-<p><strong>降级：</strong></p>
-<p>　　整数集合不支持降级操作</p>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-      
-      
-    </footer>
-    <hr class="entry-footer-hr">
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
 
 
   <nav id="page-nav">
@@ -1043,6 +861,18 @@ unsigned int span;</code></pre><p>  } level[];<br>} zskiplistNode;<br>head和tai
               <div class="widget-entry-summary" style="margin: 0;">
             
 
+              <h6 style="margin: 0;"><a href="/2019/08/02/一天一个Linux命令(du命令)/">一天一个Linux命令，du命令</a></h6>
+              <span>August 2, 2019</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
               <h6 style="margin: 0;"><a href="/2019/08/01/一天一个Linux命令(less命令)/">一天一个Linux命令，less命令</a></h6>
               <span>August 1, 2019</span>
             </div>
@@ -1097,18 +927,6 @@ unsigned int span;</code></pre><p>  } level[];<br>} zskiplistNode;<br>head和tai
 
           </li>
         
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="/2019/07/24/一天一个Linux命令(rsync命令)/">一天一个Linux命令，rsync命令</a></h6>
-              <span>July 24, 2019</span>
-            </div>
-
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -1134,7 +952,7 @@ unsigned int span;</code></pre><p>  } level[];<br>} zskiplistNode;<br>head和tai
     <h3 class="widget-title">Archives</h3>
 
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">21</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">21</span></li></ul>
     </div>
   </div>
 
