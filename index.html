@@ -131,7 +131,20 @@
 <h3 id="top交互命令"><a href="#top交互命令" class="headerlink" title="top交互命令"></a>top交互命令</h3><p>在top命令执行过程中可以使用的一些交互命令。这些命令都是单字母的，如果在命令行中使用了-s选项， 其中一些命令可能会被屏蔽。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">h：显示帮助画面，给出一些简短的命令总结说明；</span><br><span class="line">k：终止一个进程；</span><br><span class="line">i：忽略闲置和僵死进程，这是一个开关式命令；</span><br><span class="line">q：退出程序；</span><br><span class="line">r：重新安排一个进程的优先级别；</span><br><span class="line">S：切换到累计模式；</span><br><span class="line">s：改变两次刷新之间的延迟时间（单位为s），如果有小数，就换算成ms。输入0值则系统将不断刷新，默认值是5s；</span><br><span class="line">f或者F：从当前显示中添加或者删除项目；</span><br><span class="line">o或者O：改变显示项目的顺序；</span><br><span class="line">l：切换显示平均负载和启动时间信息；</span><br><span class="line">m：切换显示内存信息；</span><br><span class="line">t：切换显示进程和CPU状态信息；</span><br><span class="line">c：切换显示命令名称和完整命令行；</span><br><span class="line">M：根据驻留内存大小进行排序；</span><br><span class="line">P：根据CPU使用百分比大小进行排序；</span><br><span class="line">T：根据时间/累计时间进行排序；</span><br><span class="line">w：将当前设置写入~/.toprc文件中。</span><br></pre></td></tr></table></figure>
 
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p><img src="/2019/08/15/一天一个Linux命令(top命令)/1565868779263.png" alt="1565868779263"></p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>top 展示整个信息</p>
+<p><img src="/2019/08/15/一天一个Linux命令(top命令)/1565868779263.png" alt="1565868779263"></p>
+<p>top -c 以批处理方式展示</p>
+<p><img src="/2019/08/15/一天一个Linux命令(top命令)/1565869057436.png" alt="1565869057436"></p>
+<p>top  -b 批处理模式显示程序信息</p>
+<p><img src="/2019/08/15/一天一个Linux命令(top命令)/1565869135192.png" alt="1565869135192"></p>
+<p>top -S 累积模式显示程序信息</p>
+<p><img src="/2019/08/15/一天一个Linux命令(top命令)/1565869175989.png" alt="1565869175989"></p>
+<p>top -n 2 设置信息更新次数</p>
+<p><img src="/2019/08/15/一天一个Linux命令(top命令)/1565869221046.png" alt="1565869221046"></p>
+<p>top -d 3 设置信息更新时间 （表示更新周期为3秒）</p>
+<p><img src="/2019/08/15/一天一个Linux命令(top命令)/1565869274084.png" alt="1565869274084"></p>
+<p>top -n 5 显示更新5次后退出</p>
+<p><img src="/2019/08/15/一天一个Linux命令(top命令)/1565869307343.png" alt="1565869307343"></p>
 
       
     </div>
